@@ -1,0 +1,3 @@
+[submodule "vendor/org.octris.core"]
+	path = vendor/org.octris.core
+	url = https://github.com/octris/org.octris.core.git
