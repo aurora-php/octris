@@ -49,6 +49,67 @@ namespace octris {
         public function run()
         /**/
         {
+            global $argv;
+            
+            array_shift($argv);
+            
+            do {
+                if (!($arg = array_shift($argv))) {
+                    $this->showUsage();
+                    exit(1);
+                }
+                
+                switch ($arg) {
+                    case '--help':
+                        $this->showUsage();
+                        exit(1);
+                    case '--version':
+                        printf("octris %s (%s)\n", self::T_VERSION, self::T_VERSION_DATE);
+                        exit(1);
+                    case 'help':
+                        if (!(preg_match('/^[a-z]+/', array_shift($argv)))) {
+                            $this->showUsage();
+                        } else {
+                            // TODO: show command help
+                        }
+                        exit(1);
+                    default:
+                        if (!preg_match('/^[a-z]+/', $arg)) {
+                            $this->showUsage();
+                            exit(1);
+                        } else {
+                            // TODO: process command
+                        }
+                        break(2);
+                }
+            } while(true);
+            
+            exit(0);
+        }
+    
+        /**
+         * Show usage information.
+         *
+         * @octdoc  m:main/showUsage
+         */
+        public function showUsage()
+        /**/
+        {
+            printf("               __         .__        
+  ____   _____/  |________|__| ______
+ /  _ \_/ ___\   __\_  __ \  |/  ___/    OCTRiS framework tool
+(  <_> )  \___|  |  |  | \/  |\___ \     copyright (c) 2014 by Harald Lapp
+ \____/ \___  >__|  |__|  |__/____  >    http://github.com/octris/octris/
+            \/%20s\/
+
+usage: octris --help
+usage: octris --version
+usage: octris help <command>
+usage: octris <command> [ARGUMENTS]
+
+Commands:
+    create      Create a new project.
+", 'v' . self::T_VERSION);
         }
     
         /**
