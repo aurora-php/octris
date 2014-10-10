@@ -60,8 +60,8 @@ namespace octris {
         public static function autoload($classpath)
         /**/
         {
-            if (substr($classpath, 0, 8) == 'octris') {
-                $file = __DIR__ . '/' . preg_replace('|\\\\|', '/', substr($classpath, 8)) . '.class.php';
+            if (substr($classpath, 0, 6) == 'octris') {
+                $file = __DIR__ . '/' . preg_replace('|\\\\|', '/', substr($classpath, 6)) . '.class.php';
 
                 @include_once($file);
             }        
