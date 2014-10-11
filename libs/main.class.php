@@ -96,6 +96,7 @@ namespace octris {
 
             switch ($arg) {
                 case '--help':
+                case '-h':
                     $this->showUsage();
                     exit(1);
                 case '--version':
