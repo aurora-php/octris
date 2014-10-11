@@ -11,7 +11,7 @@
 
 namespace octris\command {
     /**
-     * Test command
+     * Test command.
      *
      * @octdoc      c:command/test
      * @copyright   copyright (c) 2014 by Harald Lapp
