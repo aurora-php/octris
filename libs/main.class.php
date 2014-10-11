@@ -117,7 +117,6 @@ namespace octris {
                         $class = "\\octris\\command\\$arg";
                         
                         if ($help) {
-                            printf("octris: manual for command '%s'\n\n", $arg);
                             print trim($class::getManual(), "\n") . "\n";
                             exit(1);
                         } else {
