@@ -67,6 +67,8 @@ namespace octris {
                     $this->commands[$command] = '\\octris\\command\\' . $command;
                 }
             }
+            
+            ksort($this->commands);
         }
     
         /**
@@ -156,7 +158,7 @@ Commands:
             }, 0);
 
             foreach ($this->commands as $command => $class) {
-                printf("    %" . $size . "s    %s\n", $command, $class::getDescription());
+                printf("    %-" . $size . "s    %s\n", $command, $class::getDescription());
             }
         }
     
