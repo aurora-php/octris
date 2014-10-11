@@ -26,19 +26,6 @@ namespace octris\command {
     /**/
     {
         /**
-         * Application types.
-         *
-         * @octdoc  p:create/$types
-         * @type    array
-         */
-        protected static $types = array(
-            'w' => 'web',
-            'c' => 'cli',
-            'l' => 'lib'
-        );
-        /**/
-
-        /**
          * Return command description.
          *
          * @octdoc  m:create/getDescription
@@ -136,16 +123,41 @@ EOT;
             // import project name
             $args = provider::access('args');
 
-            if ($args->isExist('name') && $args->isValid('name', \org\octris\core\validate::T_PROJECT)) {
-                $project = $args->getValue('name');
+            if ($args->isExist('p') && $args->isValid('p', validate::T_PROJECT)) {
+                $project = $args->getValue('p');
 
                 $tmp    = explode('.', $project);
                 $module = array_pop($tmp);
                 $domain = implode('.', array_reverse($tmp));
             } else {
-                $module = '';
-                $domain = '';
+                $this->setError('invalid project name specified');
+                
+                return 1;
             }
+
+            if ($args->isExist('t') && $args->isValid('t', validate::T_PATTERN, array('pattern' => '/^(web|cli|lib)$/'))) {
+                $type = $args->getValue('t');
+            } else {
+                $this->setError('invalid project type specified');
+                
+                return 1;
+            }
+            
+            if ($args->isExist(0) && $args->isValid(0, validate::T_PATH)) {
+                $dir = $args->getValue(0) . '/' . $project;
+
+                if (is_dir($dir)) {
+                    $this->setError(sprintf("project directory already exists '%s'", $dir));
+
+                    return 1;
+                }
+            } else {
+                $this->setError('specified path is not a directory or directory not found');
+                
+                return 1;
+            }
+            
+            $year = date('Y');
 
             // handle project configuration
             $prj = new config('org.octris.core', 'project.create');
@@ -171,23 +183,6 @@ EOT;
 
             print "\n";
 
-            $types = array();
-            array_walk(self::$types, function(&$v, $k) use (&$types) {
-                $types[] = preg_replace('/(' . $k . ')/', '(\1)', $v, 1);
-            });
-
-            do {
-                $type = stdio::getPrompt('application type ' . implode(' / ', $types) . ': ', '', true);
-            } while (!in_array($type, array_keys(self::$types)));
-
-            print "\n";
-
-            do {
-                $module = stdio::getPrompt('module [%s]: ', $module, true);
-                $year   = stdio::getPrompt('year [%s]: ', date('Y'), true);
-            } while ($module == '' || $year == '');
-
-
             // build data array
             $ns = implode(
                 '\\',
@@ -207,16 +202,11 @@ EOT;
             ));
 
             // create project
-            $src = __DIR__ . '/../../data/skel/' . self::$types[$type] . '/';
+            $src = __DIR__ . '/../../data/skel/' . $type . '/';
             if (!is_dir($src)) {
-                printf("unable to locate template directory '%s'\n", $src);
-                exit(1);
-            }
+                $this->setError(sprintf("unable to locate template directory '%s'\n", $src));
 
-            $dir  = "/Users/harald/tmp/" . $data['directory'];
-            if (is_dir($dir)) {
-                printf("project directory already exists '%s'\n", $dir);
-                exit(1);
+                return 1;
             }
 
             // process skeleton and write project files
@@ -262,8 +252,6 @@ EOT;
 
                 chmod($dst, $perms);
             }
-
-            print "done.\n";
         }
     }
 }
