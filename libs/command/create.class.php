@@ -85,7 +85,8 @@ EXAMPLES
         $ ./octris create -p org.octris.test -t web \
                 -d info.company="Foo Inc." \
                 -d info.author="Bar Baz" \
-                -d info.email="baz@example.org"
+                -d info.email="baz@example.org" \
+                ~/tmp/
 EOT;
         }
 
@@ -120,7 +121,7 @@ EOT;
         public function run()
         /**/
         {
-            // import project name
+            // import required parameters
             $args = provider::access('args');
 
             if ($args->isExist('p') && $args->isValid('p', validate::T_PROJECT)) {
