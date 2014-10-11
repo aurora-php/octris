@@ -64,14 +64,25 @@ namespace octris {
         }
         
         /**
-         * Show usage information.
+         * Return command description.
          *
-         * @octdoc  m:command/showUsage
+         * @octdoc  m:command/getDescription
          */
-        public function showUsage()
+        public static function getDescription()
         /**/
         {
-            printf("no additional help available for command '%s'.\n", $this->getName());
+            return 'No description available.';
+        }
+        
+        /**
+         * Return command manual.
+         *
+         * @octdoc  m:command/getManual
+         */
+        public static function getManual()
+        /**/
+        {
+            return 'No additional help available for command.';
         }
 
         /**
