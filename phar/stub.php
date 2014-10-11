@@ -30,7 +30,7 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
 }
 
 Phar::mapPhar();
-include 'phar://octris.phar/main.class.php';
+include 'phar://octris.phar/libs/main.class.php';
 
 $main = new \octris\main();
 $main->run();
