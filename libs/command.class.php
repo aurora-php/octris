@@ -21,15 +21,6 @@ namespace octris {
     /**/
     {
         /**
-         * Command arguments.
-         *
-         * @octdoc  p:command/$args
-         * @type    array
-         */
-        protected $args = array();
-        /**/
-        
-        /**
          * Name of command.
          *
          * @octdoc  p:command/$name
@@ -42,12 +33,10 @@ namespace octris {
          * Constructor.
          *
          * @octdoc  m:command/__construct
-         * @param   array               $args               Command arguments.
          */
-        public function __construct(array $args)
+        public function __construct()
         /**/
         {
-            $this->args = $args;
             $this->name = (new \ReflectionClass($this))->getShortName();
         }
         

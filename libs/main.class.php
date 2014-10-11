@@ -10,6 +10,8 @@
  */
 
 namespace octris {
+    use \org\octris\core\provider as provider;
+
     /**
      * Main application class.
      *
@@ -118,7 +120,11 @@ namespace octris {
                             print trim($class::getManual(), "\n") . "\n";
                             exit(1);
                         } else {
-                            $instance = new $class($argv);
+                            printf("octris: %s\n\n", $arg);
+                            
+                            provider::set('args', \org\octris\core\app\cli::getOptions($argv));
+                            
+                            $instance = new $class();
                         
                             exit($instance->run());
                         }
