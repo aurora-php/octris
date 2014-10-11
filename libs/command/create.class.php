@@ -58,7 +58,47 @@ namespace octris\command {
         /**/
         {
             return <<<EOT
-octris create --type web | cli | lib
+NAME
+    octris create - create a new project.
+    
+SYNOPSIS
+    octris create   -p <project-name> 
+                    -t web | cli | lib
+                    [-d info.company=<company-name>]
+                    [-d info.author=<author-name>]
+                    [-d info.email=<author-email>]
+                    <destination-path>
+    
+DESCRIPTION
+    This command creates a new project of specified type in the specified
+    destination-path. A valid basic directory layout will be created from
+    a skeleton according to the specified project-type.
+    
+    The current supported types are 'web', 'cli' and 'lib':
+    
+    web     This type should be used for projects like web applications,
+            web sites etc.
+    cli     This type should be used for command-line applications.
+    lib     This type should be used for (shared) libraries.
+    
+OPTIONS
+    -p      A valid name for the project in the form of a reversed domain
+            name. 
+            
+    -t      A valid type for the project
+    
+    -d      Additional definitions to set that will be used to rewrite 
+            comments in the project skeleton. The current supported fields
+            that can be set are: 'info.company', 'info.author' and
+            'info.email'.
+
+EXAMPLES
+    Create a test project:
+    
+        $ ./octris create -p org.octris.test -t web \
+                -d info.company="Foo Inc." \
+                -d info.author="Bar Baz" \
+                -d info.email="baz@example.org"
 EOT;
         }
 
