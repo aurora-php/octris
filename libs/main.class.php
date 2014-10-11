@@ -90,8 +90,6 @@ namespace octris {
                 exit(1);
             }
 
-            $help = false;
-
             switch ($arg) {
                 case '--help':
                     $this->showUsage();
@@ -99,10 +97,6 @@ namespace octris {
                 case '--version':
                     printf("octris %s (%s)\n", self::T_VERSION, self::T_VERSION_DATE);
                     exit(1);
-                case 'help':
-                    $help = true;
-                    $arg  = array_shift($argv);
-                    /** FALL THRU **/
                 default:
                     if (!(preg_match('/^[a-z]+$/', $arg))) {
                         $this->showUsage();
@@ -114,16 +108,9 @@ namespace octris {
                         require_once(__DIR__ . '/command/' . $arg . '.class.php');
                         
                         $class    = "\\octris\\command\\$arg";
+                        $instance = new $class($argv);
                         
-                        if ($help) {
-                            printf("octris: manual for command '%s'\n\n", $arg);
-                            
-                            print rtrim($class::getManual(), "\n") . "\n";
-                            exit(1);
-                        } else {
-                            $instance = new $class($argv);
-                            exit($instance->run());
-                        }
+                        exit($instance->run());
                     }
             }
 
