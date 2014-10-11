@@ -173,7 +173,18 @@ Commands:
                 $file = __DIR__ . '/' . preg_replace('|\\\\|', '/', substr($classpath, 6)) . '.class.php';
 
                 @include_once($file);
-            }        
+            } else {
+                $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\\\'), 2);
+                $classpath = preg_replace('|\\\\|', '/libs/', $classpath, 1);
+                $classpath = preg_replace('|\\\\|', '/', $classpath);
+                
+                $file = __DIR__ . '/../vendor/' . $classpath . '.class.php';
+
+                try {
+                    include_once($file);
+                } catch(\Exception $e) {
+                }
+            }
         }
     }
 
