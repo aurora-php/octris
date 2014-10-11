@@ -90,10 +90,7 @@ namespace octris {
          *
          * @octdoc  m:command/run
          */
-        public function run()
+        abstract public function run();
         /**/
-        {
-            return 0;
-        }
     }
 }
