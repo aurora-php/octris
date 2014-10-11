@@ -231,7 +231,6 @@ EOT;
                 $base  = basename($filename);
                 $ext   = preg_replace('/^\.?[^\.]+?(\..+|)$/', '\1', $base);
                 $base  = basename($filename, $ext);
-                $perms = $cur->getPerms();
 
                 if (substr($base, 0, 1) == '$' && isset($data[$base = ltrim($base, '$')])) {
                     // resolve variable in filename
@@ -240,7 +239,7 @@ EOT;
 
                 if (!is_dir($path)) {
                     // create destination directory
-                    mkdir($path, $cur->getPathInfo()->getPerms(), true);
+                    mkdir($path, 0755, true);
                 }
 
                 if (!$this->isBinary($filename)) {
@@ -251,7 +250,7 @@ EOT;
                     copy($filename, $dst);
                 }
 
-                chmod($dst, $perms);
+                chmod($dst, 0644);
             }
         }
     }
