@@ -43,12 +43,29 @@ if (file_exists($exec)) {
     unlink($exec);
 }
 
+function getDirIterator($dir) {
+    $iterator = new \RecursiveIteratorIterator(
+        new \RecursiveDirectoryIterator(
+            realpath($dir), 
+            \FilesystemIterator::SKIP_DOTS
+        )
+    );
+
+    return $iterator;
+}
+
 $phar = new Phar(
     $file, 
     FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_FILENAME, 
     basename($file)
 );
-$phar->buildFromDirectory(__DIR__ . '/../libs/', '/.php$/');
+
+$iterator = new AppendIterator();
+$iterator->append(getDirIterator(__DIR__ . '/../data/'));
+$iterator->append(getDirIterator(__DIR__ . '/../libs/'));
+$iterator->append(getDirIterator(__DIR__ . '/../vendor/org.octris.core/libs/'));
+
+$phar->buildFromIterator($iterator, realpath(__DIR__ . '/../'));
 $phar->setStub(file_get_contents(__DIR__ . '/stub.php'));
 
 rename($file, $exec);
