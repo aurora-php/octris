@@ -20,7 +20,12 @@
 /**/
 
 if (!class_exists('PHAR')) {
-    print 'unable to execute -- wrong PHP version\n';
+    print 'octris: unable to execute -- wrong PHP version\n';
+    exit(1);
+}
+
+if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+    printf("octris: PHP-5.6.0 or newer is required, your version is '%s'!\n", PHP_VERSION);
     exit(1);
 }
 

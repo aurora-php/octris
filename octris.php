@@ -19,6 +19,11 @@
  */
 /**/
 
+if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+    printf("octris: PHP-5.6.0 or newer is required, your version is '%s'!\n", PHP_VERSION);
+    exit(1);
+}
+
 require_once(__DIR__ . '/libs/main.class.php');
 
 $main = new \octris\main();
