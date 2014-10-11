@@ -58,7 +58,7 @@ DESCRIPTION
 OPTIONS
 
 EXAMPLES
-    Lint a project:
+    Validate a project:
     
         $ ./octris lint ~/tmp/org.octris.test
 EOT;
