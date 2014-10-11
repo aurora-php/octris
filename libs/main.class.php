@@ -53,37 +53,46 @@ namespace octris {
             
             array_shift($argv);
             
-            do {
-                if (!($arg = array_shift($argv))) {
+            if (!($arg = array_shift($argv))) {
+                $this->showUsage();
+                exit(1);
+            }
+
+            $help = false;
+
+            switch ($arg) {
+                case '--help':
                     $this->showUsage();
                     exit(1);
-                }
-                
-                switch ($arg) {
-                    case '--help':
+                case '--version':
+                    printf("octris %s (%s)\n", self::T_VERSION, self::T_VERSION_DATE);
+                    exit(1);
+                case 'help':
+                    $help = true;
+                    $arg  = array_shift($argv);
+                    /** FALL THRU **/
+                default:
+                    if (!(preg_match('/^[a-z]+$/', $arg))) {
                         $this->showUsage();
                         exit(1);
-                    case '--version':
-                        printf("octris %s (%s)\n", self::T_VERSION, self::T_VERSION_DATE);
+                    } elseif (!file_exists(__DIR__ . '/command/' . $arg . '.class.php')) {
+                        printf("octris: '%s' is not a command\n", $arg);
                         exit(1);
-                    case 'help':
-                        if (!(preg_match('/^[a-z]+/', array_shift($argv)))) {
-                            $this->showUsage();
-                        } else {
-                            // TODO: show command help
-                        }
-                        exit(1);
-                    default:
-                        if (!preg_match('/^[a-z]+/', $arg)) {
-                            $this->showUsage();
+                    } else {
+                        require_once(__DIR__ . '/command/' . $arg . '.class.php');
+                        
+                        $class    = "\\octris\\command\\$arg";
+                        $instance = new $class($argv);
+                        
+                        if ($help) {
+                            $instance->showUsage();
                             exit(1);
                         } else {
-                            // TODO: process command
+                            exit($instance->run());
                         }
-                        break(2);
-                }
-            } while(true);
-            
+                    }
+            }
+
             exit(0);
         }
     
