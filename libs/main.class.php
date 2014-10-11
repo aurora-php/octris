@@ -121,13 +121,17 @@ namespace octris {
                             print trim($class::getManual(), "\n") . "\n";
                             exit(1);
                         } else {
-                            printf("octris: %s\n\n", $arg);
+                            printf("octris: %s\n", $arg);
                             
                             provider::set('args', \org\octris\core\app\cli::getOptions($argv));
                             
                             $instance = new $class();
                         
-                            exit($instance->run());
+                            if (($return = $instance->run())) {
+                                printf("**error** %s\n", rtrim($instance->getError(), "\n"));
+                                
+                                exit($return);
+                            }
                         }
                     }
             }
