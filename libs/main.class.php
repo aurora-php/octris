@@ -31,6 +31,15 @@ namespace octris {
         /**/
 
         /**
+         * Available commands.
+         *
+         * @octdoc  p:main/$commands
+         * @type    array
+         */
+        protected $commands = array();
+        /**/
+
+        /**
          * Constructor.
          *
          * @octdoc  m:main/__construct
@@ -42,6 +51,25 @@ namespace octris {
         }
 
         /**
+         * Determine available "commands".
+         *
+         * @octdoc  m:main/getCommands
+         */
+        protected function getCommands()
+        /**/
+        {
+            $this->commands = array();
+            
+            foreach (new \DirectoryIterator(__DIR__ . '/command/') as $file) {
+                if (!$file->isDot() && substr(($name = $file->getFilename()), -4) == '.php') {
+                    $command = basename($name, '.class.php');
+                    
+                    $this->commands[$command] = '\\octris\\command\\' . $command;
+                }
+            }
+        }
+    
+        /**
          * Run main application.
          *
          * @octdoc  m:main/run
@@ -50,6 +78,8 @@ namespace octris {
         /**/
         {
             global $argv;
+            
+            $this->getCommands();
             
             array_shift($argv);
             
@@ -82,12 +112,14 @@ namespace octris {
                         require_once(__DIR__ . '/command/' . $arg . '.class.php');
                         
                         $class    = "\\octris\\command\\$arg";
-                        $instance = new $class($argv);
                         
                         if ($help) {
-                            $instance->showUsage();
+                            printf("octris: manual for command '%s'\n\n", $arg);
+                            
+                            print rtrim($class::getManual(), "\n") . "\n";
                             exit(1);
                         } else {
+                            $instance = new $class($argv);
                             exit($instance->run());
                         }
                     }
@@ -117,8 +149,15 @@ usage: octris help <command>
 usage: octris <command> [ARGUMENTS]
 
 Commands:
-    create      Create a new project.
 ", 'v' . self::T_VERSION);
+
+            $size = array_reduce(array_keys($this->commands), function($size, $item) {
+                return max($size, strlen($item));
+            }, 0);
+
+            foreach ($this->commands as $command => $class) {
+                printf("    %" . $size . "s    %s\n", $command, $class::getDescription());
+            }
         }
     
         /**
