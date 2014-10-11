@@ -137,8 +137,8 @@ EOT;
             });
 
             do {
-                $this->type = stdio::getPrompt('application type ' . implode(' / ', $types) . ': ', '', true);
-            } while (!in_array($this->type, array_keys(self::$types)));
+                $type = stdio::getPrompt('application type ' . implode(' / ', $types) . ': ', '', true);
+            } while (!in_array($type, array_keys(self::$types)));
 
             print "\n";
 
@@ -167,7 +167,7 @@ EOT;
             ));
 
             // create project
-            $src = __DIR__ . '/../../data/skel/' . self::$types[$this->type] . '/';
+            $src = __DIR__ . '/../../data/skel/' . self::$types[$type] . '/';
             if (!is_dir($src)) {
                 printf("unable to locate template directory '%s'\n", $src);
                 exit(1);
@@ -202,9 +202,9 @@ EOT;
                 $base  = basename($filename, $ext);
                 $perms = $cur->getPerms();
 
-                if (substr($base, 0, 1) == '$' && isset($this->data[$base = ltrim($base, '$')])) {
+                if (substr($base, 0, 1) == '$' && isset($data[$base = ltrim($base, '$')])) {
                     // resolve variable in filename
-                    $dst = $path . '/' . $this->data[$base] . $ext;
+                    $dst = $path . '/' . $data[$base] . $ext;
                 }
 
                 if (!is_dir($path)) {
