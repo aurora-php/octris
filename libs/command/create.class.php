@@ -23,12 +23,23 @@ namespace octris\command {
         /**
          * Return command description.
          *
-         * @octdoc  m:command/getDescription
+         * @octdoc  m:create/getDescription
          */
         public static function getDescription()
         /**/
         {
             return 'Create a new project.';
+        }
+
+        /**
+         * Run command.
+         *
+         * @octdoc  m:create/run
+         */
+        public function run()
+        /**/
+        {
+            return 0;
         }
     }
 }

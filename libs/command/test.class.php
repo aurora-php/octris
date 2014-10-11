@@ -20,5 +20,15 @@ namespace octris\command {
     class test extends \octris\command
     /**/
     {
+        /**
+         * Run command.
+         *
+         * @octdoc  m:test/run
+         */
+        public function run()
+        /**/
+        {
+            return 0;
+        }
     }
 }
