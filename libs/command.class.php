@@ -30,6 +30,15 @@ namespace octris {
         /**/
         
         /**
+         * Error message.
+         *
+         * @octdoc  p:command/$error
+         * @type    string
+         */
+        protected $error = '';
+        /**/
+        
+        /**
          * Constructor.
          *
          * @octdoc  m:command/__construct
@@ -72,6 +81,56 @@ namespace octris {
         /**/
         {
             return 'No additional help available for command.';
+        }
+
+        /**
+         * Return error message.
+         *
+         * @octdoc  m:command/getError
+         * @return  string                                          Error message.
+         */
+        public function getError()
+        /**/
+        {
+            return $this->error;
+        }
+
+        /**
+         * Set error message.
+         *
+         * @octdoc  m:command/setError
+         */
+        protected function setError($msg)
+        /**/
+        {
+            $this->error = $msg;
+        }
+
+        /**
+         * Get a file iterator for a specified directory and specified regular expression matching file names.
+         *
+         * @octdoc  m:command/getIterator
+         * @param   string                          $dir            Director to iterate recusrivly.
+         * @param   string                          $regexp         Regular expression each file has to match to.
+         * @param   string                          $exclude        Optional pattern for filtering files.
+         * @return  \RegexIterator                                  The iterator.
+         */
+        protected function getIterator($dir, $regexp, $exclude = null)
+        /**/
+        {
+            $iterator = new \RegexIterator(
+                new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir)),
+                $regexp,
+                \RegexIterator::GET_MATCH
+            );
+
+            if (!is_null($exclude)) {
+                $iterator = new \org\octris\core\type\filteriterator($iterator, function($current, $filename) use ($exclude) {
+                    return !preg_match($exclude, $filename);
+                });
+            }
+
+            return $iterator;
         }
 
         /**
