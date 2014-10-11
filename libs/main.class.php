@@ -28,7 +28,7 @@ namespace octris {
          * @octdoc  d:main/T_VERSION
          * @type    string
          */
-        const T_VERSION = '0.0.1';
+        const T_VERSION = '0.0.2';
         const T_VERSION_DATE = '2014-10-12';
         /**/
 
