@@ -121,8 +121,6 @@ namespace octris {
                             print trim($class::getManual(), "\n") . "\n";
                             exit(1);
                         } else {
-                            printf("octris: %s\n", $arg);
-                            
                             provider::set('args', \org\octris\core\app\cli::getOptions($argv));
                             
                             $instance = new $class();
