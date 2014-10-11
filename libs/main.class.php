@@ -29,7 +29,7 @@ namespace octris {
          * @type    string
          */
         const T_VERSION = '0.0.1';
-        const T_VERSION_DATE = '2014-00-00';
+        const T_VERSION_DATE = '2014-10-12';
         /**/
 
         /**
