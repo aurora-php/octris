@@ -31,5 +31,31 @@ namespace {{$namespace}}\app {
          */
         protected $entry_page = '{{$namespace}}\app\entry';
         /**/
+    
+        /**
+         * Class Autoloader.
+         *
+         * @octdoc  m:main/autoload
+         * @param   string          $classpath              Path of class to load.
+         */
+        public static function autoload($classpath)
+        /**/
+        {
+            if (strpos($classpath, '{{$namespace}}\\') === 0) {
+                $file = __DIR__ . '/' . str_replace('\\', '/', substr($classpath, strlen('{{$namespace}}'))) . '.class.php';
+            } else {
+                $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\'), 2);
+                $classpath = preg_replace('|\\\\|', '/libs/', $classpath, 1);
+                $classpath = str_replace('\\', '/', $classpath);
+                
+                $file = __DIR__ . '/../vendor/' . $classpath . '.class.php';
+            }
+            
+            if (file_exists($file)) {
+                require_once($file);
+            }
+        }
     }
+
+    spl_autoload_register(array('\{{$namespace}}\main', 'autoload'));
 }

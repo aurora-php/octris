@@ -107,18 +107,16 @@ EOT;
                 if (strpos($classpath, $ns) === 0) {
                     // main application library
                     $file = $dir . '/libs/' . str_replace('\\', '/', substr($classpath, strlen($ns))) . '.class.php';
-                    
-                    include_once($file);
                 } else {
                     // vendor library
-                    $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\\\'), 2);
+                    $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\'), 2);
                     $classpath = preg_replace('|\\\\|', '/libs/', $classpath, 1);
-                    $classpath = preg_replace('|\\\\|', '/', $classpath);
+                    $classpath = str_replace('\\', '/', $classpath);
                     
                     $file = $dir . '/vendor/' . $classpath . '.class.php';
-                    
-                    include_once($file);
                 }
+                
+                require_once($file);
             });
             
             // main

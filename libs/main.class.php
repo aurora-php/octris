@@ -253,23 +253,22 @@ Commands:
         /**/
         {
             if (substr($classpath, 0, 6) == 'octris') {
-                $file = __DIR__ . '/' . preg_replace('|\\\\|', '/', substr($classpath, 6)) . '.class.php';
-
-                @include_once($file);
+                $file = __DIR__ . '/' . str_replace('\\', '/', substr($classpath, 6)) . '.class.php';
             } else {
-                $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\\\'), 2);
+                $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\'), 2);
                 $classpath = preg_replace('|\\\\|', '/libs/', $classpath, 1);
-                $classpath = preg_replace('|\\\\|', '/', $classpath);
+                $classpath = str_replace('\\', '/', $classpath);
                 
                 $file = __DIR__ . '/../vendor/' . $classpath . '.class.php';
-
-                try {
-                    include_once($file);
-                } catch(\Exception $e) {
-                }
+            }
+            
+            if (file_exists($file)) {
+                require_once($file);
             }
         }
     }
 
     spl_autoload_register(array('\octris\main', 'autoload'));
+    
+    provider::set('env', $_ENV);
 }
