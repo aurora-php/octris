@@ -39,6 +39,35 @@ namespace {{$namespace}}\libs {
         /**/
         {
         }
+    
+        /**
+         * Class Autoloader.
+         *
+         * @octdoc  m:main/autoload
+         * @param   string          $classpath              Path of class to load.
+         */
+        public static function autoload($classpath)
+        /**/
+        {
+            if (substr($classpath, 0, 6) == '{{$module}}') {
+                $file = __DIR__ . '/' . preg_replace('|\\\\|', '/', substr($classpath, 6)) . '.class.php';
+
+                @include_once($file);
+            } else {
+                $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\\\'), 2);
+                $classpath = preg_replace('|\\\\|', '/libs/', $classpath, 1);
+                $classpath = preg_replace('|\\\\|', '/', $classpath);
+                
+                $file = __DIR__ . '/../vendor/' . $classpath . '.class.php';
+
+                try {
+                    include_once($file);
+                } catch(\Exception $e) {
+                }
+            }
+        }
     }
+
+    spl_autoload_register(array('\{{$module}}\main', 'autoload'));
 }
 
