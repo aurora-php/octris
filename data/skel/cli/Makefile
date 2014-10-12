@@ -17,7 +17,13 @@
 # @author       {{$author}} <{{$email}}>
 #**
 
-include ../org.octris.core/Makefile.cli
+CURDIR := $(shell pwd)
 
-project = "{{$directory}}"
-appname = "{{$module}}"
+DSTDIR := "/usr/local/bin"
+
+help:
+	@echo "make targets:"
+	@echo "    install    creates single-executable '$(DSTDIR)/{{$module}}'"
+	
+install:
+	@php -dphar.readonly=0 $(CURDIR)/phar/install.php $(DSTDIR)
