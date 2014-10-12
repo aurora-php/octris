@@ -10,9 +10,7 @@
  */
 
 namespace octris\command {
-    use \org\octris\core\config as config;
     use \org\octris\core\provider as provider;
-    use \org\octris\core\app\cli\stdio as stdio;
     use \org\octris\core\validate as validate;
 
     /**
