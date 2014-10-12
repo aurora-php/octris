@@ -164,6 +164,10 @@ Commands:
             }, 0);
 
             foreach ($this->commands as $command => $class) {
+                if (($desc = $class::getDescription()) == '') {
+                    continue;
+                }
+                
                 printf("    %-" . $size . "s    %s\n", $command, $class::getDescription());
             }
         }

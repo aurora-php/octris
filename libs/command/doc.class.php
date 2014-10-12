@@ -24,6 +24,17 @@ namespace octris\command {
     /**/
     {
         /**
+         * Return command description.
+         *
+         * @octdoc  m:doc/getDescription
+         */
+        public static function getDescription()
+        /**/
+        {
+            return '';
+        }
+
+        /**
          * Run command.
          *
          * @octdoc  m:lint/run
