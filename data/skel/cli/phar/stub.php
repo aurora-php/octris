@@ -34,7 +34,7 @@ Phar::mapPhar();
 
 require_once('phar://{{$module}}.phar/libs/autoloader.class.php');
 
-$main = new {{$namespace}}\libs\main();
+$main = new {{$namespace}}\main();
 $main->run();
 
 __HALT_COMPILER();

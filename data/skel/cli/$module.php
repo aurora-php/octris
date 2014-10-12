@@ -27,5 +27,5 @@
 
 require_once(__DIR__ . '/libs/main.class.php');
 
-$main = new {{$namespace}}\libs\main();
+$main = new {{$module}}\main();
 $main->run();
