@@ -25,7 +25,7 @@
  */
 /**/
 
-require_once(__DIR__ . '/libs/main.class.php');
+require_once(__DIR__ . '/libs/autoloader.class.php');
 
 $main = new {{$module}}\main();
 $main->run();
