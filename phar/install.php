@@ -63,6 +63,7 @@ $phar = new Phar(
 $iterator = new AppendIterator();
 $iterator->append(getDirIterator(__DIR__ . '/../data/'));
 $iterator->append(getDirIterator(__DIR__ . '/../libs/'));
+$iterator->append(getDirIterator(__DIR__ . '/../vendor/org.octris.cliff/libs/'));
 $iterator->append(getDirIterator(__DIR__ . '/../vendor/org.octris.core/libs/'));
 
 $phar->buildFromIterator($iterator, realpath(__DIR__ . '/../'));
