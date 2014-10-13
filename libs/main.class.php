@@ -242,33 +242,7 @@ Commands:
                 printf("    %-" . $size . "s    %s\n", $command, $class::getDescription());
             }
         }
-    
-        /**
-         * Class Autoloader.
-         *
-         * @octdoc  m:main/autoload
-         * @param   string          $classpath              Path of class to load.
-         */
-        public static function autoload($classpath)
-        /**/
-        {
-            if (substr($classpath, 0, 6) == 'octris') {
-                $file = __DIR__ . '/' . str_replace('\\', '/', substr($classpath, 6)) . '.class.php';
-            } else {
-                $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\'), 2);
-                $classpath = preg_replace('|\\\\|', '/libs/', $classpath, 1);
-                $classpath = str_replace('\\', '/', $classpath);
-                
-                $file = __DIR__ . '/../vendor/' . $classpath . '.class.php';
-            }
-            
-            if (file_exists($file)) {
-                require_once($file);
-            }
-        }
     }
 
-    spl_autoload_register(array('\octris\main', 'autoload'));
-    
     provider::set('env', $_ENV);
 }

@@ -102,7 +102,7 @@ EOT;
             /*
              * install new project-specific autoloader
              */
-            spl_autoload_unregister(array('\octris\main', 'autoload'));
+            spl_autoload_unregister(array('\octris\autoloader', 'autoload'));
             spl_autoload_register(function($classpath) use ($dir, $ns) {
                 if (strpos($classpath, $ns) === 0) {
                     // main application library

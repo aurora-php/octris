@@ -24,7 +24,7 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
     exit(1);
 }
 
-require_once(__DIR__ . '/libs/main.class.php');
+require_once(__DIR__ . '/libs/autoloader.class.php');
 
 $main = new \octris\main();
 $main->run();
