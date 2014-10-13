@@ -30,7 +30,8 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
 }
 
 Phar::mapPhar();
-include 'phar://octris.phar/libs/autoloader.class.php';
+
+require_once('phar://octris.phar/libs/autoloader.class.php');
 
 // load application configuration
 $registry = \org\octris\core\registry::getInstance();
@@ -43,4 +44,5 @@ $registry->set('config', function() {
 // run application
 $main = new \octris\main();
 $main->run();
+
 __HALT_COMPILER();
