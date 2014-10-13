@@ -121,31 +121,15 @@ EOT;
         public function run()
         /**/
         {
-            // import required parameters
-            $args = provider::access('args');
+            $project = $this->args['project'];
+            $type    = $this->args['type'];
 
-            if ($args->isExist('p') && $args->isValid('p', validate::T_PROJECT)) {
-                $project = $args->getValue('p');
+            $tmp    = explode('.', $project);
+            $module = array_pop($tmp);
+            $domain = implode('.', array_reverse($tmp));
 
-                $tmp    = explode('.', $project);
-                $module = array_pop($tmp);
-                $domain = implode('.', array_reverse($tmp));
-            } else {
-                $this->setError('invalid project name specified');
-                
-                return 1;
-            }
-
-            if ($args->isExist('t') && $args->isValid('t', validate::T_PATTERN, array('pattern' => '/^(web|cli|lib)$/'))) {
-                $type = $args->getValue('t');
-            } else {
-                $this->setError('invalid project type specified');
-                
-                return 1;
-            }
-            
-            if ($args->isExist(0) && $args->isValid(0, validate::T_PATH)) {
-                $dir = $args->getValue(0) . '/' . $project;
+            if (isset($this->args[0]) && is_dir($this->args[0])) {
+                $dir = $this->args[0] . '/' . $project;
 
                 if (is_dir($dir)) {
                     $this->setError(sprintf("project directory already exists '%s'", $dir));

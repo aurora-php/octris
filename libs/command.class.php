@@ -39,14 +39,25 @@ namespace octris {
         /**/
         
         /**
+         * Arguments for command.
+         *
+         * @octdoc  p:command/$args
+         * @type    \org\octris\cliff\options\collection
+         */
+        protected $args;
+        /**/
+        
+        /**
          * Constructor.
          *
          * @octdoc  m:command/__construct
+         * @param   \org\octris\cliff\options\collection    $args       Arguments for command.
          */
-        public function __construct()
+        public function __construct(\org\octris\cliff\options\collection $args)
         /**/
         {
             $this->name = (new \ReflectionClass($this))->getShortName();
+            $this->args = $args;
         }
         
         /**
