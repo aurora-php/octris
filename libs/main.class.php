@@ -120,12 +120,18 @@ namespace octris {
                 print "subcommand create\n";
                 var_dump($collection);
             });
-            $cmd->addOption(['p'], options::T_VALUE);
-            $cmd->addOption(['t'], options::T_VALUE);
-            $cmd->addOption(['d'], options::T_KEYVALUE);
+            $cmd->addOption(['p'], options::T_VALUE)->setValidator(function($value) {
+                $validator = new \org\octris\core\validate\type\project();
+                return $validator->validate($validator->preFilter($value));
+            }, 'invalid project name specified');
+            $cmd->addOption(['t'], options::T_VALUE)->setValidator(function($value) {
+                return in_array($value, ['web', 'cli', 'lib']);
+            }, 'invalid project type specified');
+            $cmd->addOption(['d'], options::T_KEYVALUE)->setValidator(function($value, $key) {
+                return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
+            }, 'invalid argument value');
 
             if (!$opts->process()) {
-                $this->showUsage();
                 exit(1);
             }
 
@@ -140,8 +146,6 @@ namespace octris {
         public function showUsage()
         /**/
         {
-            debug_print_backtrace();
-            
             printf("               __         .__        
   ____   _____/  |________|__| ______
  /  _ \_/ ___\   __\_  __ \  |/  ___/    OCTRiS framework tool
