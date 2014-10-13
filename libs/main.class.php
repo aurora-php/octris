@@ -187,7 +187,11 @@ namespace octris {
             $cmd->addOption(['t'], options::T_VALUE);
             $cmd->addOption(['d'], options::T_KEYVALUE);
 
-            $args = $opts->process();
+            if (!$opts->process()) {
+                $this->showUsage();
+                exit(1);
+            }
+            
             //
             //
             // switch ($arg) {
