@@ -24,6 +24,8 @@ namespace {{$namespace}} {
     
     // load application configuration
     $registry = \org\octris\core\registry::getInstance();
+    $registry->set('OCTRIS_APP', '{{$directory}}');
+    $registry->set('OCTRIS_BASE', realpath(__DIR__ . '/../'));
     $registry->set('config', function() {
         return new \org\octris\core\config('{{$directory}}', 'config');
     }, \org\octris\core\registry::T_SHARED | \org\octris\core\registry::T_READONLY);
