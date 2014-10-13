@@ -11,6 +11,7 @@
 
 namespace octris {
     use \org\octris\core\provider as provider;
+    use \org\octris\cliff\options as options;
 
     /**
      * Main application class.
@@ -156,53 +157,77 @@ namespace octris {
             
             $this->getCommands();
             
-            array_shift($argv);
-
-            if (!($arg = array_shift($argv))) {
+            // array_shift($argv);
+            //
+            // if (!($arg = array_shift($argv))) {
+            //     $this->showUsage();
+            //     exit(1);
+            // }
+            //
+            $opts = new \org\octris\cliff\options();
+            $opts->addOption(['h', 'help'])->setAction(function() {
                 $this->showUsage();
                 exit(1);
-            }
+            });
+            $opts->addOption(['version'])->setAction(function() {
+                printf("octris %s (%s)\n", self::T_VERSION, self::T_VERSION_DATE);
+                exit(1);
+            });
+            
+            // help
+            $opts->addCommand('help');
+            
+            // create
+            $cmd = $opts->addCommand('create')->setAction(function(\org\octris\cliff\options $options) {
+                // (new \octris\command\create($args))->run();
+                print "subcommand create\n";
+                var_dump($options);
+            });
+            $cmd->addOption(['p'], options::T_VALUE);
+            $cmd->addOption(['t'], options::T_VALUE);
+            $cmd->addOption(['d'], options::T_KEYVALUE);
 
-            $help = false;
-
-            switch ($arg) {
-                case '--help':
-                case '-h':
-                    $this->showUsage();
-                    exit(1);
-                case '--version':
-                    printf("octris %s (%s)\n", self::T_VERSION, self::T_VERSION_DATE);
-                    exit(1);
-                case 'help':
-                    $help = true;
-                    $arg  = array_shift($argv);
-                    /** FALL THRU **/
-                default:
-                    if (!(preg_match('/^[a-z]+$/', $arg))) {
-                        $this->showUsage();
-                        exit(1);
-                    } elseif (!isset($this->commands[$arg])) {
-                        printf("octris: '%s' is not a command\n", $arg);
-                        exit(1);
-                    } else {
-                        $class = "\\octris\\command\\$arg";
-
-                        if ($help) {
-                            print trim($class::getManual(), "\n") . "\n";
-                            exit(1);
-                        } else {
-                            provider::set('args', $this->getOptions($argv));
-
-                            $instance = new $class();
-
-                            if (($return = $instance->run())) {
-                                printf("**error** %s\n", rtrim($instance->getError(), "\n"));
-
-                                exit($return);
-                            }
-                        }
-                    }
-            }
+            $args = $opts->process();
+            //
+            //
+            // switch ($arg) {
+            //     case '--help':
+            //     case '-h':
+            //         $this->showUsage();
+            //         exit(1);
+            //     case '--version':
+            //         printf("octris %s (%s)\n", self::T_VERSION, self::T_VERSION_DATE);
+            //         exit(1);
+            //     case 'help':
+            //         $help = true;
+            //         $arg  = array_shift($argv);
+            //         /** FALL THRU **/
+            //     default:
+            //         if (!(preg_match('/^[a-z]+$/', $arg))) {
+            //             $this->showUsage();
+            //             exit(1);
+            //         } elseif (!isset($this->commands[$arg])) {
+            //             printf("octris: '%s' is not a command\n", $arg);
+            //             exit(1);
+            //         } else {
+            //             $class = "\\octris\\command\\$arg";
+            //
+            //             if ($help) {
+            //                 print trim($class::getManual(), "\n") . "\n";
+            //                 exit(1);
+            //             } else {
+            //                 provider::set('args', $this->getOptions($argv));
+            //
+            //                 $instance = new $class();
+            //
+            //                 if (($return = $instance->run())) {
+            //                     printf("**error** %s\n", rtrim($instance->getError(), "\n"));
+            //
+            //                     exit($return);
+            //                 }
+            //             }
+            //         }
+            // }
 
             exit(0);
         }
@@ -215,6 +240,8 @@ namespace octris {
         public function showUsage()
         /**/
         {
+            debug_print_backtrace();
+            
             printf("               __         .__        
   ____   _____/  |________|__| ______
  /  _ \_/ ___\   __\_  __ \  |/  ___/    OCTRiS framework tool
