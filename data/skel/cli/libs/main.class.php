@@ -17,7 +17,7 @@ namespace {{$module}} {
      * @copyright   copyright (c) {{$year}} by {{$company}}
      * @author      {{$author}} <{{$email}}>
      */
-    class main
+    class main extends \org\octris\cliff\app
     /**/
     {
         /**
@@ -33,9 +33,9 @@ namespace {{$module}} {
         /**
          * Execute application.
          *
-         * @octdoc  m:main/run
+         * @octdoc  m:main/main
          */
-        public function run()
+        public function main()
         /**/
         {
         }

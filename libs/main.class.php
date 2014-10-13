@@ -19,7 +19,7 @@ namespace octris {
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class main 
+    class main extends \org\octris\cliff\app
     /**/
     {
         /**
@@ -147,9 +147,9 @@ namespace octris {
         /**
          * Run main application.
          *
-         * @octdoc  m:main/run
+         * @octdoc  m:main/main
          */
-        public function run()
+        public function main()
         /**/
         {
             global $argv;
