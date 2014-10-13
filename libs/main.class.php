@@ -174,8 +174,23 @@ namespace octris {
                 exit(1);
             });
             
-            // help
-            $opts->addCommand('help');
+            // help command
+            $opts->addCommand('help')->setAction(function(\org\octris\cliff\options $options) {
+                if (count($operands = $options->getOperands()) != 1) {
+                    $this->showUsage();
+                    exit(1);
+                }
+                
+                if (!isset($this->commands[$operands[0]])) {
+                    printf("octris: '%s' is not a command\n", $operands[0]);
+                    exit(1);
+                }
+                
+                $class = '\\octris\\command\\' . $operands[0];
+                
+                print trim($class::getManual(), "\n") . "\n";
+                exit(1);
+            });
             
             // create
             $cmd = $opts->addCommand('create')->setAction(function(\org\octris\cliff\options $options) {
