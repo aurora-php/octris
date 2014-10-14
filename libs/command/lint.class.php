@@ -20,9 +20,19 @@ namespace octris\command {
      * @copyright   copyright (c) 2012-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class lint extends \octris\command
+    class lint extends \org\octris\cliff\app\command
     /**/
     {
+        /**
+         * Constructor.
+         *
+         * @octdoc  m:lint/__construct
+         */
+        public function __construct()
+        /**/
+        {
+        }
+        
         /**
          * Return command description.
          *
@@ -31,7 +41,7 @@ namespace octris\command {
         public static function getDescription()
         /**/
         {
-            return 'Validate files in a project.';
+            return 'Syntactical check of project files.';
         }
 
         /**
@@ -44,41 +54,70 @@ namespace octris\command {
         {
             return <<<EOT
 NAME
-    octris lint - validate files in a project.
+    octris lint - syntactical check of project files.
     
 SYNOPSIS
     octris lint     <project-path>
     
 DESCRIPTION
-    This command is used to validate the files in a project. Currently
-    validation can be performed for php files and template files.
+    This command is used to check the syntax of files in a project. Currently
+    validation can be performed for php files and OCTRiS template files.
     
 OPTIONS
 
 EXAMPLES
-    Validate a project:
+    Check a project:
     
         $ ./octris lint ~/tmp/org.octris.test
 EOT;
         }
 
         /**
+         * Get a file iterator for a specified directory and specified regular expression matching file names.
+         *
+         * @octdoc  m:lint/getIterator
+         * @param   string                          $dir            Director to iterate recusrivly.
+         * @param   string                          $regexp         Regular expression each file has to match to.
+         * @param   string                          $exclude        Optional pattern for filtering files.
+         * @return  \RegexIterator                                  The iterator.
+         */
+        protected function getIterator($dir, $regexp, $exclude = null)
+        /**/
+        {
+            $iterator = new \RegexIterator(
+                new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir)),
+                $regexp,
+                \RegexIterator::GET_MATCH
+            );
+
+            if (!is_null($exclude)) {
+                $iterator = new \org\octris\core\type\filteriterator($iterator, function($current, $filename) use ($exclude) {
+                    return !preg_match($exclude, $filename);
+                });
+            }
+
+            return $iterator;
+        }
+
+        /**
          * Run command.
          *
          * @octdoc  m:lint/run
+         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments for command.
          */
-        public function run()
+        public function run(\org\octris\cliff\options\collection $args)
         /**/
         {
-            // import required parameters
-            $args = provider::access('args');
-
-            if ($args->isExist(0) && $args->isValid(0, validate::T_PATH)) {
-                $dir = $args->getValue(0);
-            } else {
+            if (!isset($args[0])) {
+                $this->setError(sprintf("no project path specified"));
+                
+                return false;
+            } elseif (!is_dir($args[0])) {
                 $this->setError('specified path is not a directory or directory not found');
                 
-                return 1;
+                return false;
+            } else {
+                $dir = rtrim($args[0], '/');
             }
 
             // lint php files
