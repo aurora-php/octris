@@ -20,9 +20,19 @@ namespace octris\command {
      * @copyright   copyright (c) 2011-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class graph extends \octris\command
+    class graph extends \org\octris\cliff\app\command
     /**/
     {
+        /**
+         * Constructor.
+         *
+         * @octdoc  m:graph/__construct
+         */
+        public function __construct()
+        /**/
+        {
+        }
+        
         /**
          * Return command description.
          *
@@ -75,25 +85,27 @@ EOT;
          * Run command.
          *
          * @octdoc  m:graph/run
+         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments for command.
          */
-        public function run()
+        public function run(\org\octris\cliff\options\collection $args)
         /**/
         {
-            // import required parameters
-            $args = provider::access('args');
-
-            if ($args->isExist(0) && $args->isValid(0, validate::T_PATH)) {
-                $dir = rtrim($args->getValue(0), '/');
-            } else {
+            if (!isset($args[0])) {
+                $this->setError(sprintf("no project path specified"));
+                
+                return false;
+            } elseif (!is_dir($args[0])) {
                 $this->setError('specified path is not a directory or directory not found');
                 
-                return 1;
+                return false;
+            } else {
+                $dir = rtrim($args[0], '/');
             }
-
+            
             if (!is_dir($dir . '/libs/app') || !is_file($dir . '/libs/app/entry.class.php')) {
                 $this->setError(sprintf('\'%s\' does not seem to be a web application created with the OCTRiS framework', $dir));
                 
-                return 1;
+                return false;
             }
             
             $project = basename($dir);
