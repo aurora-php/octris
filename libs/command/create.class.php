@@ -14,6 +14,7 @@ namespace octris\command {
     use \org\octris\core\provider as provider;
     use \org\octris\cliff\stdio as stdio;
     use \org\octris\core\validate as validate;
+    use \org\octris\cliff\options as options;
 
     /**
      * Create a new project.
@@ -22,9 +23,40 @@ namespace octris\command {
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class create extends \octris\command
+    class create extends \org\octris\cliff\app\command
     /**/
     {
+        /**
+         * Constructor.
+         *
+         * @octdoc  m:create/__construct
+         */
+        public function __construct()
+        /**/
+        {
+        }
+        
+        /**
+         * Configure command arguments.
+         *
+         * @octdoc  m:create/configure
+         * @param   \org\octris\cliff\options       $options            Instance of options parser.
+         */
+        public function configure(\org\octris\cliff\options $options)
+        /**/
+        {
+            $options->addOption(['p', 'project'], options::T_VALUE | options::T_REQUIRED)->setValidator(function($value) {
+                $validator = new \org\octris\core\validate\type\project();
+                return $validator->validate($validator->preFilter($value));
+            }, 'invalid project name specified');
+            $options->addOption(['t', 'type'], options::T_VALUE | options::T_REQUIRED)->setValidator(function($value) {
+                return in_array($value, ['web', 'cli', 'lib']);
+            }, 'invalid project type specified');
+            $options->addOption(['d', 'define'], options::T_KEYVALUE)->setValidator(function($value, $key) {
+                return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
+            }, 'invalid argument value');
+        }
+        
         /**
          * Return command description.
          *
@@ -118,28 +150,32 @@ EOT;
          *
          * @octdoc  m:create/run
          */
-        public function run()
+        public function run(\org\octris\cliff\options\collection $args)
         /**/
         {
-            $project = $this->args['project'];
-            $type    = $this->args['type'];
+            $project = $args['project'];
+            $type    = $args['type'];
 
             $tmp    = explode('.', $project);
             $module = array_pop($tmp);
             $domain = implode('.', array_reverse($tmp));
 
-            if (isset($this->args[0]) && is_dir($this->args[0])) {
-                $dir = $this->args[0] . '/' . $project;
+            if (!isset($args[0])) {
+                $this->setError(sprintf("no destination path specified"));
+                
+                return false;
+            } elseif (!is_dir($args[0])) {
+                $this->setError('specified path is not a directory or directory not found');
+                
+                return false;
+            } else {
+                $dir = $args[0] . '/' . $project;
 
                 if (is_dir($dir)) {
                     $this->setError(sprintf("project directory already exists '%s'", $dir));
 
-                    return 1;
+                    return false;
                 }
-            } else {
-                $this->setError('specified path is not a directory or directory not found');
-                
-                return 1;
             }
             
             $year = date('Y');
