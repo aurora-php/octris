@@ -71,8 +71,11 @@ namespace octris {
         {
             parent::configure($options);
             
-            // create
             $options->addCommand('create', new \octris\command\create());
+            $options->addCommand('graph',  new \octris\command\graph());
+            $options->addCommand('lint',   new \octris\command\lint());
+            $options->addCommand('test',   new \octris\command\test());
+            $options->addCommand('doc',    new \octris\command\doc());
         }
 
         /**
