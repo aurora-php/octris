@@ -20,7 +20,11 @@
 /**/
 
 if (version_compare(PHP_VERSION, '5.6.0') < 0) {
-    printf("octris: PHP-5.6.0 or newer is required, your version is '%s'!\n", PHP_VERSION);
+    printf(
+        "%s: PHP-5.6.0 or newer is required, your version is '%s'!\n",
+        basename($argv[0]),
+        PHP_VERSION
+    );
     exit(1);
 }
 

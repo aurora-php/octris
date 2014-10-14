@@ -19,13 +19,20 @@
  */
 /**/
 
-if (!class_exists('PHAR')) {
-    print 'octris: unable to execute -- wrong PHP version\n';
+if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+    printf(
+        "%s: PHP-5.6.0 or newer is required, your version is '%s'!\n",
+        basename($argv[0]),
+        PHP_VERSION
+    );
     exit(1);
 }
 
-if (version_compare(PHP_VERSION, '5.6.0') < 0) {
-    printf("octris: PHP-5.6.0 or newer is required, your version is '%s'!\n", PHP_VERSION);
+if (!class_exists('PHAR')) {
+    printf(
+        "%s: unable to execute, PHAR extension is not available\n",
+        basename($argv[0])
+    );
     exit(1);
 }
 
