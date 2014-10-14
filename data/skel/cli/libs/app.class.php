@@ -11,19 +11,46 @@
 
 namespace {{$module}} {
     /**
-     * Main application.
+     * Application class.
      *
-     * @octdoc      c:libs/main
+     * @octdoc      c:libs/app
      * @copyright   copyright (c) {{$year}} by {{$company}}
      * @author      {{$author}} <{{$email}}>
      */
-    class main extends \org\octris\cliff\app
+    class app extends \org\octris\cliff\app
     /**/
     {
         /**
+         * Application name.
+         *
+         * @octdoc  p:app/$app_name
+         * @type    string
+         */
+        protected static $app_name = '{{$directory}}';
+        /**/
+        
+        /**
+         * Application version.
+         *
+         * @octdoc  p:app/$app_version
+         * @type    string
+         */
+        protected static $app_version = '0.0.0';
+        /**/
+        
+        /**
+         * Application version date.
+         *
+         * @octdoc  p:app/$app_version_date
+         * @type    string
+         */
+        protected static $app_version_date = '0000-00-00';
+        /**/
+        
+        /**
          * Constructor.
          *
-         * @octdoc  m:main/__construct
+         * @octdoc  m:app/__construct
          */
         public function __construct()
         /**/
@@ -33,9 +60,10 @@ namespace {{$module}} {
         /**
          * Execute application.
          *
-         * @octdoc  m:main/main
+         * @octdoc  m:app/main
+         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments.
          */
-        public function main()
+        protected function main(\org\octris\cliff\options\collection $args);
         /**/
         {
         }

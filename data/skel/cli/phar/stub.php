@@ -25,8 +25,20 @@
  */
 /**/
 
+if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+    printf(
+        "%s: PHP-5.6.0 or newer is required, your version is '%s'!\n",
+        basename($argv[0]),
+        PHP_VERSION
+    );
+    exit(1);
+}
+
 if (!class_exists('PHAR')) {
-    print 'unable to execute -- wrong PHP version\n';
+    printf(
+        "%s: unable to execute, PHAR extension is not available\n",
+        basename($argv[0])
+    );
     exit(1);
 }
 
@@ -43,7 +55,7 @@ $registry->set('config', function() {
 }, \org\octris\core\registry::T_SHARED | \org\octris\core\registry::T_READONLY);
 
 // run application
-$main = new {{$namespace}}\main();
-$main->run();
+$app = new {{$namespace}}\app();
+$app->run();
 
 __HALT_COMPILER();

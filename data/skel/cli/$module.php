@@ -25,6 +25,15 @@
  */
 /**/
 
+if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+    printf(
+        "%s: PHP-5.6.0 or newer is required, your version is '%s'!\n",
+        basename($argv[0]),
+        PHP_VERSION
+    );
+    exit(1);
+}
+
 require_once(__DIR__ . '/libs/autoloader.class.php');
 
 // load application configuration
@@ -36,5 +45,5 @@ $registry->set('config', function() {
 }, \org\octris\core\registry::T_SHARED | \org\octris\core\registry::T_READONLY);
 
 // run application
-$main = new {{$module}}\main();
-$main->run();
+$app = new {{$module}}\app();
+$app->run();
