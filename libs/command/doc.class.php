@@ -20,9 +20,19 @@ namespace octris\command {
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class doc extends \octris\command
+    class doc extends \org\octris\cliff\app\command
     /**/
     {
+        /**
+         * Constructor.
+         *
+         * @octdoc  m:doc/__construct
+         */
+        public function __construct()
+        /**/
+        {
+        }
+        
         /**
          * Return command description.
          *
@@ -38,8 +48,9 @@ namespace octris\command {
          * Run command.
          *
          * @octdoc  m:lint/run
+         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments for command.
          */
-        public function run()
+        public function run(\org\octris\cliff\options\collection $args)
         /**/
         {
             // $this->setError('not implemented, yet');
