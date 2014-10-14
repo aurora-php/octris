@@ -149,6 +149,7 @@ EOT;
          * Run command.
          *
          * @octdoc  m:create/run
+         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments for command.
          */
         public function run(\org\octris\cliff\options\collection $args)
         /**/
