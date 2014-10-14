@@ -12,6 +12,7 @@
 namespace octris\command {
     use \org\octris\core\provider as provider;
     use \org\octris\core\validate as validate;
+    use \org\octris\cliff\options as options;
 
     /**
      * Execute phpunit test-suite for a project.
@@ -20,9 +21,34 @@ namespace octris\command {
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class test extends \octris\command
+    class test extends \org\octris\cliff\app\command
     /**/
     {
+        /**
+         * Constructor.
+         *
+         * @octdoc  m:test/__construct
+         */
+        public function __construct()
+        /**/
+        {
+        }
+        
+        /**
+         * Configure command arguments.
+         *
+         * @octdoc  m:test/configure
+         * @param   \org\octris\cliff\options       $options            Instance of options parser.
+         */
+        public function configure(\org\octris\cliff\options $options)
+        /**/
+        {
+            $options->addOption(['f', 'filter'], options::T_VALUE)->setValidator(function($value) {
+                $validator = new \org\octris\core\validate\type\printable();
+                return $validator->validate($validator->preFilter($value));
+            }, 'invalid filter specified');
+        }
+        
         /**
          * Return command description.
          *
@@ -37,7 +63,7 @@ namespace octris\command {
         /**
          * Return command manual.
          *
-         * @octdoc  m:create/getManual
+         * @octdoc  m:test/getManual
          */
         public static function getManual()
         /**/
@@ -68,29 +94,31 @@ EOT;
          * Run command.
          *
          * @octdoc  m:test/run
+         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments for command.
          */
-        public function run()
+        public function run(\org\octris\cliff\options\collection $args)
         /**/
         {
-            // import required parameters
-            $args = provider::access('args');
-
-            if ($args->isExist(0) && $args->isValid(0, validate::T_PATH)) {
-                $dir = $args->getValue(0) . '/tests/';
+            if (!isset($args[0])) {
+                $this->setError(sprintf("no destination path specified"));
+                
+                return false;
+            } elseif (!is_dir($args[0])) {
+                $this->setError('specified path is not a directory or directory not found');
+                
+                return false;
+            } else {
+                $dir = $args[0] . '/tests/';
                 
                 if (!is_dir($dir)) {
                     $this->setError('no tests available');
                     
-                    return 1;
+                    return false;
                 }
-            } else {
-                $this->setError('specified path is not a directory or directory not found');
-                
-                return 1;
             }
             
-            if ($args->isExist('f') && $args->isValid('f', validate::T_PRINTABLE)) {
-                $filter = '--filter ' . escapeshellarg($args->getValue('f'));
+            if (isset($args['f'])) {
+                $filter = '--filter ' . escapeshellarg($args['f']);
             } else {
                 $filter = '';
             }
