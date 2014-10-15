@@ -58,24 +58,24 @@ namespace octris {
         public function __construct()
         /**/
         {
+            parent::__construct();
         }
 
         /**
          * Configure application arguments.
          *
          * @octdoc  m:app/configure
-         * @param   \org\octris\cliff\options       $options            Instance of options parser.
          */
-        protected function configure(\org\octris\cliff\options $options)
+        protected function configure()
         /**/
         {
-            parent::configure($options);
+            parent::configure();
             
-            $options->addCommand('create', new \octris\command\create());
-            $options->addCommand('graph',  new \octris\command\graph());
-            $options->addCommand('lint',   new \octris\command\lint());
-            $options->addCommand('test',   new \octris\command\test());
-            $options->addCommand('doc',    new \octris\command\doc());
+            $this->addCommand('create', new \octris\command\create());
+            $this->addCommand('graph',  new \octris\command\graph());
+            $this->addCommand('lint',   new \octris\command\lint());
+            $this->addCommand('test',   new \octris\command\test());
+            $this->addCommand('doc',    new \octris\command\doc());
         }
 
         /**

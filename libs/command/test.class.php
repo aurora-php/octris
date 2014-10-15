@@ -32,6 +32,7 @@ namespace octris\command {
         public function __construct()
         /**/
         {
+            parent::__construct();
         }
         
         /**
