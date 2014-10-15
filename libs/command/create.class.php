@@ -45,14 +45,14 @@ namespace octris\command {
         public function configure()
         /**/
         {
-            $this->addOption(['p', 'project'], options::T_VALUE | options::T_REQUIRED)->setValidator(function($value) {
+            $this->addOption(['p', 'project'], options::T_VALUE | options::T_REQUIRED)->addValidator(function($value) {
                 $validator = new \org\octris\core\validate\type\project();
                 return $validator->validate($validator->preFilter($value));
             }, 'invalid project name specified');
-            $this->addOption(['t', 'type'], options::T_VALUE | options::T_REQUIRED)->setValidator(function($value) {
+            $this->addOption(['t', 'type'], options::T_VALUE | options::T_REQUIRED)->addValidator(function($value) {
                 return in_array($value, ['web', 'cli', 'lib']);
             }, 'invalid project type specified');
-            $this->addOption(['d', 'define'], options::T_KEYVALUE)->setValidator(function($value, $key) {
+            $this->addOption(['d', 'define'], options::T_KEYVALUE)->addValidator(function($value, $key) {
                 return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
             }, 'invalid argument value');
         }

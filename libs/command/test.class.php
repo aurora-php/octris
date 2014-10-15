@@ -43,7 +43,7 @@ namespace octris\command {
         public function configure()
         /**/
         {
-            $this->addOption(['f', 'filter'], options::T_VALUE)->setValidator(function($value) {
+            $this->addOption(['f', 'filter'], options::T_VALUE)->addValidator(function($value) {
                 $validator = new \org\octris\core\validate\type\printable();
                 return $validator->validate($validator->preFilter($value));
             }, 'invalid filter specified');
