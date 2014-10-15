@@ -39,12 +39,11 @@ namespace octris\command {
          * Configure command arguments.
          *
          * @octdoc  m:test/configure
-         * @param   \org\octris\cliff\options       $options            Instance of options parser.
          */
-        public function configure(\org\octris\cliff\options $options)
+        public function configure()
         /**/
         {
-            $options->addOption(['f', 'filter'], options::T_VALUE)->setValidator(function($value) {
+            $this->addOption(['f', 'filter'], options::T_VALUE)->setValidator(function($value) {
                 $validator = new \org\octris\core\validate\type\printable();
                 return $validator->validate($validator->preFilter($value));
             }, 'invalid filter specified');
