@@ -55,6 +55,10 @@ namespace octris\command {
             $this->addOption(['d', 'define'], options::T_KEYVALUE)->addValidator(function($value, $key) {
                 return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
             }, 'invalid argument value');
+            
+            $this->addOperand(1, 1)->addValidator(function($value) {
+                return is_dir($value);
+            }, 'specified path is not a directory or directory not found');
         }
         
         /**
