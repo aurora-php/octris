@@ -27,11 +27,12 @@ namespace octris\command {
          * Constructor.
          *
          * @octdoc  m:graph/__construct
+         * @param   string                              $name               Name of command.
          */
-        public function __construct()
+        public function __construct($name)
         /**/
         {
-            parent::__construct();
+            parent::__construct($name);
         }
         
         /**

@@ -71,11 +71,11 @@ namespace octris {
         {
             parent::configure();
             
-            $this->addCommand('create', new \octris\command\create());
-            $this->addCommand('graph',  new \octris\command\graph());
-            $this->addCommand('lint',   new \octris\command\lint());
-            $this->addCommand('test',   new \octris\command\test());
-            $this->addCommand('doc',    new \octris\command\doc());
+            $this->addCommand(new \octris\command\create('create'));
+            $this->addCommand(new \octris\command\graph('graph'));
+            $this->addCommand(new \octris\command\lint('lint'));
+            $this->addCommand(new \octris\command\test('test'));
+            $this->addCommand(new \octris\command\doc('doc'));
         }
 
         /**
