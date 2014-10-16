@@ -14,7 +14,7 @@ namespace octris\command {
     use \org\octris\core\provider as provider;
     use \org\octris\cliff\stdio as stdio;
     use \org\octris\core\validate as validate;
-    use \org\octris\cliff\options as options;
+    use \org\octris\cliff\args as args;
 
     /**
      * Create a new project.
@@ -45,14 +45,14 @@ namespace octris\command {
         public function configure()
         /**/
         {
-            $this->addOption(['p', 'project'], options::T_VALUE | options::T_REQUIRED)->addValidator(function($value) {
+            $this->addOption(['p', 'project'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
                 $validator = new \org\octris\core\validate\type\project();
                 return $validator->validate($validator->preFilter($value));
             }, 'invalid project name specified');
-            $this->addOption(['t', 'type'], options::T_VALUE | options::T_REQUIRED)->addValidator(function($value) {
+            $this->addOption(['t', 'type'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
                 return in_array($value, ['web', 'cli', 'lib']);
             }, 'invalid project type specified');
-            $this->addOption(['d', 'define'], options::T_KEYVALUE)->addValidator(function($value, $key) {
+            $this->addOption(['d', 'define'], args::T_KEYVALUE)->addValidator(function($value, $key) {
                 return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
             }, 'invalid argument value');
             
@@ -153,9 +153,9 @@ EOT;
          * Run command.
          *
          * @octdoc  m:create/run
-         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments for command.
+         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments for command.
          */
-        public function run(\org\octris\cliff\options\collection $args)
+        public function run(\org\octris\cliff\args\collection $args)
         /**/
         {
             $project = $args['project'];

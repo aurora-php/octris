@@ -104,9 +104,9 @@ EOT;
          * Run command.
          *
          * @octdoc  m:lint/run
-         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments for command.
+         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments for command.
          */
-        public function run(\org\octris\cliff\options\collection $args)
+        public function run(\org\octris\cliff\args\collection $args)
         /**/
         {
             if (!isset($args[0])) {

@@ -61,9 +61,9 @@ namespace {{$module}} {
          * Execute application.
          *
          * @octdoc  m:app/main
-         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments.
+         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments.
          */
-        protected function main(\org\octris\cliff\options\collection $args);
+        protected function main(\org\octris\cliff\args\collection $args);
         /**/
         {
         }

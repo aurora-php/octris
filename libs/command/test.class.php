@@ -12,7 +12,7 @@
 namespace octris\command {
     use \org\octris\core\provider as provider;
     use \org\octris\core\validate as validate;
-    use \org\octris\cliff\options as options;
+    use \org\octris\cliff\args    as args;
 
     /**
      * Execute phpunit test-suite for a project.
@@ -43,7 +43,7 @@ namespace octris\command {
         public function configure()
         /**/
         {
-            $this->addOption(['f', 'filter'], options::T_VALUE)->addValidator(function($value) {
+            $this->addOption(['f', 'filter'], args::T_VALUE)->addValidator(function($value) {
                 $validator = new \org\octris\core\validate\type\printable();
                 return $validator->validate($validator->preFilter($value));
             }, 'invalid filter specified');
@@ -94,9 +94,9 @@ EOT;
          * Run command.
          *
          * @octdoc  m:test/run
-         * @param   \org\octris\cliff\options\collection        $args           Parsed arguments for command.
+         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments for command.
          */
-        public function run(\org\octris\cliff\options\collection $args)
+        public function run(\org\octris\cliff\args\collection $args)
         /**/
         {
             if (!isset($args[0])) {
