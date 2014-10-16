@@ -16,7 +16,7 @@ namespace octris\app {
     /**
      * Lint a project.
      *
-     * @octdoc      c:command/lint
+     * @octdoc      c:app/lint
      * @copyright   copyright (c) 2012-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */

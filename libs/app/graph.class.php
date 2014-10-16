@@ -16,7 +16,7 @@ namespace octris\app {
     /**
      * Create a page graph of a project.
      *
-     * @octdoc      c:command/graph
+     * @octdoc      c:app/graph
      * @copyright   copyright (c) 2011-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */

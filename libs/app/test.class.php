@@ -17,7 +17,7 @@ namespace octris\app {
     /**
      * Execute phpunit test-suite for a project.
      *
-     * @octdoc      c:command/test
+     * @octdoc      c:app/test
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
