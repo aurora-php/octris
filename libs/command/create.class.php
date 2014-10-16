@@ -23,7 +23,7 @@ namespace octris\command {
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class create extends \org\octris\cliff\app\command
+    class create extends \org\octris\cliff\args\command
     /**/
     {
         /**
