@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\command {
+namespace octris\app {
     use \org\octris\core\provider as provider;
     use \org\octris\core\validate as validate;
     use \org\octris\cliff\args    as args;

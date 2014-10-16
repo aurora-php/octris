@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\command {
+namespace octris\app {
     use \org\octris\core\config as config;
     use \org\octris\core\provider as provider;
     use \org\octris\cliff\stdio as stdio;
