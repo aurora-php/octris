@@ -101,20 +101,14 @@ EOT;
         /**/
         {
             if (!isset($args[0])) {
-                $this->setError(sprintf("no destination path specified"));
-                
-                return false;
+                throw new \org\octris\cliff\exception\argument(sprintf("no destination path specified"));
             } elseif (!is_dir($args[0])) {
-                $this->setError('specified path is not a directory or directory not found');
-                
-                return false;
+                throw new \org\octris\cliff\exception\argument('specified path is not a directory or directory not found');
             } else {
                 $dir = $args[0] . '/tests/';
                 
                 if (!is_dir($dir)) {
-                    $this->setError('no tests available');
-                    
-                    return false;
+                    throw new \org\octris\cliff\exception\application('no tests available');
                 }
             }
             
@@ -125,9 +119,7 @@ EOT;
             }
             
             if (!($cmd = `which phpunit`)) {
-                $this->setError('phpunit not found');
-                
-                return 1;
+                throw new \org\octris\cliff\exception\application('phpunit not found');
             }
             
             // execute tests

@@ -93,21 +93,15 @@ EOT;
         /**/
         {
             if (!isset($args[0])) {
-                $this->setError(sprintf("no project path specified"));
-                
-                return false;
+                throw new \org\octris\cliff\exception\argument(sprintf("no project path specified"));
             } elseif (!is_dir($args[0])) {
-                $this->setError('specified path is not a directory or directory not found');
-                
-                return false;
+                throw new \org\octris\cliff\exception\argument('specified path is not a directory or directory not found');
             } else {
                 $dir = rtrim($args[0], '/');
             }
             
             if (!is_dir($dir . '/libs/app') || !is_file($dir . '/libs/app/entry.class.php')) {
-                $this->setError(sprintf('\'%s\' does not seem to be a web application created with the OCTRiS framework', $dir));
-                
-                return false;
+                throw new \org\octris\cliff\exception\argument(sprintf('\'%s\' does not seem to be a web application created with the OCTRiS framework', $dir));
             }
             
             $project = basename($dir);

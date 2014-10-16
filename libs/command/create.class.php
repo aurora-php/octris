@@ -167,20 +167,14 @@ EOT;
             $domain = implode('.', array_reverse($tmp));
 
             if (!isset($args[0])) {
-                $this->setError(sprintf("no destination path specified"));
-                
-                return false;
+                throw new \org\octris\cliff\exception\argument(sprintf("no destination path specified"));
             } elseif (!is_dir($args[0])) {
-                $this->setError('specified path is not a directory or directory not found');
-                
-                return false;
+                throw new \org\octris\cliff\exception\argument('specified path is not a directory or directory not found');
             } else {
                 $dir = $args[0] . '/' . $project;
 
                 if (is_dir($dir)) {
-                    $this->setError(sprintf("project directory already exists '%s'", $dir));
-
-                    return false;
+                    throw new \org\octris\cliff\exception\argument(sprintf("project directory already exists '%s'", $dir));
                 }
             }
             
@@ -231,7 +225,7 @@ EOT;
             // create project
             $src = __DIR__ . '/../../data/skel/' . $type . '/';
             if (!is_dir($src)) {
-                $this->setError(sprintf("unable to locate template directory '%s'\n", $src));
+                throw new \org\octris\cliff\exception\application(sprintf("unable to locate template directory '%s'\n", $src));
 
                 return 1;
             }
