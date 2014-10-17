@@ -49,7 +49,8 @@ namespace octris\app {
             $this->addOption(['p', 'project'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
                 $validator = new \org\octris\core\validate\type\project();
                 return $validator->validate($validator->preFilter($value));
-            }, 'invalid project name specified');
+            }, 'invalid project name specified')->setHelp('A valid name for the project in the form of a reversed domain
+            name.');
             $this->addOption(['t', 'type'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
                 return in_array($value, ['web', 'cli', 'lib']);
             }, 'invalid project type specified');
@@ -57,9 +58,9 @@ namespace octris\app {
                 return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
             }, 'invalid argument value');
             
-            $this->addOperand(1, 1)->addValidator(function($value) {
+            $this->addOperand(1, 'project-path')->addValidator(function($value) {
                 return is_dir($value);
-            }, 'specified path is not a directory or directory not found');
+            }, 'specified path is not a directory or directory not found')->setHelp('Path to a project.');
         }
         
         /**
