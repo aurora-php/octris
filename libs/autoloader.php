@@ -30,13 +30,7 @@ namespace octris {
         /**/
         {
             if (substr($classpath, 0, 6) == 'octris') {
-                $file = __DIR__ . '/' . str_replace('\\', '/', substr($classpath, 6)) . '.class.php';
-            } else {
-                $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\'), 2);
-                $classpath = preg_replace('|\\\\|', '/libs/', $classpath, 1);
-                $classpath = str_replace('\\', '/', $classpath);
-                
-                $file = __DIR__ . '/../vendor/' . $classpath . '.class.php';
+                $file = __DIR__ . '/' . str_replace('\\', '/', substr($classpath, 6)) . '.php';
             }
             
             if (file_exists($file)) {
@@ -45,5 +39,5 @@ namespace octris {
         }
     }
     
-    spl_autoload_register(array('\octris\autoloader', 'autoload'));
+    spl_autoload_register(array('\octris\autoloader', 'autoload'), true, true);
 }
