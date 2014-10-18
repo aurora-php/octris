@@ -10,7 +10,7 @@
 #
 
 #**
-# Makefile for {{$directory}}.
+# Makefile for {{$vendor}}-{{$module}}.
 #
 # @octdoc       h:{{$module}}/Makefile
 # @copyright    copyright (c) {{$year}} by {{$company}}

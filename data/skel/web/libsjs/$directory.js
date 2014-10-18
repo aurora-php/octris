@@ -8,9 +8,9 @@
  */
 
 /**
- * Main javascript library for {{$directory}}.
+ * Main javascript library for {{$vendor}}-{{$module}}.
  *
- * @octdoc      c:libsjs/{{$directory}}
+ * @octdoc      c:libsjs/{{$vendor}}-{{$module}}
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */

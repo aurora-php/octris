@@ -26,7 +26,7 @@ namespace {{$module}} {
          * @octdoc  p:app/$app_name
          * @type    string
          */
-        protected static $app_name = '{{$directory}}';
+        protected static $app_name = '{{$vendor}}-{{$module}}';
         /**/
         
         /**

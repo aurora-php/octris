@@ -1,5 +1,5 @@
 #**
-# Main configuration for {{$directory}}.
+# Main configuration for {{$vendor}}-{{$module}}.
 #
 # @octdoc      h:styles/{{$module}}
 # @copyright   copyright (c) {{$year}} by {{$company}}

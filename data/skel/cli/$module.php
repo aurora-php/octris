@@ -38,10 +38,10 @@ require_once(__DIR__ . '/libs/autoloader.class.php');
 
 // load application configuration
 $registry = \octris\core\registry::getInstance();
-$registry->set('OCTRIS_APP', '{{$directory}}', \octris\core\registry::T_READONLY);
+$registry->set('OCTRIS_APP', '{{$vendor}}-{{$module}}', \octris\core\registry::T_READONLY);
 $registry->set('OCTRIS_BASE', __DIR__, \octris\core\registry::T_READONLY);
 $registry->set('config', function() {
-    return new \octris\core\config('{{$directory}}', 'config');
+    return new \octris\core\config('{{$vendor}}-{{$module}}', 'config');
 }, \octris\core\registry::T_SHARED | \octris\core\registry::T_READONLY);
 
 // run application
