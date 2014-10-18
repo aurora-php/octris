@@ -74,7 +74,7 @@ OPTIONS
 EXAMPLES
     Create a graph of a project in PDF format:
     
-        $ ./octris graph ~/tmp/org.octris.test |\
+        $ ./octris graph ~/tmp/octris/test |\
                 dot -Tpdf
 
 HINTS
