@@ -14,18 +14,18 @@
     
     "repositories": [
         {
-            "url":  "https://github.com/octris/org.octris.cliff.git",
+            "url":  "https://github.com/octris/cliff.git",
             "type": "git"
         },
         {
-            "url":  "https://github.com/octris/org.octris.core.git",
+            "url":  "https://github.com/octris/core.git",
             "type": "git"
         }
     ],
 
     "require":      {
-        "php":                     ">=5.6.0",
-        "octris/org.octris.cliff": "dev-ns",
-        "octris/org.octris.core":  "dev-ns"
+        "php":          ">=5.6.0",
+        "octris/cliff": "dev-master",
+        "octris/core":  "dev-master"
     }
 }
