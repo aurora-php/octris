@@ -63,10 +63,13 @@ $phar = new Phar(
 $iterator = new AppendIterator();
 $iterator->append(getDirIterator(__DIR__ . '/../data/'));
 $iterator->append(getDirIterator(__DIR__ . '/../libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/org.octris.cliff/libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/org.octris.core/libs/'));
+$iterator->append(getDirIterator(__DIR__ . '/../vendor/composer/'));
+$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/org.octris.cliff/libs/'));
+$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/org.octris.core/libs/'));
 
 $phar->buildFromIterator($iterator, realpath(__DIR__ . '/../'));
+$phar->addFile(realpath(__DIR__ . '/../vendor/autoload.php'), '/vendor/autoload.php');
+
 $phar->setStub(file_get_contents(__DIR__ . '/stub.php'));
 
 rename($file, $exec);
