@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'octris' package.
+ * This file is part of the octris/core.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -10,9 +10,9 @@
  */
 
 namespace octris\app {
-    use \org\octris\core\provider as provider;
-    use \org\octris\core\validate as validate;
-    use \org\octris\cliff\args    as args;
+    use \octris\core\provider as provider;
+    use \octris\core\validate as validate;
+    use \octris\cliff\args    as args;
 
     /**
      * Execute phpunit test-suite for a project.
@@ -21,7 +21,7 @@ namespace octris\app {
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class test extends \org\octris\cliff\args\command
+    class test extends \octris\cliff\args\command
     /**/
     {
         /**
@@ -45,7 +45,7 @@ namespace octris\app {
         /**/
         {
             $this->addOption(['f', 'filter'], args::T_VALUE)->addValidator(function($value) {
-                $validator = new \org\octris\core\validate\type\printable();
+                $validator = new \octris\core\validate\type\printable();
                 return $validator->validate($validator->preFilter($value));
             }, 'invalid filter specified');
         }
@@ -95,20 +95,20 @@ EOT;
          * Run command.
          *
          * @octdoc  m:test/run
-         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments for command.
+         * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
-        public function run(\org\octris\cliff\args\collection $args)
+        public function run(\octris\cliff\args\collection $args)
         /**/
         {
             if (!isset($args[0])) {
-                throw new \org\octris\cliff\exception\argument(sprintf("no destination path specified"));
+                throw new \octris\cliff\exception\argument(sprintf("no destination path specified"));
             } elseif (!is_dir($args[0])) {
-                throw new \org\octris\cliff\exception\argument('specified path is not a directory or directory not found');
+                throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
             } else {
                 $dir = $args[0] . '/tests/';
                 
                 if (!is_dir($dir)) {
-                    throw new \org\octris\cliff\exception\application('no tests available');
+                    throw new \octris\cliff\exception\application('no tests available');
                 }
             }
             
@@ -119,7 +119,7 @@ EOT;
             }
             
             if (!($cmd = `which phpunit`)) {
-                throw new \org\octris\cliff\exception\application('phpunit not found');
+                throw new \octris\cliff\exception\application('phpunit not found');
             }
             
             // execute tests

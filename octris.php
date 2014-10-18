@@ -2,7 +2,7 @@
 <?php
 
 /*
- * This file is part of the 'octris' package.
+ * This file is part of the 'octris/octris' package.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -28,15 +28,15 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
     exit(1);
 }
 
-require_once(__DIR__ . '/libs/autoloader.class.php');
+require_once(__DIR__ . '/vendor/autoload.php');
 
 // load application configuration
-$registry = \org\octris\core\registry::getInstance();
-$registry->set('OCTRIS_APP', 'octris', \org\octris\core\registry::T_READONLY);
-$registry->set('OCTRIS_BASE', __DIR__, \org\octris\core\registry::T_READONLY);
+$registry = \octris\core\registry::getInstance();
+$registry->set('OCTRIS_APP', 'octris', \octris\core\registry::T_READONLY);
+$registry->set('OCTRIS_BASE', __DIR__, \octris\core\registry::T_READONLY);
 $registry->set('config', function() {
-    return new \org\octris\core\config('octris', 'config');
-}, \org\octris\core\registry::T_SHARED | \org\octris\core\registry::T_READONLY);
+    return new \octris\core\config('octris', 'config');
+}, \octris\core\registry::T_SHARED | \octris\core\registry::T_READONLY);
 
 // run application
 $app = new \octris\app();

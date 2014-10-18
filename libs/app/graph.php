@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'octris' package.
+ * This file is part of the octris/core.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -10,8 +10,8 @@
  */
 
 namespace octris\app {
-    use \org\octris\core\provider as provider;
-    use \org\octris\core\validate as validate;
+    use \octris\core\provider as provider;
+    use \octris\core\validate as validate;
 
     /**
      * Create a page graph of a project.
@@ -20,7 +20,7 @@ namespace octris\app {
      * @copyright   copyright (c) 2011-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class graph extends \org\octris\cliff\args\command
+    class graph extends \octris\cliff\args\command
     /**/
     {
         /**
@@ -87,21 +87,21 @@ EOT;
          * Run command.
          *
          * @octdoc  m:graph/run
-         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments for command.
+         * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
-        public function run(\org\octris\cliff\args\collection $args)
+        public function run(\octris\cliff\args\collection $args)
         /**/
         {
             if (!isset($args[0])) {
-                throw new \org\octris\cliff\exception\argument(sprintf("no project path specified"));
+                throw new \octris\cliff\exception\argument(sprintf("no project path specified"));
             } elseif (!is_dir($args[0])) {
-                throw new \org\octris\cliff\exception\argument('specified path is not a directory or directory not found');
+                throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
             } else {
                 $dir = rtrim($args[0], '/');
             }
             
             if (!is_dir($dir . '/libs/app') || !is_file($dir . '/libs/app/entry.class.php')) {
-                throw new \org\octris\cliff\exception\argument(sprintf('\'%s\' does not seem to be a web application created with the OCTRiS framework', $dir));
+                throw new \octris\cliff\exception\argument(sprintf('\'%s\' does not seem to be a web application created with the OCTRiS framework', $dir));
             }
             
             $project = basename($dir);

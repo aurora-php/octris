@@ -17,7 +17,7 @@ namespace {{$namespace}}\app {
      * @copyright   copyright (c) {{$year}} by {{$company}}
      * @author      {{$author}} <{{$email}}>
      */
-    class index extends \org\octris\core\app\web\page
+    class index extends \octris\core\app\web\page
     /**/
     {
         /**
@@ -48,10 +48,10 @@ namespace {{$namespace}}\app {
          * Prepare rendering of a page. this method is called _BEFORE_ rendering a page.
          *
          * @octdoc  m:index/prepare
-         * @param   \org\octris\core\app\page       $last_page  Instance of the page that was active before this one
-         * @return  null|\org\octris\core\app\page              A page can be returned.
+         * @param   \octris\core\app\page       $last_page  Instance of the page that was active before this one
+         * @return  null|\octris\core\app\page              A page can be returned.
          */
-        public function prepare(\org\octris\core\app\page $last_page, $action)
+        public function prepare(\octris\core\app\page $last_page, $action)
         /**/
         {
         }
@@ -64,7 +64,7 @@ namespace {{$namespace}}\app {
         public function render()
         /**/
         {
-            $tpl = \org\octris\core\app::getInstance()->getTemplate();
+            $tpl = \octris\core\app::getInstance()->getTemplate();
             $tpl->render('index.html');
         }
     }

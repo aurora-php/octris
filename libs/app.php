@@ -10,7 +10,7 @@
  */
 
 namespace octris {
-    use \org\octris\core\provider as provider;
+    use \octris\core\provider as provider;
 
     /**
      * Application class.
@@ -19,7 +19,7 @@ namespace octris {
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class app extends \org\octris\cliff\app
+    class app extends \octris\cliff\app
     /**/
     {
         /**
@@ -82,9 +82,9 @@ namespace octris {
          * Run main application.
          *
          * @octdoc  m:app/main
-         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments.
+         * @param   \octris\cliff\args\collection        $args           Parsed arguments.
          */
-        protected function main(\org\octris\cliff\args\collection $args)
+        protected function main(\octris\cliff\args\collection $args)
         /**/
         {
             exit(0);

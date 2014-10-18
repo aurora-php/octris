@@ -17,7 +17,7 @@ namespace {{$module}} {
      * @copyright   copyright (c) {{$year}} by {{$company}}
      * @author      {{$author}} <{{$email}}>
      */
-    class app extends \org\octris\cliff\app
+    class app extends \octris\cliff\app
     /**/
     {
         /**
@@ -61,9 +61,9 @@ namespace {{$module}} {
          * Execute application.
          *
          * @octdoc  m:app/main
-         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments.
+         * @param   \octris\cliff\args\collection        $args           Parsed arguments.
          */
-        protected function main(\org\octris\cliff\args\collection $args);
+        protected function main(\octris\cliff\args\collection $args);
         /**/
         {
         }

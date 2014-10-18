@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'octris' package.
+ * This file is part of the octris/core.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -10,8 +10,8 @@
  */
 
 namespace octris\app {
-    use \org\octris\core\provider as provider;
-    use \org\octris\core\validate as validate;
+    use \octris\core\provider as provider;
+    use \octris\core\validate as validate;
 
     /**
      * Documentation tools.
@@ -20,7 +20,7 @@ namespace octris\app {
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class doc extends \org\octris\cliff\args\command
+    class doc extends \octris\cliff\args\command
     /**/
     {
         /**
@@ -50,9 +50,9 @@ namespace octris\app {
          * Run command.
          *
          * @octdoc  m:lint/run
-         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments for command.
+         * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
-        public function run(\org\octris\cliff\args\collection $args)
+        public function run(\octris\cliff\args\collection $args)
         /**/
         {
             // $this->setError('not implemented, yet');
@@ -60,7 +60,7 @@ namespace octris\app {
             // return 1;
 
             // export EBNF
-            $grammar = new \org\octris\core\tpl\compiler\grammar();
+            $grammar = new \octris\core\tpl\compiler\grammar();
             print $grammar->getEBNF();
         }
     }

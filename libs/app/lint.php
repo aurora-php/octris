@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'octris' package.
+ * This file is part of the octris/core.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -10,8 +10,8 @@
  */
 
 namespace octris\app {
-    use \org\octris\core\provider as provider;
-    use \org\octris\core\validate as validate;
+    use \octris\core\provider as provider;
+    use \octris\core\validate as validate;
 
     /**
      * Lint a project.
@@ -20,7 +20,7 @@ namespace octris\app {
      * @copyright   copyright (c) 2012-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class lint extends \org\octris\cliff\args\command
+    class lint extends \octris\cliff\args\command
     /**/
     {
         /**
@@ -93,7 +93,7 @@ EOT;
             );
 
             if (!is_null($exclude)) {
-                $iterator = new \org\octris\core\type\filteriterator($iterator, function($current, $filename) use ($exclude) {
+                $iterator = new \octris\core\type\filteriterator($iterator, function($current, $filename) use ($exclude) {
                     return !preg_match($exclude, $filename);
                 });
             }
@@ -105,15 +105,15 @@ EOT;
          * Run command.
          *
          * @octdoc  m:lint/run
-         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments for command.
+         * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
-        public function run(\org\octris\cliff\args\collection $args)
+        public function run(\octris\cliff\args\collection $args)
         /**/
         {
             if (!isset($args[0])) {
-                throw new \org\octris\cliff\exception\argument(sprintf("no project path specified"));
+                throw new \octris\cliff\exception\argument(sprintf("no project path specified"));
             } elseif (!is_dir($args[0])) {
-                throw new \org\octris\cliff\exception\argument('specified path is not a directory or directory not found');
+                throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
             } else {
                 $dir = rtrim($args[0], '/');
             }
@@ -129,13 +129,13 @@ EOT;
             if (is_dir($dir . '/templates/')) {
                 $iterator = $this->getIterator($dir . '/templates/', '/\.html$/');
                 
-                $tpl = new \org\octris\core\tpl\lint();
+                $tpl = new \octris\core\tpl\lint();
 
                 foreach ($iterator as $filename => $cur) {
                     print $filename . "\n";
 
                     try {
-                        $tpl->process($filename, \org\octris\core\tpl::T_ESC_HTML);
+                        $tpl->process($filename, \octris\core\tpl::T_ESC_HTML);
                     } catch(\Exception $e) {
                     }
                 }

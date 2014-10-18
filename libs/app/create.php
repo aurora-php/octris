@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'octris' package.
+ * This file is part of the octris/core.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
@@ -10,11 +10,11 @@
  */
 
 namespace octris\app {
-    use \org\octris\core\config as config;
-    use \org\octris\core\provider as provider;
-    use \org\octris\cliff\stdio as stdio;
-    use \org\octris\core\validate as validate;
-    use \org\octris\cliff\args as args;
+    use \octris\core\config as config;
+    use \octris\core\provider as provider;
+    use \octris\cliff\stdio as stdio;
+    use \octris\core\validate as validate;
+    use \octris\cliff\args as args;
 
     /**
      * Create a new project.
@@ -23,7 +23,7 @@ namespace octris\app {
      * @copyright   copyright (c) 2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class create extends \org\octris\cliff\args\command
+    class create extends \octris\cliff\args\command
     /**/
     {
         /**
@@ -47,7 +47,7 @@ namespace octris\app {
         /**/
         {
             $this->addOption(['p', 'project'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
-                $validator = new \org\octris\core\validate\type\project();
+                $validator = new \octris\core\validate\type\project();
                 return $validator->validate($validator->preFilter($value));
             }, 'invalid project name specified')->setHelp('A valid name for the project in the form of a reversed domain
             name.');
@@ -155,9 +155,9 @@ EOT;
          * Run command.
          *
          * @octdoc  m:create/run
-         * @param   \org\octris\cliff\args\collection        $args           Parsed arguments for command.
+         * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
-        public function run(\org\octris\cliff\args\collection $args)
+        public function run(\octris\cliff\args\collection $args)
         /**/
         {
             $project = $args['project'];
@@ -168,14 +168,14 @@ EOT;
             $domain = implode('.', array_reverse($tmp));
 
             if (!isset($args[0])) {
-                throw new \org\octris\cliff\exception\argument(sprintf("no destination path specified"));
+                throw new \octris\cliff\exception\argument(sprintf("no destination path specified"));
             } elseif (!is_dir($args[0])) {
-                throw new \org\octris\cliff\exception\argument('specified path is not a directory or directory not found');
+                throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
             } else {
                 $dir = $args[0] . '/' . $project;
 
                 if (is_dir($dir)) {
-                    throw new \org\octris\cliff\exception\argument(sprintf("project directory already exists '%s'", $dir));
+                    throw new \octris\cliff\exception\argument(sprintf("project directory already exists '%s'", $dir));
                 }
             }
             
@@ -226,13 +226,13 @@ EOT;
             // create project
             $src = __DIR__ . '/../../data/skel/' . $type . '/';
             if (!is_dir($src)) {
-                throw new \org\octris\cliff\exception\application(sprintf("unable to locate template directory '%s'\n", $src));
+                throw new \octris\cliff\exception\application(sprintf("unable to locate template directory '%s'\n", $src));
 
                 return 1;
             }
 
             // process skeleton and write project files
-            $tpl = new \org\octris\core\tpl();
+            $tpl = new \octris\core\tpl();
             $tpl->addSearchPath($src);
             $tpl->setValues($data);
 
@@ -264,7 +264,7 @@ EOT;
                 }
 
                 if (!$this->isBinary($filename)) {
-                    $cmp = $tpl->fetch($rel, \org\octris\core\tpl::T_ESC_NONE);
+                    $cmp = $tpl->fetch($rel, \octris\core\tpl::T_ESC_NONE);
 
                     file_put_contents($dst, $cmp);
                 } else {
