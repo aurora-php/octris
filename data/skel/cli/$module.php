@@ -45,5 +45,5 @@ $registry->set('config', function() {
 }, \octris\core\registry::T_SHARED | \octris\core\registry::T_READONLY);
 
 // run application
-$app = new {{$module}}\app();
+$app = new {{$namespace}}\app();
 $app->run();

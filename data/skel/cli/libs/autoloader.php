@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace {{$module}} {
+namespace {{$namespace}} {
     /**
      * Autoloader.
      *
@@ -29,8 +29,8 @@ namespace {{$module}} {
         public static function autoload($class)
         /**/
         {
-            if (strpos($class, 'octris\\') === 0) {
-                $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, 7)) . '.php';
+            if (strpos($class, '{{$namespace}}\\') === 0) {
+                $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, {{strlen($namespace . '\\')}})) . '.php';
             
                 if (file_exists($file)) {
                     require_once($file);
