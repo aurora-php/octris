@@ -1,0 +1,26 @@
+{
+    "name":         "{{$vendor}}/{{$module}}",
+    "type":         "project",
+    "description":  "",
+    "keywords":     [],
+    "homepage":     "",
+    "license":      "",
+    
+    "authors":      [{
+        "name":         "{{$author}}",
+        "email":        "{{$email}}",
+        "homepage":     ""
+    }],
+    
+    "repositories": [
+        {
+            "url":  "https://github.com/octris/core.git",
+            "type": "git"
+        }
+    ],
+
+    "require":      {
+        "php":          ">=5.6.0",
+        "octris/core":  "dev-master"
+    }
+}
