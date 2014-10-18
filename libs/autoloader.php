@@ -30,7 +30,7 @@ namespace octris {
         /**/
         {
             if (strpos($class, 'octris\\') === 0) {
-                $file = __DIR__ . '/' . str_replace('\\', '/', substr($classpath, 7)) . '.php';
+                $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, 7)) . '.php';
             
                 if (file_exists($file)) {
                     require_once($file);
