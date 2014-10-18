@@ -1,7 +1,7 @@
 # vim:set noexpandtab:
 
 #
-# This file is part of the '{{$directory}}' package.
+# This file is part of the '{{$vendor}}/{{$module}}' package.
 #
 # (c) {{$company}}
 #
