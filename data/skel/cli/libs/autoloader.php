@@ -30,7 +30,7 @@ namespace {{$namespace}} {
         /**/
         {
             if (strpos($class, '{{$namespace}}\\') === 0) {
-                $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, {{strlen($namespace . '\\')}})) . '.php';
+                $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, {{length(concat($namespace, '\\'))}})) . '.php';
             
                 if (file_exists($file)) {
                     require_once($file);
