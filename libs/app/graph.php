@@ -100,7 +100,7 @@ EOT;
                 $dir = rtrim($args[0], '/');
             }
             
-            if (!is_dir($dir . '/libs/app') || !is_file($dir . '/libs/app/entry.class.php')) {
+            if (!is_dir($dir . '/libs/app') || !is_file($dir . '/libs/app/entry.php')) {
                 throw new \octris\cliff\exception\argument(sprintf('\'%s\' does not seem to be a web application created with the OCTRiS framework', $dir));
             }
             
