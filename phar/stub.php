@@ -39,6 +39,7 @@ if (!class_exists('PHAR')) {
 Phar::mapPhar();
 
 require_once('phar://octris.phar/vendor/autoload.php');
+require_once('phar://octris.phar/libs/autoloader.php');
 
 // load application configuration
 $registry = \octris\core\registry::getInstance();
