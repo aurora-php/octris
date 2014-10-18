@@ -70,7 +70,7 @@ OPTIONS
 EXAMPLES
     Check a project:
     
-        $ ./octris lint ~/tmp/org.octris.test
+        $ ./octris lint ~/tmp/octris/test
 EOT;
         }
 
