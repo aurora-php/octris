@@ -1,6 +1,0 @@
-[submodule "vendor/org.octris.core"]
-	path = vendor/org.octris.core
-	url = https://github.com/octris/org.octris.core.git
-[submodule "vendor/org.octris.cliff"]
-	path = vendor/org.octris.cliff
-	url = https://github.com/octris/org.octris.cliff.git
