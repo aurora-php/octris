@@ -37,7 +37,7 @@ namespace octris {
          * @octdoc  p:app/$app_version
          * @type    string
          */
-        protected static $app_version = '0.0.4';
+        protected static $app_version = '0.0.5';
         /**/
         
         /**
@@ -46,7 +46,7 @@ namespace octris {
          * @octdoc  p:app/$app_version_date
          * @type    string
          */
-        protected static $app_version_date = '2014-10-15';
+        protected static $app_version_date = '2014-10-18';
         /**/
         
         /**
