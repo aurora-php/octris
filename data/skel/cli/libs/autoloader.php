@@ -24,26 +24,20 @@ namespace {{$module}} {
          * Class Autoloader.
          *
          * @octdoc  m:autoloader/autoload
-         * @param   string          $classpath              Path of class to load.
+         * @param   string          $class              Class to load.
          */
-        public static function autoload($classpath)
+        public static function autoload($class)
         /**/
         {
-            if (strpos($classpath, '{{$module}}\\') === 0) {
-                $file = __DIR__ . '/' . str_replace('\\', '/', substr($classpath, strlen('{{$module}}'))) . '.class.php';
-            } else {
-                $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\'), 2);
-                $classpath = preg_replace('|\\\\|', '/libs/', $classpath, 1);
-                $classpath = str_replace('\\', '/', $classpath);
-                
-                $file = __DIR__ . '/../vendor/' . $classpath . '.class.php';
-            }
+            if (strpos($class, 'octris\\') === 0) {
+                $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, 7)) . '.php';
             
-            if (file_exists($file)) {
-                require_once($file);
+                if (file_exists($file)) {
+                    require_once($file);
+                }
             }
         }
     }
     
-    spl_autoload_register(array('\{{$module}}\autoloader', 'autoload'));
+    spl_autoload_register(array('\{{$module}}\autoloader', 'autoload', true, true));
 }
