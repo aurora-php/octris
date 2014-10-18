@@ -169,7 +169,7 @@ EOT;
             } elseif (!is_dir($args[0])) {
                 throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
             } else {
-                $dir = $args[0] . '/' . $project;
+                $dir = $args[0] . '/' . $module;
 
                 if (is_dir($dir)) {
                     throw new \octris\cliff\exception\argument(sprintf("project directory already exists '%s'", $dir));
