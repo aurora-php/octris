@@ -24,17 +24,17 @@ namespace octris {
          * Class Autoloader.
          *
          * @octdoc  m:autoloader/autoload
-         * @param   string          $classpath              Path of class to load.
+         * @param   string          $class              Class to load.
          */
-        public static function autoload($classpath)
+        public static function autoload($class)
         /**/
         {
-            if (substr($classpath, 0, 6) == 'octris') {
-                $file = __DIR__ . '/' . str_replace('\\', '/', substr($classpath, 6)) . '.php';
-            }
+            if (strpos($class, 'octris\\') === 0) {
+                $file = __DIR__ . '/' . str_replace('\\', '/', substr($classpath, 7)) . '.php';
             
-            if (file_exists($file)) {
-                require_once($file);
+                if (file_exists($file)) {
+                    require_once($file);
+                }
             }
         }
     }
