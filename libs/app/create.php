@@ -87,7 +87,7 @@ NAME
     octris create - create a new project.
     
 SYNOPSIS
-    octris create   -p <project-name> 
+    octris create   -p <project-name>
                     -t web | cli | lib
                     [-d info.company=<company-name>]
                     [-d info.author=<author-name>]
@@ -107,8 +107,7 @@ DESCRIPTION
     lib     This type should be used for (shared) libraries.
     
 OPTIONS
-    -p      A valid name for the project in the form of a reversed domain
-            name. 
+    -p      A valid name for the project in the form of <vendor>/<module>. 
             
     -t      A valid type for the project
     
@@ -120,7 +119,7 @@ OPTIONS
 EXAMPLES
     Create a test project:
     
-        $ ./octris create -p org.octris.test -t web \
+        $ ./octris create -p example/test -t web \
                 -d info.company="Foo Inc." \
                 -d info.author="Bar Baz" \
                 -d info.email="baz@example.org" \
@@ -163,9 +162,7 @@ EOT;
             $project = $args['project'];
             $type    = $args['type'];
 
-            $tmp    = explode('.', $project);
-            $module = array_pop($tmp);
-            $domain = implode('.', array_reverse($tmp));
+            list($vendor, $module) = explode('/', $project);
 
             if (!isset($args[0])) {
                 throw new \octris\cliff\exception\argument(sprintf("no destination path specified"));
@@ -190,10 +187,6 @@ EOT;
                 'info.email'   => (isset($data['email']) ? $data['email'] : '')
             ));
 
-            if ($domain != '') {
-                $prj['info.domain'] = $domain;
-            }
-
             // collect information and create configuration for new project
             $filter = $prj->filter('info');
 
@@ -206,21 +199,12 @@ EOT;
             print "\n";
 
             // build data array
-            $ns = implode(
-                '\\',
-                array_reverse(
-                    explode('.', $prj['info.domain'])
-                )
-            ) . '\\' . $module;
-
-            $project = str_replace('\\', '.', $ns);
-
             $data = array_merge($prj->filter('info')->getArrayCopy(true), array(
                 'year'      => $year,
                 'module'    => $module,
-                'namespace' => $ns,
-                'directory' => $project,
-                'project'   => $project
+                'vendor'    => $vendor,
+                'namespace' => $vendor . '\\' . $module,
+                'directory' => $vendor . '.' . $module
             ));
 
             // create project

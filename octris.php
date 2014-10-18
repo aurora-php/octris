@@ -33,10 +33,10 @@ require_once(__DIR__ . '/libs/autoloader.php');
 
 // load application configuration
 $registry = \octris\core\registry::getInstance();
-$registry->set('OCTRIS_APP', 'octris', \octris\core\registry::T_READONLY);
+$registry->set('OCTRIS_APP', 'octris-octris', \octris\core\registry::T_READONLY);
 $registry->set('OCTRIS_BASE', __DIR__, \octris\core\registry::T_READONLY);
 $registry->set('config', function() {
-    return new \octris\core\config('octris', 'config');
+    return new \octris\core\config('octris-octris', 'config');
 }, \octris\core\registry::T_SHARED | \octris\core\registry::T_READONLY);
 
 // run application
