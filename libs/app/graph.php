@@ -110,22 +110,22 @@ EOT;
             /*
              * install new project-specific autoloader
              */
-            spl_autoload_unregister(array('\octris\autoloader', 'autoload'));
-            spl_autoload_register(function($classpath) use ($dir, $ns) {
-                if (strpos($classpath, $ns) === 0) {
+            foreach (spl_autoload_functions() as $autoloader) {
+                spl_autoload_unregister($autoloader);
+            }
+
+            if (file_exists($dir . '/vendor/autoload.php')) {
+                require_once($dir . '/vendor/autoload.php');
+            }
+
+            spl_autoload_register(function($class) use ($dir, $ns) {
+                if (strpos($class, $ns) === 0) {
                     // main application library
-                    $file = $dir . '/libs/' . str_replace('\\', '/', substr($classpath, strlen($ns))) . '.class.php';
-                } else {
-                    // vendor library
-                    $classpath = preg_replace('|\\\\|', '.', ltrim($classpath, '\\'), 2);
-                    $classpath = preg_replace('|\\\\|', '/libs/', $classpath, 1);
-                    $classpath = str_replace('\\', '/', $classpath);
-                    
-                    $file = $dir . '/vendor/' . $classpath . '.class.php';
-                }
+                    $file = $dir . '/libs/' . str_replace('\\', '/', substr($class, strlen($ns))) . '.php';
                 
-                require_once($file);
-            });
+                    require_once($file);
+                }
+            }, true, true);
             
             // main
             $analyze = function($page) use (&$analyze) {
