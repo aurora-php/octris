@@ -34,7 +34,8 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
     exit(1);
 }
 
-require_once(__DIR__ . '/libs/autoloader.class.php');
+@include_once(__DIR__ . '/vendor/autoload.php');
+require_once(__DIR__ . '/libs/autoloader.php');
 
 // load application configuration
 $registry = \octris\core\registry::getInstance();

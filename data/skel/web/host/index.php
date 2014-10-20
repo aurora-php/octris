@@ -20,7 +20,8 @@ namespace {{$namespace}} {
     /**/
 
     // include core web application library
-    require_once(__DIR__ . '/../libs/autoloader.class.php');
+    @include_once(__DIR__ . '/../vendor/autoload.php');
+    require_once(__DIR__ . '/../libs/autoloader.php');
     
     // load application configuration
     $registry = \octris\core\registry::getInstance();
