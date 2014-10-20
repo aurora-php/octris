@@ -87,7 +87,13 @@ namespace octris {
         protected function main(\octris\cliff\args\collection $args)
         /**/
         {
-            exit(0);
+            if (count($GLOBALS['argv']) == 1) {
+                $this->showHelp();
+                
+                exit(1);
+            } else {
+                exit(0);
+            }
         }
     
         /**
