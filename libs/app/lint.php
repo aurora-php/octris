@@ -21,7 +21,6 @@ namespace octris\app {
      * @author      Harald Lapp <harald@octris.org>
      */
     class lint extends \octris\cliff\args\command
-    /**/
     {
         /**
          * Constructor.
@@ -30,7 +29,6 @@ namespace octris\app {
          * @param   string                              $name               Name of command.
          */
         public function __construct($name)
-        /**/
         {
             parent::__construct($name);
         }
@@ -41,7 +39,6 @@ namespace octris\app {
          * @octdoc  m:lint/getDescription
          */
         public static function getDescription()
-        /**/
         {
             return 'Syntactical check of project files.';
         }
@@ -52,7 +49,6 @@ namespace octris\app {
          * @octdoc  m:create/getManual
          */
         public static function getManual()
-        /**/
         {
             return <<<EOT
 NAME
@@ -84,7 +80,6 @@ EOT;
          * @return  \RegexIterator                                  The iterator.
          */
         protected function getIterator($dir, $regexp, $exclude = null)
-        /**/
         {
             $iterator = new \RegexIterator(
                 new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir)),
@@ -108,7 +103,6 @@ EOT;
          * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
         public function run(\octris\cliff\args\collection $args)
-        /**/
         {
             if (!isset($args[0])) {
                 throw new \octris\cliff\exception\argument(sprintf("no project path specified"));

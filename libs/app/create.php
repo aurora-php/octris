@@ -24,7 +24,6 @@ namespace octris\app {
      * @author      Harald Lapp <harald@octris.org>
      */
     class create extends \octris\cliff\args\command
-    /**/
     {
         /**
          * Constructor.
@@ -33,7 +32,6 @@ namespace octris\app {
          * @param   string                              $name               Name of command.
          */
         public function __construct($name)
-        /**/
         {
             parent::__construct($name);
         }
@@ -44,7 +42,6 @@ namespace octris\app {
          * @octdoc  m:create/configure
          */
         public function configure()
-        /**/
         {
             $this->addOption(['p', 'project'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
                 $validator = new \octris\core\validate\type\project();
@@ -69,7 +66,6 @@ namespace octris\app {
          * @octdoc  m:create/getDescription
          */
         public static function getDescription()
-        /**/
         {
             return 'Create a new project.';
         }
@@ -80,7 +76,6 @@ namespace octris\app {
          * @octdoc  m:create/getManual
          */
         public static function getManual()
-        /**/
         {
             return <<<EOT
 NAME
@@ -136,7 +131,6 @@ EOT;
          * @return  bool                                Returns true for binaries.
          */
         protected function isBinary($file, $size = 2048)
-        /**/
         {
             $return = false;
 
@@ -157,7 +151,6 @@ EOT;
          * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
         public function run(\octris\cliff\args\collection $args)
-        /**/
         {
             $project = $args['project'];
             $type    = $args['type'];

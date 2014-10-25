@@ -18,7 +18,6 @@ namespace octris {
      * @author      Harald Lapp <harald@octris.org>
      */
     class autoloader
-    /**/
     {
         /**
          * Class Autoloader.
@@ -27,7 +26,6 @@ namespace octris {
          * @param   string          $class              Class to load.
          */
         public static function autoload($class)
-        /**/
         {
             if (strpos($class, 'octris\\') === 0) {
                 $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, 7)) . '.php';

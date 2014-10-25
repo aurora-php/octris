@@ -21,7 +21,6 @@ namespace octris\app {
      * @author      Harald Lapp <harald@octris.org>
      */
     class doc extends \octris\cliff\args\command
-    /**/
     {
         /**
          * Constructor.
@@ -30,7 +29,6 @@ namespace octris\app {
          * @param   string                              $name               Name of command.
          */
         public function __construct($name)
-        /**/
         {
             parent::__construct($name);
         }
@@ -41,7 +39,6 @@ namespace octris\app {
          * @octdoc  m:doc/getDescription
          */
         public static function getDescription()
-        /**/
         {
             return '';
         }
@@ -53,7 +50,6 @@ namespace octris\app {
          * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
         public function run(\octris\cliff\args\collection $args)
-        /**/
         {
             // $this->setError('not implemented, yet');
             //

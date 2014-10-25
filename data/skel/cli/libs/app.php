@@ -18,7 +18,6 @@ namespace {{$namespace}} {
      * @author      {{$author}} <{{$email}}>
      */
     class app extends \octris\cliff\app
-    /**/
     {
         /**
          * Application name.
@@ -53,7 +52,6 @@ namespace {{$namespace}} {
          * @octdoc  m:app/__construct
          */
         public function __construct()
-        /**/
         {
         }
 
@@ -64,7 +62,6 @@ namespace {{$namespace}} {
          * @param   \octris\cliff\args\collection        $args           Parsed arguments.
          */
         protected function main(\octris\cliff\args\collection $args);
-        /**/
         {
         }
     }

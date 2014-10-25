@@ -20,7 +20,6 @@ namespace {{$namespace}}\app {
      * @author      {{$author}} <{{$email}}>
      */
     class main extends \octris\core\app\web
-    /**/
     {
         /**
          * Page to use a entry point, if no "next_page" is specified through the

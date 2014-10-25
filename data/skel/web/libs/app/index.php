@@ -18,7 +18,6 @@ namespace {{$namespace}}\app {
      * @author      {{$author}} <{{$email}}>
      */
     class index extends \octris\core\app\web\page
-    /**/
     {
         /**
          * The index points to which the current page should allow requests to have to be defined with this
@@ -39,7 +38,6 @@ namespace {{$namespace}}\app {
          * @octdoc  m:index/__construct
          */
         public function __construct() 
-        /**/
         {
             parent::__construct();
         }
@@ -52,7 +50,6 @@ namespace {{$namespace}}\app {
          * @return  null|\octris\core\app\page              A page can be returned.
          */
         public function prepare(\octris\core\app\page $last_page, $action)
-        /**/
         {
         }
 
@@ -62,7 +59,6 @@ namespace {{$namespace}}\app {
          * @octdoc  m:index/render
          */
         public function render()
-        /**/
         {
             $tpl = \octris\core\app::getInstance()->getTemplate();
             $tpl->render('index.html');

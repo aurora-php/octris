@@ -22,7 +22,6 @@ namespace octris\app {
      * @author      Harald Lapp <harald@octris.org>
      */
     class test extends \octris\cliff\args\command
-    /**/
     {
         /**
          * Constructor.
@@ -31,7 +30,6 @@ namespace octris\app {
          * @param   string                              $name               Name of command.
          */
         public function __construct($name)
-        /**/
         {
             parent::__construct($name);
         }
@@ -42,7 +40,6 @@ namespace octris\app {
          * @octdoc  m:test/configure
          */
         public function configure()
-        /**/
         {
             $this->addOption(['f', 'filter'], args::T_VALUE)->addValidator(function($value) {
                 $validator = new \octris\core\validate\type\printable();
@@ -56,7 +53,6 @@ namespace octris\app {
          * @octdoc  m:test/getDescription
          */
         public static function getDescription()
-        /**/
         {
             return 'Execute phpunit tests.';
         }
@@ -67,7 +63,6 @@ namespace octris\app {
          * @octdoc  m:test/getManual
          */
         public static function getManual()
-        /**/
         {
             return <<<EOT
 NAME
@@ -98,7 +93,6 @@ EOT;
          * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
         public function run(\octris\cliff\args\collection $args)
-        /**/
         {
             if (!isset($args[0])) {
                 throw new \octris\cliff\exception\argument(sprintf("no destination path specified"));

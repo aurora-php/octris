@@ -20,7 +20,6 @@ namespace octris {
      * @author      Harald Lapp <harald@octris.org>
      */
     class app extends \octris\cliff\app
-    /**/
     {
         /**
          * Application name.
@@ -56,7 +55,6 @@ namespace octris {
          * @param   
          */
         public function __construct()
-        /**/
         {
             parent::__construct();
         }
@@ -67,7 +65,6 @@ namespace octris {
          * @octdoc  m:app/configure
          */
         protected function configure()
-        /**/
         {
             parent::configure();
             
@@ -85,7 +82,6 @@ namespace octris {
          * @param   \octris\cliff\args\collection        $args           Parsed arguments.
          */
         protected function main(\octris\cliff\args\collection $args)
-        /**/
         {
             if (count($GLOBALS['argv']) == 1) {
                 $this->showHelp();
@@ -102,7 +98,6 @@ namespace octris {
          * @octdoc  m:app/showHelp
          */
         protected function showHelp()
-        /**/
         {
             printf("               __         .__        
   ____   _____/  |________|__| ______

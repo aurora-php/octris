@@ -18,7 +18,6 @@ namespace {{$namespace}} {
      * @author      {{$author}} <{{$email}}>
      */
     class autoloader
-    /**/
     {
         /**
          * Class Autoloader.
@@ -27,7 +26,6 @@ namespace {{$namespace}} {
          * @param   string          $class              Class to load.
          */
         public static function autoload($class)
-        /**/
         {
             if (strpos($class, '{{$namespace}}\\') === 0) {
                 $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, {{length(concat($namespace, '\\'))}})) . '.php';

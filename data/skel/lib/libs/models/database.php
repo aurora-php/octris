@@ -18,7 +18,6 @@ namespace {{$namespace}}\models {
      * @author      {{$author}} <{{$email}}>
      */
     class database
-    /**/
     {
         /**
          * Instance of database backend class.
@@ -36,7 +35,6 @@ namespace {{$namespace}}\models {
          * @param   array           $settings                   Database connection settings.
          */
         public function __construct(array $settings)
-        /**/
         {
             $class = get_class($this);
             $class = substr($class, strrpos($class, '\\'));
