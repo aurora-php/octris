@@ -70,7 +70,7 @@ namespace octris {
             
             $this->addCommand(new \octris\app\create('create'));
             $this->addCommand(new \octris\app\graph('graph'));
-            $this->addCommand(new \octris\app\lint('lint'));
+            $this->addCommand(new \octris\app\lint('check'));
             $this->addCommand(new \octris\app\test('test'));
             $this->addCommand(new \octris\app\doc('doc'));
         }
