@@ -16,16 +16,16 @@ namespace octris\app {
     /**
      * Lint a project.
      *
-     * @octdoc      c:app/lint
+     * @octdoc      c:app/check
      * @copyright   copyright (c) 2012-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class lint extends \octris\cliff\args\command
+    class check extends \octris\cliff\args\command
     {
         /**
          * Constructor.
          *
-         * @octdoc  m:lint/__construct
+         * @octdoc  m:check/__construct
          * @param   string                              $name               Name of command.
          */
         public function __construct($name)
@@ -36,7 +36,7 @@ namespace octris\app {
         /**
          * Return command description.
          *
-         * @octdoc  m:lint/getDescription
+         * @octdoc  m:check/getDescription
          */
         public static function getDescription()
         {
@@ -52,10 +52,10 @@ namespace octris\app {
         {
             return <<<EOT
 NAME
-    octris lint - syntactical check of project files.
+    octris check - syntactical check of project files.
     
 SYNOPSIS
-    octris lint     <project-path>
+    octris check     <project-path>
     
 DESCRIPTION
     This command is used to check the syntax of files in a project. Currently
@@ -66,14 +66,14 @@ OPTIONS
 EXAMPLES
     Check a project:
     
-        $ ./octris lint ~/tmp/octris/test
+        $ ./octris check ~/tmp/octris/test
 EOT;
         }
 
         /**
          * Get a file iterator for a specified directory and specified regular expression matching file names.
          *
-         * @octdoc  m:lint/getIterator
+         * @octdoc  m:check/getIterator
          * @param   string                          $dir            Director to iterate recusrivly.
          * @param   string                          $regexp         Regular expression each file has to match to.
          * @param   string                          $exclude        Optional pattern for filtering files.
@@ -99,7 +99,7 @@ EOT;
         /**
          * Run command.
          *
-         * @octdoc  m:lint/run
+         * @octdoc  m:check/run
          * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
          */
         public function run(\octris\cliff\args\collection $args)
@@ -112,18 +112,18 @@ EOT;
                 $dir = rtrim($args[0], '/');
             }
 
-            // lint php files
+            // check php files
             $iterator = $this->getIterator($dir, '/\.php$/', '/(\/data\/cldr\/)/');
 
             foreach ($iterator as $filename => $cur) {
                 system(PHP_BINARY . ' -l ' . escapeshellarg($filename));
             }
 
-            // lint templates
+            // check templates
             if (is_dir($dir . '/templates/')) {
                 $iterator = $this->getIterator($dir . '/templates/', '/\.html$/');
                 
-                $tpl = new \octris\core\tpl\lint();
+                $tpl = new \octris\core\tpl\check();
 
                 foreach ($iterator as $filename => $cur) {
                     print $filename . "\n";
