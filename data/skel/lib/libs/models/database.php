@@ -9,38 +9,39 @@
  * file that was distributed with this source code.
  */
 
-namespace {{$namespace}}\models {
+namespace {{$namespace}}\models;
+
+/**
+ * Proxy for accessing different database backends.
+ *
+ * @octdoc      c:models/database
+ * @copyright   copyright (c) {{$year}} by {{$company}}
+ * @author      {{$author}} <{{$email}}>
+ */
+class database
+{
     /**
-     * Proxy for accessing different database backends.
+     * Instance of database backend class.
      *
-     * @octdoc      c:models/database
-     * @copyright   copyright (c) {{$year}} by {{$company}}
-     * @author      {{$author}} <{{$email}}>
+     * @octdoc  p:database/$backend
+     * @type    \{{$namespace}}\models\database
      */
-    class database
+    protected $backend;
+    /**/
+    
+    /**
+     * Constructor.
+     *
+     * @octdoc  m:database/__construct
+     * @param   array           $settings                   Database connection settings.
+     */
+    public function __construct(array $settings)
     {
-        /**
-         * Instance of database backend class.
-         *
-         * @octdoc  p:database/$backend
-         * @type    \{{$namespace}}\models\database
-         */
-        protected $backend;
-        /**/
+        $class = get_class($this);
+        $class = substr($class, strrpos($class, '\\'));
+        $class = '{{$namespace}}\models\\' . $settings['device'] . $class;
         
-        /**
-         * Constructor.
-         *
-         * @octdoc  m:database/__construct
-         * @param   array           $settings                   Database connection settings.
-         */
-        public function __construct(array $settings)
-        {
-            $class = get_class($this);
-            $class = substr($class, strrpos($class, '\\'));
-            $class = '{{$namespace}}\models\\' . $settings['device'] . $class;
-            
-            $this->backend = new $class($settings);
-        }
+        $this->backend = new $class($settings);
     }
 }
+

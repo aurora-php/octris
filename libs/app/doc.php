@@ -9,55 +9,56 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\app {
-    use \octris\core\provider as provider;
-    use \octris\core\validate as validate;
+namespace octris\app;
+
+use \octris\core\provider as provider;
+use \octris\core\validate as validate;
+
+/**
+ * Documentation tools.
+ *
+ * @octdoc      c:app/doc
+ * @copyright   copyright (c) 2014 by Harald Lapp
+ * @author      Harald Lapp <harald@octris.org>
+ */
+class doc extends \octris\cliff\args\command
+{
+    /**
+     * Constructor.
+     *
+     * @octdoc  m:doc/__construct
+     * @param   string                              $name               Name of command.
+     */
+    public function __construct($name)
+    {
+        parent::__construct($name);
+    }
+    
+    /**
+     * Return command description.
+     *
+     * @octdoc  m:doc/getDescription
+     */
+    public static function getDescription()
+    {
+        return '';
+    }
 
     /**
-     * Documentation tools.
+     * Run command.
      *
-     * @octdoc      c:app/doc
-     * @copyright   copyright (c) 2014 by Harald Lapp
-     * @author      Harald Lapp <harald@octris.org>
+     * @octdoc  m:lint/run
+     * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
      */
-    class doc extends \octris\cliff\args\command
+    public function run(\octris\cliff\args\collection $args)
     {
-        /**
-         * Constructor.
-         *
-         * @octdoc  m:doc/__construct
-         * @param   string                              $name               Name of command.
-         */
-        public function __construct($name)
-        {
-            parent::__construct($name);
-        }
-        
-        /**
-         * Return command description.
-         *
-         * @octdoc  m:doc/getDescription
-         */
-        public static function getDescription()
-        {
-            return '';
-        }
+        // $this->setError('not implemented, yet');
+        //
+        // return 1;
 
-        /**
-         * Run command.
-         *
-         * @octdoc  m:lint/run
-         * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
-         */
-        public function run(\octris\cliff\args\collection $args)
-        {
-            // $this->setError('not implemented, yet');
-            //
-            // return 1;
-
-            // export EBNF
-            $grammar = new \octris\core\tpl\compiler\grammar();
-            print $grammar->getEBNF();
-        }
+        // export EBNF
+        $grammar = new \octris\core\tpl\compiler\grammar();
+        print $grammar->getEBNF();
     }
 }
+

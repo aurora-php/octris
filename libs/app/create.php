@@ -9,74 +9,75 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\app {
-    use \octris\core\config as config;
-    use \octris\core\provider as provider;
-    use \octris\cliff\stdio as stdio;
-    use \octris\core\validate as validate;
-    use \octris\cliff\args as args;
+namespace octris\app;
+
+use \octris\core\config as config;
+use \octris\core\provider as provider;
+use \octris\cliff\stdio as stdio;
+use \octris\core\validate as validate;
+use \octris\cliff\args as args;
+
+/**
+ * Create a new project.
+ *
+ * @octdoc      c:app/create
+ * @copyright   copyright (c) 2014 by Harald Lapp
+ * @author      Harald Lapp <harald@octris.org>
+ */
+class create extends \octris\cliff\args\command
+{
+    /**
+     * Constructor.
+     *
+     * @octdoc  m:create/__construct
+     * @param   string                              $name               Name of command.
+     */
+    public function __construct($name)
+    {
+        parent::__construct($name);
+    }
+    
+    /**
+     * Configure command arguments.
+     *
+     * @octdoc  m:create/configure
+     */
+    public function configure()
+    {
+        $this->addOption(['p', 'project'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
+            $validator = new \octris\core\validate\type\project();
+            return $validator->validate($validator->preFilter($value));
+        }, 'invalid project name specified')->setHelp('A valid name for the project in the form of a reversed domain
+        name.');
+        $this->addOption(['t', 'type'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
+            return in_array($value, ['web', 'cli', 'lib']);
+        }, 'invalid project type specified');
+        $this->addOption(['d', 'define'], args::T_KEYVALUE)->addValidator(function($value, $key) {
+            return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
+        }, 'invalid argument value');
+        
+        $this->addOperand(1, 'project-path')->addValidator(function($value) {
+            return is_dir($value);
+        }, 'specified path is not a directory or directory not found')->setHelp('Path to a project.');
+    }
+    
+    /**
+     * Return command description.
+     *
+     * @octdoc  m:create/getDescription
+     */
+    public static function getDescription()
+    {
+        return 'Create a new project.';
+    }
 
     /**
-     * Create a new project.
+     * Return command manual.
      *
-     * @octdoc      c:app/create
-     * @copyright   copyright (c) 2014 by Harald Lapp
-     * @author      Harald Lapp <harald@octris.org>
+     * @octdoc  m:create/getManual
      */
-    class create extends \octris\cliff\args\command
+    public static function getManual()
     {
-        /**
-         * Constructor.
-         *
-         * @octdoc  m:create/__construct
-         * @param   string                              $name               Name of command.
-         */
-        public function __construct($name)
-        {
-            parent::__construct($name);
-        }
-        
-        /**
-         * Configure command arguments.
-         *
-         * @octdoc  m:create/configure
-         */
-        public function configure()
-        {
-            $this->addOption(['p', 'project'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
-                $validator = new \octris\core\validate\type\project();
-                return $validator->validate($validator->preFilter($value));
-            }, 'invalid project name specified')->setHelp('A valid name for the project in the form of a reversed domain
-            name.');
-            $this->addOption(['t', 'type'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
-                return in_array($value, ['web', 'cli', 'lib']);
-            }, 'invalid project type specified');
-            $this->addOption(['d', 'define'], args::T_KEYVALUE)->addValidator(function($value, $key) {
-                return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
-            }, 'invalid argument value');
-            
-            $this->addOperand(1, 'project-path')->addValidator(function($value) {
-                return is_dir($value);
-            }, 'specified path is not a directory or directory not found')->setHelp('Path to a project.');
-        }
-        
-        /**
-         * Return command description.
-         *
-         * @octdoc  m:create/getDescription
-         */
-        public static function getDescription()
-        {
-            return 'Create a new project.';
-        }
-
-        /**
-         * Return command manual.
-         *
-         * @octdoc  m:create/getManual
-         */
-        public static function getManual()
-        {
             return <<<EOT
 NAME
     octris create - create a new project.
@@ -120,136 +121,136 @@ EXAMPLES
                 -d info.email="baz@example.org" \
                 ~/tmp/
 EOT;
+    }
+
+    /**
+     * Helper method to test whether a file is binary or text file.
+     *
+     * @octdoc  m:create/isBinary
+     * @param   string          $file               File to test.
+     * @param   string          $size               Optional block size to test.
+     * @return  bool                                Returns true for binaries.
+     */
+    protected function isBinary($file, $size = 2048)
+    {
+        $return = false;
+
+        if (is_file($file) && is_readable($file) && ($fp = fopen($file, 'r'))) {
+            $blk = fread($fp, $size);
+            fclose($fp);
+
+            $return = (substr_count($blk, "\x00") > 0);
         }
 
-        /**
-         * Helper method to test whether a file is binary or text file.
-         *
-         * @octdoc  m:create/isBinary
-         * @param   string          $file               File to test.
-         * @param   string          $size               Optional block size to test.
-         * @return  bool                                Returns true for binaries.
-         */
-        protected function isBinary($file, $size = 2048)
-        {
-            $return = false;
+        return $return;
+    }
 
-            if (is_file($file) && is_readable($file) && ($fp = fopen($file, 'r'))) {
-                $blk = fread($fp, $size);
-                fclose($fp);
+    /**
+     * Run command.
+     *
+     * @octdoc  m:create/run
+     * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
+     */
+    public function run(\octris\cliff\args\collection $args)
+    {
+        $project = $args['project'];
+        $type    = $args['type'];
 
-                $return = (substr_count($blk, "\x00") > 0);
+        list($vendor, $module) = explode('/', $project);
+
+        if (!isset($args[0])) {
+            throw new \octris\cliff\exception\argument(sprintf("no destination path specified"));
+        } elseif (!is_dir($args[0])) {
+            throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
+        } else {
+            $dir = $args[0] . '/' . $module;
+
+            if (is_dir($dir)) {
+                throw new \octris\cliff\exception\argument(sprintf("project directory already exists '%s'", $dir));
+            }
+        }
+        
+        $year = date('Y');
+
+        // handle project configuration
+        $prj = new config('org.octris.core', 'project.create');
+
+        $prj->setDefaults(array(
+            'info.company' => (isset($data['company']) ? $data['company'] : ''),
+            'info.author'  => (isset($data['author']) ? $data['author'] : ''),
+            'info.email'   => (isset($data['email']) ? $data['email'] : '')
+        ));
+
+        // collect information and create configuration for new project
+        $filter = $prj->filter('info');
+
+        foreach ($filter as $k => $v) {
+            $prj['info.' . $k] = stdio::getPrompt(sprintf("%s [%%s]: ", $k), $v);
+        }
+
+        $prj->save();
+
+        print "\n";
+
+        // build data array
+        $data = array_merge($prj->filter('info')->getArrayCopy(true), array(
+            'year'      => $year,
+            'module'    => $module,
+            'vendor'    => $vendor,
+            'namespace' => $vendor . '\\' . $module,
+            'directory' => $vendor . '.' . $module
+        ));
+
+        // create project
+        $src = __DIR__ . '/../../data/skel/' . $type . '/';
+        if (!is_dir($src)) {
+            throw new \octris\cliff\exception\application(sprintf("unable to locate template directory '%s'\n", $src));
+
+            return 1;
+        }
+
+        // process skeleton and write project files
+        $tpl = new \octris\core\tpl();
+        $tpl->addSearchPath($src);
+        $tpl->setValues($data);
+
+        $len = strlen($src);
+
+        mkdir($dir, 0755);
+
+        $directories = array();
+        $iterator    = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($src, \FilesystemIterator::SKIP_DOTS)
+        );
+
+        foreach ($iterator as $filename => $cur) {
+            $rel   = substr($filename, $len);
+            $dst   = $dir . '/' . $rel;
+            $path  = dirname($dst);
+            $base  = basename($filename);
+            $ext   = preg_replace('/^\.?[^\.]+?(\..+|)$/', '\1', $base);
+            $base  = basename($filename, $ext);
+
+            if (substr($base, 0, 1) == '$' && isset($data[$base = ltrim($base, '$')])) {
+                // resolve variable in filename
+                $dst = $path . '/' . $data[$base] . $ext;
             }
 
-            return $return;
-        }
+            if (!is_dir($path)) {
+                // create destination directory
+                mkdir($path, 0755, true);
+            }
 
-        /**
-         * Run command.
-         *
-         * @octdoc  m:create/run
-         * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
-         */
-        public function run(\octris\cliff\args\collection $args)
-        {
-            $project = $args['project'];
-            $type    = $args['type'];
+            if (!$this->isBinary($filename)) {
+                $cmp = $tpl->fetch($rel, \octris\core\tpl::T_ESC_NONE);
 
-            list($vendor, $module) = explode('/', $project);
-
-            if (!isset($args[0])) {
-                throw new \octris\cliff\exception\argument(sprintf("no destination path specified"));
-            } elseif (!is_dir($args[0])) {
-                throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
+                file_put_contents($dst, $cmp);
             } else {
-                $dir = $args[0] . '/' . $module;
-
-                if (is_dir($dir)) {
-                    throw new \octris\cliff\exception\argument(sprintf("project directory already exists '%s'", $dir));
-                }
-            }
-            
-            $year = date('Y');
-
-            // handle project configuration
-            $prj = new config('org.octris.core', 'project.create');
-
-            $prj->setDefaults(array(
-                'info.company' => (isset($data['company']) ? $data['company'] : ''),
-                'info.author'  => (isset($data['author']) ? $data['author'] : ''),
-                'info.email'   => (isset($data['email']) ? $data['email'] : '')
-            ));
-
-            // collect information and create configuration for new project
-            $filter = $prj->filter('info');
-
-            foreach ($filter as $k => $v) {
-                $prj['info.' . $k] = stdio::getPrompt(sprintf("%s [%%s]: ", $k), $v);
+                copy($filename, $dst);
             }
 
-            $prj->save();
-
-            print "\n";
-
-            // build data array
-            $data = array_merge($prj->filter('info')->getArrayCopy(true), array(
-                'year'      => $year,
-                'module'    => $module,
-                'vendor'    => $vendor,
-                'namespace' => $vendor . '\\' . $module,
-                'directory' => $vendor . '.' . $module
-            ));
-
-            // create project
-            $src = __DIR__ . '/../../data/skel/' . $type . '/';
-            if (!is_dir($src)) {
-                throw new \octris\cliff\exception\application(sprintf("unable to locate template directory '%s'\n", $src));
-
-                return 1;
-            }
-
-            // process skeleton and write project files
-            $tpl = new \octris\core\tpl();
-            $tpl->addSearchPath($src);
-            $tpl->setValues($data);
-
-            $len = strlen($src);
-
-            mkdir($dir, 0755);
-
-            $directories = array();
-            $iterator    = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($src, \FilesystemIterator::SKIP_DOTS)
-            );
-
-            foreach ($iterator as $filename => $cur) {
-                $rel   = substr($filename, $len);
-                $dst   = $dir . '/' . $rel;
-                $path  = dirname($dst);
-                $base  = basename($filename);
-                $ext   = preg_replace('/^\.?[^\.]+?(\..+|)$/', '\1', $base);
-                $base  = basename($filename, $ext);
-
-                if (substr($base, 0, 1) == '$' && isset($data[$base = ltrim($base, '$')])) {
-                    // resolve variable in filename
-                    $dst = $path . '/' . $data[$base] . $ext;
-                }
-
-                if (!is_dir($path)) {
-                    // create destination directory
-                    mkdir($path, 0755, true);
-                }
-
-                if (!$this->isBinary($filename)) {
-                    $cmp = $tpl->fetch($rel, \octris\core\tpl::T_ESC_NONE);
-
-                    file_put_contents($dst, $cmp);
-                } else {
-                    copy($filename, $dst);
-                }
-
-                chmod($dst, 0644);
-            }
+            chmod($dst, 0644);
         }
     }
 }
+
