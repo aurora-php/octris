@@ -135,7 +135,7 @@ EOT;
 
             try {
                 $class = new \ReflectionClass($page);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 return;
             }
 

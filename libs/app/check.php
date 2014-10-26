@@ -131,7 +131,7 @@ EOT;
 
                 try {
                     $tpl->process($filename, \octris\core\tpl::T_ESC_HTML);
-                } catch(\Exception $e) {
+                } catch (\Exception $e) {
                 }
             }
         }
