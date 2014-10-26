@@ -14,7 +14,7 @@ namespace octris\app {
     use \octris\core\validate as validate;
 
     /**
-     * Lint a project.
+     * Check a project for various kind of coding-style related flaws.
      *
      * @octdoc      c:app/check
      * @copyright   copyright (c) 2012-2014 by Harald Lapp
