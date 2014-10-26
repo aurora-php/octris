@@ -66,4 +66,3 @@ class app extends \octris\cliff\app
     {
     }
 }
-

@@ -34,4 +34,3 @@ $registry->set('config', function() {
 
 // run application
 app\main::getInstance()->process();
-

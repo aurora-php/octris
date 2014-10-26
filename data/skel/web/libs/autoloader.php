@@ -39,4 +39,3 @@ class autoloader
 }
 
 spl_autoload_register(array('\{{$module}}\autoloader', 'autoload', true, true));
-

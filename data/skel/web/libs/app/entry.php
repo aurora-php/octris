@@ -65,4 +65,3 @@ class entry extends \octris\core\app\web\page
         die('error!');
     }
 }
-

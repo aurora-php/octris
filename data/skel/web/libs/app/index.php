@@ -65,4 +65,3 @@ class index extends \octris\core\app\web\page
         $tpl->render('index.html');
     }
 }
-

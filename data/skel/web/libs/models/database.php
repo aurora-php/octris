@@ -44,4 +44,3 @@ class database
         $this->backend = new $class($settings);
     }
 }
-

@@ -32,4 +32,3 @@ class main extends \octris\core\app\web
     protected $entry_page = '{{$namespace}}\app\entry';
     /**/
 }
-

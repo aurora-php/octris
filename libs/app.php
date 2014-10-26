@@ -112,4 +112,3 @@ class app extends \octris\cliff\app
 }
 
 provider::set('env', $_ENV);
-

@@ -61,4 +61,3 @@ class doc extends \octris\cliff\args\command
         print $grammar->getEBNF();
     }
 }
-
