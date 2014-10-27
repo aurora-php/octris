@@ -31,6 +31,9 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
 require_once(__DIR__ . '/vendor/autoload.php');
 require_once(__DIR__ . '/libs/autoloader.php');
 
+// import environment
+provider::set('env', $_ENV);
+
 // load application configuration
 $registry = \octris\core\registry::getInstance();
 $registry->set('OCTRIS_APP', 'octris-octris', \octris\core\registry::T_READONLY);

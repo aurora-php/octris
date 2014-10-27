@@ -97,7 +97,10 @@ EOT;
         }
         
         if (!is_dir($dir . '/libs/app') || !is_file($dir . '/libs/app/entry.php')) {
-            throw new \Octris\Cliff\Exception\Argument(sprintf('\'%s\' does not seem to be a web application created with the OCTRiS framework', $dir));
+            throw new \Octris\Cliff\Exception\Argument(sprintf(
+                '\'%s\' does not seem to be a web application created with the OCTRiS framework',
+                $dir
+            ));
         }
         
         $project = basename($dir);

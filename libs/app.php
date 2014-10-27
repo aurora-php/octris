@@ -110,5 +110,3 @@ class App extends \Octris\Cliff\App
         parent::showHelp();
     }
 }
-
-provider::set('env', $_ENV);
