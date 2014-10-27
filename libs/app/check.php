@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\app;
+namespace Octris\App;
 
-use \octris\core\provider as provider;
-use \octris\core\validate as validate;
+use \Octris\Core\Provider as provider;
+use \Octris\Core\Validate as validate;
 
 /**
  * Check a project for various kind of coding-style related flaws.
@@ -21,7 +21,7 @@ use \octris\core\validate as validate;
  * @copyright   copyright (c) 2012-2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class check extends \octris\cliff\args\command
+class Check extends \Octris\Cliff\Args\Command
 {
     /**
      * Constructor.
@@ -89,7 +89,7 @@ EOT;
         );
 
         if (!is_null($exclude)) {
-            $iterator = new \octris\core\type\filteriterator($iterator, function($current, $filename) use ($exclude) {
+            $iterator = new \Octris\Core\Type\Filteriterator($iterator, function($current, $filename) use ($exclude) {
                 return !preg_match($exclude, $filename);
             });
         }
@@ -106,9 +106,9 @@ EOT;
     public function run(\octris\cliff\args\collection $args)
     {
         if (!isset($args[0])) {
-            throw new \octris\cliff\exception\argument(sprintf("no project path specified"));
+            throw new \Octris\Cliff\Exception\Argument(sprintf("no project path specified"));
         } elseif (!is_dir($args[0])) {
-            throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
+            throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
         } else {
             $dir = rtrim($args[0], '/');
         }
@@ -124,13 +124,13 @@ EOT;
         if (is_dir($dir . '/templates/')) {
             $iterator = $this->getIterator($dir . '/templates/', '/\.html$/');
             
-            $tpl = new \octris\core\tpl\check();
+            $tpl = new \Octris\Core\Tpl\Check();
 
             foreach ($iterator as $filename => $cur) {
                 print $filename . "\n";
 
                 try {
-                    $tpl->process($filename, \octris\core\tpl::T_ESC_HTML);
+                    $tpl->process($filename, \Octris\Core\Tpl::T_ESC_HTML);
                 } catch (\Exception $e) {
                 }
             }

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\app;
+namespace Octris\App;
 
-use \octris\core\provider as provider;
-use \octris\core\validate as validate;
+use \Octris\Core\Provider as provider;
+use \Octris\Core\Validate as validate;
 
 /**
  * Documentation tools.
@@ -21,7 +21,7 @@ use \octris\core\validate as validate;
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class doc extends \octris\cliff\args\command
+class Doc extends \Octris\Cliff\Args\Command
 {
     /**
      * Constructor.
@@ -57,7 +57,7 @@ class doc extends \octris\cliff\args\command
         // return 1;
 
         // export EBNF
-        $grammar = new \octris\core\tpl\compiler\grammar();
+        $grammar = new \Octris\Core\Tpl\Compiler\Grammar();
         print $grammar->getEBNF();
     }
 }

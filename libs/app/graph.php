@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\app;
+namespace Octris\App;
 
-use \octris\core\provider as provider;
-use \octris\core\validate as validate;
+use \Octris\Core\Provider as provider;
+use \Octris\Core\Validate as validate;
 
 /**
  * Create a page graph of a project.
@@ -21,7 +21,7 @@ use \octris\core\validate as validate;
  * @copyright   copyright (c) 2011-2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class graph extends \octris\cliff\args\command
+class Graph extends \Octris\Cliff\Args\Command
 {
     /**
      * Constructor.
@@ -89,15 +89,15 @@ EOT;
     public function run(\octris\cliff\args\collection $args)
     {
         if (!isset($args[0])) {
-            throw new \octris\cliff\exception\argument(sprintf("no project path specified"));
+            throw new \Octris\Cliff\Exception\Argument(sprintf("no project path specified"));
         } elseif (!is_dir($args[0])) {
-            throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
+            throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
         } else {
             $dir = rtrim($args[0], '/');
         }
         
         if (!is_dir($dir . '/libs/app') || !is_file($dir . '/libs/app/entry.php')) {
-            throw new \octris\cliff\exception\argument(sprintf('\'%s\' does not seem to be a web application created with the OCTRiS framework', $dir));
+            throw new \Octris\Cliff\Exception\Argument(sprintf('\'%s\' does not seem to be a web application created with the OCTRiS framework', $dir));
         }
         
         $project = basename($dir);

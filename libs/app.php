@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace octris;
+namespace Octris;
 
-use \octris\core\provider as provider;
+use \Octris\Core\Provider as provider;
 
 /**
  * Application class.
@@ -20,7 +20,7 @@ use \octris\core\provider as provider;
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class app extends \octris\cliff\app
+class App extends \Octris\Cliff\App
 {
     /**
      * Application name.
@@ -69,11 +69,11 @@ class app extends \octris\cliff\app
     {
         parent::configure();
         
-        $this->addCommand(new \octris\app\create('create'));
-        $this->addCommand(new \octris\app\graph('graph'));
-        $this->addCommand(new \octris\app\lint('check'));
-        $this->addCommand(new \octris\app\test('test'));
-        $this->addCommand(new \octris\app\doc('doc'));
+        $this->addCommand(new \Octris\App\Create('create'));
+        $this->addCommand(new \Octris\App\Graph('graph'));
+        $this->addCommand(new \Octris\App\Lint('check'));
+        $this->addCommand(new \Octris\App\Test('test'));
+        $this->addCommand(new \Octris\App\Doc('doc'));
     }
 
     /**

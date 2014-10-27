@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\app;
+namespace Octris\App;
 
-use \octris\core\config as config;
-use \octris\core\provider as provider;
-use \octris\cliff\stdio as stdio;
-use \octris\core\validate as validate;
-use \octris\cliff\args as args;
+use \Octris\Core\Config as config;
+use \Octris\Core\Provider as provider;
+use \Octris\Cliff\Stdio as stdio;
+use \Octris\Core\Validate as validate;
+use \Octris\Cliff\Args as args;
 
 /**
  * Create a new project.
@@ -24,7 +24,7 @@ use \octris\cliff\args as args;
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class create extends \octris\cliff\args\command
+class Create extends \Octris\Cliff\Args\Command
 {
     /**
      * Constructor.
@@ -45,7 +45,7 @@ class create extends \octris\cliff\args\command
     public function configure()
     {
         $this->addOption(['p', 'project'], args::T_VALUE | args::T_REQUIRED)->addValidator(function($value) {
-            $validator = new \octris\core\validate\type\project();
+            $validator = new \Octris\Core\Validate\Type\Project();
             return $validator->validate($validator->preFilter($value));
         }, 'invalid project name specified')->setHelp('A valid name for the project in the form of a reversed domain
         name.');
@@ -159,14 +159,14 @@ EOT;
         list($vendor, $module) = explode('/', $project);
 
         if (!isset($args[0])) {
-            throw new \octris\cliff\exception\argument(sprintf("no destination path specified"));
+            throw new \Octris\Cliff\Exception\Argument(sprintf("no destination path specified"));
         } elseif (!is_dir($args[0])) {
-            throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
+            throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
         } else {
             $dir = $args[0] . '/' . $module;
 
             if (is_dir($dir)) {
-                throw new \octris\cliff\exception\argument(sprintf("project directory already exists '%s'", $dir));
+                throw new \Octris\Cliff\Exception\Argument(sprintf("project directory already exists '%s'", $dir));
             }
         }
         
@@ -204,13 +204,13 @@ EOT;
         // create project
         $src = __DIR__ . '/../../data/skel/' . $type . '/';
         if (!is_dir($src)) {
-            throw new \octris\cliff\exception\application(sprintf("unable to locate template directory '%s'\n", $src));
+            throw new \Octris\Cliff\Exception\Application(sprintf("unable to locate template directory '%s'\n", $src));
 
             return 1;
         }
 
         // process skeleton and write project files
-        $tpl = new \octris\core\tpl();
+        $tpl = new \Octris\Core\Tpl();
         $tpl->addSearchPath($src);
         $tpl->setValues($data);
 
@@ -242,7 +242,7 @@ EOT;
             }
 
             if (!$this->isBinary($filename)) {
-                $cmp = $tpl->fetch($rel, \octris\core\tpl::T_ESC_NONE);
+                $cmp = $tpl->fetch($rel, \Octris\Core\Tpl::T_ESC_NONE);
 
                 file_put_contents($dst, $cmp);
             } else {

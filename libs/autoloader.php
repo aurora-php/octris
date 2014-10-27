@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace octris;
+namespace Octris;
 
 /**
  * Autoloader.
@@ -18,13 +18,13 @@ namespace octris;
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class autoloader
+class Autoloader extends 
 {
     /**
      * Class Autoloader.
      *
      * @octdoc  m:autoloader/autoload
-     * @param   string          $class              Class to load.
+     * @param   string          $class              Class extends  to load.
      */
     public static function autoload($class)
     {

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\app;
+namespace Octris\App;
 
-use \octris\core\provider as provider;
-use \octris\core\validate as validate;
-use \octris\cliff\args    as args;
+use \Octris\Core\Provider as provider;
+use \Octris\Core\Validate as validate;
+use \Octris\Cliff\Args    as args;
 
 /**
  * Execute phpunit test-suite for a project.
@@ -22,7 +22,7 @@ use \octris\cliff\args    as args;
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class test extends \octris\cliff\args\command
+class Test extends \Octris\Cliff\Args\Command
 {
     /**
      * Constructor.
@@ -43,7 +43,7 @@ class test extends \octris\cliff\args\command
     public function configure()
     {
         $this->addOption(['f', 'filter'], args::T_VALUE)->addValidator(function($value) {
-            $validator = new \octris\core\validate\type\printable();
+            $validator = new \Octris\Core\Validate\Type\Printable();
             return $validator->validate($validator->preFilter($value));
         }, 'invalid filter specified');
     }
@@ -96,14 +96,14 @@ EOT;
     public function run(\octris\cliff\args\collection $args)
     {
         if (!isset($args[0])) {
-            throw new \octris\cliff\exception\argument(sprintf("no destination path specified"));
+            throw new \Octris\Cliff\Exception\Argument(sprintf("no destination path specified"));
         } elseif (!is_dir($args[0])) {
-            throw new \octris\cliff\exception\argument('specified path is not a directory or directory not found');
+            throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
         } else {
             $dir = $args[0] . '/tests/';
             
             if (!is_dir($dir)) {
-                throw new \octris\cliff\exception\application('no tests available');
+                throw new \Octris\Cliff\Exception\Application('no tests available');
             }
         }
         
@@ -114,7 +114,7 @@ EOT;
         }
         
         if (!($cmd = `which phpunit`)) {
-            throw new \octris\cliff\exception\application('phpunit not found');
+            throw new \Octris\Cliff\Exception\Application('phpunit not found');
         }
         
         // execute tests
