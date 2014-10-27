@@ -36,7 +36,7 @@ class Create extends \Octris\Cliff\Args\Command
     {
         parent::__construct($name);
     }
-    
+
     /**
      * Configure command arguments.
      *
@@ -55,12 +55,12 @@ class Create extends \Octris\Cliff\Args\Command
         $this->addOption(['d', 'define'], args::T_KEYVALUE)->addValidator(function ($value, $key) {
             return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
         }, 'invalid argument value');
-        
+
         $this->addOperand(1, 'project-path')->addValidator(function ($value) {
             return is_dir($value);
         }, 'specified path is not a directory or directory not found')->setHelp('Path to a project.');
     }
-    
+
     /**
      * Return command description.
      *
@@ -81,7 +81,7 @@ class Create extends \Octris\Cliff\Args\Command
             return <<<EOT
 NAME
     octris create - create a new project.
-    
+
 SYNOPSIS
     octris create   -p <project-name>
                     -t web | cli | lib
@@ -89,32 +89,32 @@ SYNOPSIS
                     [-d info.author=<author-name>]
                     [-d info.email=<author-email>]
                     <destination-path>
-    
+
 DESCRIPTION
     This command creates a new project of specified type in the specified
     destination-path. A valid basic directory layout will be created from
     a skeleton according to the specified project-type.
-    
+
     The current supported types are 'web', 'cli' and 'lib':
-    
+
     web     This type should be used for projects like web applications,
             web sites etc.
     cli     This type should be used for command-line applications.
     lib     This type should be used for (shared) libraries.
-    
+
 OPTIONS
-    -p      A valid name for the project in the form of <vendor>/<module>. 
-            
+    -p      A valid name for the project in the form of <vendor>/<module>.
+
     -t      A valid type for the project
-    
-    -d      Additional definitions to set that will be used to rewrite 
+
+    -d      Additional definitions to set that will be used to rewrite
             comments in the project skeleton. The current supported fields
             that can be set are: 'info.company', 'info.author' and
             'info.email'.
 
 EXAMPLES
     Create a test project:
-    
+
         $ ./octris create -p example/test -t web \
                 -d info.company="Foo Inc." \
                 -d info.author="Bar Baz" \
@@ -169,7 +169,7 @@ EOT;
                 throw new \Octris\Cliff\Exception\Argument(sprintf("project directory already exists '%s'", $dir));
             }
         }
-        
+
         $year = date('Y');
 
         // handle project configuration
@@ -197,7 +197,7 @@ EOT;
             'year'      => $year,
             'module'    => $module,
             'vendor'    => $vendor,
-            'namespace' => $vendor . '\\' . $module,
+            'namespace' => ucfirst($vendor) . '\\' . ucfirst($module),
             'directory' => $vendor . '.' . $module
         ));
 

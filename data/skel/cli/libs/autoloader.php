@@ -18,7 +18,7 @@ namespace {{$namespace}};
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
-class autoloader
+class Autoloader
 {
     /**
      * Class Autoloader.
@@ -30,7 +30,7 @@ class autoloader
     {
         if (strpos($class, '{{$namespace}}\\') === 0) {
             $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, {{length(concat($namespace, '\\'))}})) . '.php';
-        
+
             if (file_exists($file)) {
                 require_once($file);
             }
@@ -38,4 +38,4 @@ class autoloader
     }
 }
 
-spl_autoload_register(array('\{{$module}}\autoloader', 'autoload', true, true));
+spl_autoload_register(array('\{{$module}}\Autoloader', 'autoload', true, true));

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace {{$namespace}}\app;
+namespace {{$namespace}}\App;
 
 /**
  * Entry page.
@@ -18,7 +18,7 @@ namespace {{$namespace}}\app;
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
-class entry extends \octris\core\app\web\page
+class Entry extends \Octris\Core\App\Web\Page
 {
     /**
      * The entry points to which the current page should allow requests to have to be defined with this
@@ -28,17 +28,17 @@ class entry extends \octris\core\app\web\page
      * @type    array
      */
      protected $next_pages = array(
-         '' => '{{$namespace}}\app\index',
+         '' => '{{$namespace}}\App\Index',
      );
     /**/
 
     /**
-     * The constructor is used to setup common settings for example validation rulesets must be defined 
+     * The constructor is used to setup common settings for example validation rulesets must be defined
      * through the page object constructor.
      *
      * @octdoc  m:entry/__construct
      */
-    public function __construct() 
+    public function __construct()
     {
         parent::__construct();
     }
@@ -50,7 +50,7 @@ class entry extends \octris\core\app\web\page
      * @param   \octris\core\app\page       $last_page  Instance of the page that was active before this one
      * @return  null|\octris\core\app\page              A page can be returned.
      */
-    public function prepare(\octris\core\app\page $last_page, $action)
+    public function prepare(\Octris\Core\App\Page $last_page, $action)
     {
     }
 

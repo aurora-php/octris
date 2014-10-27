@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace {{$namespace}}\app;
+namespace {{$namespace}}\App;
 
 /**
  * index page.
@@ -18,7 +18,7 @@ namespace {{$namespace}}\app;
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
-class index extends \octris\core\app\web\page
+class Index extends \Octris\Core\App\Web\Page
 {
     /**
      * The index points to which the current page should allow requests to have to be defined with this
@@ -28,17 +28,17 @@ class index extends \octris\core\app\web\page
      * @type    array
      */
      protected $next_pages = array(
-         '' => '{{$namespace}}\app\index',
+         '' => '{{$namespace}}\App\Index',
      );
     /**/
 
     /**
-     * The constructor is used to setup common settings for example validation rulesets must be defined 
+     * The constructor is used to setup common settings for example validation rulesets must be defined
      * through the page object constructor.
      *
      * @octdoc  m:index/__construct
      */
-    public function __construct() 
+    public function __construct()
     {
         parent::__construct();
     }
@@ -47,10 +47,10 @@ class index extends \octris\core\app\web\page
      * Prepare rendering of a page. this method is called _BEFORE_ rendering a page.
      *
      * @octdoc  m:index/prepare
-     * @param   \octris\core\app\page       $last_page  Instance of the page that was active before this one
-     * @return  null|\octris\core\app\page              A page can be returned.
+     * @param   \Octris\Core\App\Page       $last_page  Instance of the page that was active before this one
+     * @return  null|\Octris\Core\App\Page              A page can be returned.
      */
-    public function prepare(\octris\core\app\page $last_page, $action)
+    public function prepare(\Octris\Core\App\Page $last_page, $action)
     {
     }
 
@@ -61,7 +61,7 @@ class index extends \octris\core\app\web\page
      */
     public function render()
     {
-        $tpl = \octris\core\app::getInstance()->getTemplate();
+        $tpl = \Octris\Core\App::getInstance()->getTemplate();
         $tpl->render('index.html');
     }
 }

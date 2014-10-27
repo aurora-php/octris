@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace {{$namespace}}\models;
+namespace {{$namespace}}\Models;
 
 /**
  * Proxy for accessing different database backends.
@@ -18,17 +18,17 @@ namespace {{$namespace}}\models;
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
-class database
+class Database
 {
     /**
      * Instance of database backend class.
      *
      * @octdoc  p:database/$backend
-     * @type    \{{$namespace}}\models\database
+     * @type    \{{$namespace}}\Models\Database
      */
     protected $backend;
     /**/
-    
+
     /**
      * Constructor.
      *
@@ -39,8 +39,8 @@ class database
     {
         $class = get_class($this);
         $class = substr($class, strrpos($class, '\\'));
-        $class = '{{$namespace}}\models\\' . $settings['device'] . $class;
-        
+        $class = '{{$namespace}}\Models\\' . $settings['device'] . $class;
+
         $this->backend = new $class($settings);
     }
 }
