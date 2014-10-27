@@ -45,7 +45,7 @@ require_once('phar://octris.phar/libs/autoloader.php');
 $registry = \octris\core\registry::getInstance();
 $registry->set('OCTRIS_APP', 'octris', \octris\core\registry::T_READONLY);
 $registry->set('OCTRIS_BASE', __DIR__, \octris\core\registry::T_READONLY);
-$registry->set('config', function() {
+$registry->set('config', function () {
     return new \octris\core\config('octris', 'config');
 }, \octris\core\registry::T_SHARED | \octris\core\registry::T_READONLY);
 

@@ -114,7 +114,7 @@ EOT;
             require_once($dir . '/vendor/autoload.php');
         }
 
-        spl_autoload_register(function($class) use ($dir, $ns) {
+        spl_autoload_register(function ($class) use ($dir, $ns) {
             if (strpos($class, $ns) === 0) {
                 // main application library
                 $file = $dir . '/libs/' . str_replace('\\', '/', substr($class, strlen($ns))) . '.php';
@@ -124,7 +124,7 @@ EOT;
         }, true, true);
         
         // main
-        $analyze = function($page) use (&$analyze) {
+        $analyze = function ($page) use (&$analyze) {
             static $processed = array();
 
             if (in_array($page, $processed)) {

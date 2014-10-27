@@ -89,7 +89,7 @@ EOT;
         );
 
         if (!is_null($exclude)) {
-            $iterator = new \Octris\Core\Type\Filteriterator($iterator, function($current, $filename) use ($exclude) {
+            $iterator = new \Octris\Core\Type\Filteriterator($iterator, function ($current, $filename) use ($exclude) {
                 return !preg_match($exclude, $filename);
             });
         }

@@ -42,7 +42,7 @@ class Test extends \Octris\Cliff\Args\Command
      */
     public function configure()
     {
-        $this->addOption(['f', 'filter'], args::T_VALUE)->addValidator(function($value) {
+        $this->addOption(['f', 'filter'], args::T_VALUE)->addValidator(function ($value) {
             $validator = new \Octris\Core\Validate\Type\Printable();
             return $validator->validate($validator->preFilter($value));
         }, 'invalid filter specified');

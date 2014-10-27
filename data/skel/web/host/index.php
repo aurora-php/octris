@@ -28,7 +28,7 @@ require_once(__DIR__ . '/../libs/autoloader.php');
 $registry = \octris\core\registry::getInstance();
 $registry->set('OCTRIS_APP', '{{$vendor}}-{{$module}}');
 $registry->set('OCTRIS_BASE', realpath(__DIR__ . '/../'));
-$registry->set('config', function() {
+$registry->set('config', function () {
     return new \octris\core\config('{{$vendor}}-{{$module}}', 'config');
 }, \octris\core\registry::T_SHARED | \octris\core\registry::T_READONLY);
 
