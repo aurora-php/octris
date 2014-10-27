@@ -18,7 +18,7 @@ namespace Octris;
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Autoloader extends 
+class Autoloader
 {
     /**
      * Class Autoloader.
