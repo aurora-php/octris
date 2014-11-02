@@ -30,7 +30,7 @@ class App extends \Octris\Cliff\App
      */
     protected static $app_name = 'octris';
     /**/
-    
+
     /**
      * Application version.
      *
@@ -39,7 +39,7 @@ class App extends \Octris\Cliff\App
      */
     protected static $app_version = '0.0.5';
     /**/
-    
+
     /**
      * Application version date.
      *
@@ -48,12 +48,12 @@ class App extends \Octris\Cliff\App
      */
     protected static $app_version_date = '2014-10-18';
     /**/
-    
+
     /**
      * Constructor.
      *
      * @octdoc  m:app/__construct
-     * @param   
+     * @param
      */
     public function __construct()
     {
@@ -68,10 +68,10 @@ class App extends \Octris\Cliff\App
     protected function configure()
     {
         parent::configure();
-        
+
         $this->addCommand(new \Octris\App\Create('create'));
         $this->addCommand(new \Octris\App\Graph('graph'));
-        $this->addCommand(new \Octris\App\Lint('check'));
+        $this->addCommand(new \Octris\App\Check('check'));
         $this->addCommand(new \Octris\App\Test('test'));
         $this->addCommand(new \Octris\App\Doc('doc'));
     }
@@ -86,7 +86,7 @@ class App extends \Octris\Cliff\App
     {
         if (count($GLOBALS['argv']) == 1) {
             $this->showHelp();
-            
+
             exit(1);
         } else {
             exit(0);
@@ -100,7 +100,7 @@ class App extends \Octris\Cliff\App
      */
     protected function showHelp()
     {
-        printf("               __         .__        
+        printf("               __         .__
   ____   _____/  |________|__| ______
  /  _ \_/ ___\   __\_  __ \  |/  ___/    OCTRiS framework tool
 (  <_> )  \___|  |  |  | \/  |\___ \     copyright (c) 2014 by Harald Lapp
