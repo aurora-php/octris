@@ -80,9 +80,9 @@ class App extends \Octris\Cliff\App
      * Run main application.
      *
      * @octdoc  m:app/main
-     * @param   \octris\cliff\args\collection        $args           Parsed arguments.
+     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments.
      */
-    protected function main(\octris\cliff\args\collection $args)
+    protected function main(\Octris\Cliff\Args\Collection $args)
     {
         if (count($GLOBALS['argv']) == 1) {
             $this->showHelp();

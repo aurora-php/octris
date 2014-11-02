@@ -84,9 +84,9 @@ EOT;
      * Run command.
      *
      * @octdoc  m:graph/run
-     * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
+     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
      */
-    public function run(\octris\cliff\args\collection $args)
+    public function run(\Octris\Cliff\Args\Collection $args)
     {
         if (!isset($args[0])) {
             throw new \Octris\Cliff\Exception\Argument(sprintf("no project path specified"));

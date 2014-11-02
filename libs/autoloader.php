@@ -38,4 +38,4 @@ class Autoloader
     }
 }
 
-spl_autoload_register(array('\octris\autoloader', 'autoload'), true, true);
+spl_autoload_register(array('\Octris\Autoloader', 'autoload'), true, true);

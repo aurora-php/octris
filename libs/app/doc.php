@@ -48,9 +48,9 @@ class Doc extends \Octris\Cliff\Args\Command
      * Run command.
      *
      * @octdoc  m:lint/run
-     * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
+     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
      */
-    public function run(\octris\cliff\args\collection $args)
+    public function run(\Octris\Cliff\Args\Collection $args)
     {
         // $this->setError('not implemented, yet');
         //

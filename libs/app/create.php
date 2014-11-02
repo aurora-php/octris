@@ -149,9 +149,9 @@ EOT;
      * Run command.
      *
      * @octdoc  m:create/run
-     * @param   \octris\cliff\args\collection        $args           Parsed arguments for command.
+     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
      */
-    public function run(\octris\cliff\args\collection $args)
+    public function run(\Octris\Cliff\Args\Collection $args)
     {
         $project = $args['project'];
         $type    = $args['type'];
