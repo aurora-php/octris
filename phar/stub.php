@@ -41,18 +41,18 @@ require_once('phar://octris.phar/vendor/autoload.php');
 require_once('phar://octris.phar/libs/autoloader.php');
 
 // import environment
-provider::set('env', $_ENV);
+\Octris\Core\Provider::set('env', $_ENV);
 
 // load application configuration
-$registry = \octris\core\registry::getInstance();
-$registry->set('OCTRIS_APP', 'octris', \octris\core\registry::T_READONLY);
-$registry->set('OCTRIS_BASE', __DIR__, \octris\core\registry::T_READONLY);
+$registry = \Octris\Core\Registry::getInstance();
+$registry->set('OCTRIS_APP', 'octris-octris', \Octris\Core\Registry::T_READONLY);
+$registry->set('OCTRIS_BASE', __DIR__, \Octris\Core\Registry::T_READONLY);
 $registry->set('config', function () {
-    return new \octris\core\config('octris', 'config');
-}, \octris\core\registry::T_SHARED | \octris\core\registry::T_READONLY);
+    return new \Octris\Core\Config('octris-octris', 'config');
+}, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY);
 
 // run application
-$app = new \octris\app();
+$app = new \Octris\App();
 $app->run();
 
 __HALT_COMPILER();
