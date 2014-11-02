@@ -29,19 +29,19 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
 }
 
 require_once(__DIR__ . '/vendor/autoload.php');
-require_once(__DIR__ . '/libs/autoloader.php');
+require_once(__DIR__ . '/libs/Autoloader.php');
 
 // import environment
-provider::set('env', $_ENV);
+\Octris\Core\Provider::set('env', $_ENV);
 
 // load application configuration
-$registry = \octris\core\registry::getInstance();
-$registry->set('OCTRIS_APP', 'octris-octris', \octris\core\registry::T_READONLY);
-$registry->set('OCTRIS_BASE', __DIR__, \octris\core\registry::T_READONLY);
+$registry = \Octris\Core\Registry::getInstance();
+$registry->set('OCTRIS_APP', 'octris-octris', \Octris\Core\Registry::T_READONLY);
+$registry->set('OCTRIS_BASE', __DIR__, \Octris\Core\Registry::T_READONLY);
 $registry->set('config', function () {
-    return new \octris\core\config('octris-octris', 'config');
-}, \octris\core\registry::T_SHARED | \octris\core\registry::T_READONLY);
+    return new \Octris\Core\Config('octris-octris', 'config');
+}, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY);
 
 // run application
-$app = new \octris\app();
+$app = new \Octris\App();
 $app->run();
