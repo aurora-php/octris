@@ -11,7 +11,6 @@
 
 namespace Octris\App;
 
-use \Octris\Core\Config as config;
 use \Octris\Core\Provider as provider;
 use \Octris\Cliff\Stdio as stdio;
 use \Octris\Core\Validate as validate;
@@ -163,7 +162,7 @@ EOT;
         $year = date('Y');
 
         // handle project configuration
-        $prj = new config('org.octris.core', 'project.create');
+        $prj = new \Octris\Core\Config('org.octris.core', 'project.create');
 
         $prj->setDefaults(array(
             'info.company' => (isset($data['company']) ? $data['company'] : ''),

@@ -62,6 +62,7 @@ class App extends \Octris\Cliff\App
     {
         parent::configure();
 
+        $this->addCommand(new \Octris\App\Config('config'));
         $this->addCommand(new \Octris\App\Create('create'));
         $this->addCommand(new \Octris\App\Graph('graph'));
         $this->addCommand(new \Octris\App\Check('check'));
