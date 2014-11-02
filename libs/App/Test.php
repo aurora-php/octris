@@ -35,7 +35,6 @@ class Test extends \Octris\Cliff\Args\Command
 
     /**
      * Configure command arguments.
-     *
      */
     public function configure()
     {
@@ -47,7 +46,6 @@ class Test extends \Octris\Cliff\Args\Command
 
     /**
      * Return command description.
-     *
      */
     public static function getDescription()
     {
@@ -56,7 +54,6 @@ class Test extends \Octris\Cliff\Args\Command
 
     /**
      * Return command manual.
-     *
      */
     public static function getManual()
     {

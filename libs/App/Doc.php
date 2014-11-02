@@ -34,7 +34,6 @@ class Doc extends \Octris\Cliff\Args\Command
 
     /**
      * Return command description.
-     *
      */
     public static function getDescription()
     {

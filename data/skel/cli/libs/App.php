@@ -45,7 +45,6 @@ class App extends \Octris\Cliff\App
 
     /**
      * Constructor.
-     *
      */
     public function __construct()
     {

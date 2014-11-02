@@ -33,7 +33,6 @@ class Entry extends \Octris\Core\App\Web\Page
     /**
      * The constructor is used to setup common settings for example validation rulesets must be defined
      * through the page object constructor.
-     *
      */
     public function __construct()
     {
@@ -53,7 +52,6 @@ class Entry extends \Octris\Core\App\Web\Page
     /**
      * This method is used to populate a template with data and render it. This method should never be reached for
      * the entry page. Otherwise the application is propably broken.
-     *
      */
     public function render()
     {

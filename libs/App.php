@@ -57,7 +57,6 @@ class App extends \Octris\Cliff\App
 
     /**
      * Configure application arguments.
-     *
      */
     protected function configure()
     {
@@ -88,7 +87,6 @@ class App extends \Octris\Cliff\App
 
     /**
      * Show help.
-     *
      */
     protected function showHelp()
     {

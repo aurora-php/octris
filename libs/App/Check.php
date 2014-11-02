@@ -34,7 +34,6 @@ class Check extends \Octris\Cliff\Args\Command
 
     /**
      * Return command description.
-     *
      */
     public static function getDescription()
     {
@@ -43,7 +42,6 @@ class Check extends \Octris\Cliff\Args\Command
 
     /**
      * Return command manual.
-     *
      */
     public static function getManual()
     {

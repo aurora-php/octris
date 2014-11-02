@@ -37,7 +37,6 @@ class Create extends \Octris\Cliff\Args\Command
 
     /**
      * Configure command arguments.
-     *
      */
     public function configure()
     {
@@ -60,7 +59,6 @@ class Create extends \Octris\Cliff\Args\Command
 
     /**
      * Return command description.
-     *
      */
     public static function getDescription()
     {
@@ -69,7 +67,6 @@ class Create extends \Octris\Cliff\Args\Command
 
     /**
      * Return command manual.
-     *
      */
     public static function getManual()
     {
