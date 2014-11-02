@@ -105,7 +105,7 @@ class App extends \Octris\Cliff\App
  /  _ \_/ ___\   __\_  __ \  |/  ___/    OCTRiS framework tool
 (  <_> )  \___|  |  |  | \/  |\___ \     copyright (c) 2014 by Harald Lapp
  \____/ \___  >__|  |__|  |__/____  >    http://github.com/octris/octris/
-        \/%20s\/\n\n", 'v' . static::$app_version);
+            \/%20s\/\n\n", 'v' . static::$app_version);
 
         parent::showHelp();
     }
