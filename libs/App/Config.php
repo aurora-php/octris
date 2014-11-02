@@ -49,9 +49,9 @@ class Config extends \Octris\Cliff\Args\Command
 NAME
 
 SYNOPSIS
-    octris config   [info.company=<company-name> |
-                     info.author=<author-name> |
-                     info.email=<email-address>]
+    octris config   [-s company=<company-name> |
+                     -s author=<author-name> |
+                     -s email=<email-address>]
 
 DESCRIPTION
     This command changes the OCTRIS command-line tool configuration.
@@ -61,7 +61,7 @@ OPTIONS
 EXAMPLES
     Change company name in configuration:
 
-        $ ./octris config info.company=foo
+        $ ./octris config -s company=foo
 EOT;
     }
 
