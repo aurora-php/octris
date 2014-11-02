@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/cliff.git",
-                "reference": "8736a2e2954b65b3decae9a5f86e38363bd0728d"
+                "reference": "6b7dc61aaf71ebe376b3ac9314c8d131da8345d1"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -35,7 +35,7 @@
             ],
             "description": "OCTRiS command-line framework",
             "homepage": "http://github.com/octris/cliff/",
-            "time": "2014-10-20 20:59:10"
+            "time": "2014-11-02 17:46:13"
         },
         {
             "name": "octris/core",
@@ -43,7 +43,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "93e0e5245b5f9e4682423896f4166583a43b917b"
+                "reference": "8bb0dec13783b6756f619a7eb11acd6edeaed4b0"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -66,7 +66,7 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2014-10-19 08:28:01"
+            "time": "2014-11-02 17:45:48"
         }
     ],
     "packages-dev": [],
