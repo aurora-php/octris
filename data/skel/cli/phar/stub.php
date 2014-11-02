@@ -46,8 +46,11 @@ Phar::mapPhar();
 require_once('phar://{{$module}}.phar/vendor/autoload.php');
 require_once('phar://{{$module}}.phar/libs/autoloader.php');
 
+// import environment
+\Octris\Core\Provider::set('env', $_ENV);
+
 // load application configuration
-$registry = \octris\core\registry::getInstance();
+$registry = \Octris\Core\Registry::getInstance();
 $registry->set('OCTRIS_APP', '{{$vendor}}-{{$module}}', \Octris\Core\Registry::T_READONLY);
 $registry->set('OCTRIS_BASE', __DIR__, \Octris\Core\Registry::T_READONLY);
 $registry->set('config', function () {
