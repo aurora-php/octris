@@ -12,7 +12,6 @@
 /**
  * Build PHAR package.
  *
- * @octdoc      h:install/build
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */

@@ -16,7 +16,6 @@ use \Octris\Core\Provider as provider;
 /**
  * Application class.
  *
- * @octdoc      c:libs/app
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
@@ -25,7 +24,6 @@ class App extends \Octris\Cliff\App
     /**
      * Application name.
      *
-     * @octdoc  p:app/$app_name
      * @type    string
      */
     protected static $app_name = 'octris';
@@ -34,7 +32,6 @@ class App extends \Octris\Cliff\App
     /**
      * Application version.
      *
-     * @octdoc  p:app/$app_version
      * @type    string
      */
     protected static $app_version = '0.0.5';
@@ -43,7 +40,6 @@ class App extends \Octris\Cliff\App
     /**
      * Application version date.
      *
-     * @octdoc  p:app/$app_version_date
      * @type    string
      */
     protected static $app_version_date = '2014-10-18';
@@ -52,7 +48,6 @@ class App extends \Octris\Cliff\App
     /**
      * Constructor.
      *
-     * @octdoc  m:app/__construct
      * @param
      */
     public function __construct()
@@ -63,7 +58,6 @@ class App extends \Octris\Cliff\App
     /**
      * Configure application arguments.
      *
-     * @octdoc  m:app/configure
      */
     protected function configure()
     {
@@ -79,7 +73,6 @@ class App extends \Octris\Cliff\App
     /**
      * Run main application.
      *
-     * @octdoc  m:app/main
      * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments.
      */
     protected function main(\Octris\Cliff\Args\Collection $args)
@@ -96,7 +89,6 @@ class App extends \Octris\Cliff\App
     /**
      * Show help.
      *
-     * @octdoc  m:app/showHelp
      */
     protected function showHelp()
     {

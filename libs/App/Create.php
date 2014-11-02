@@ -20,7 +20,6 @@ use \Octris\Cliff\Args as args;
 /**
  * Create a new project.
  *
- * @octdoc      c:app/create
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
@@ -29,7 +28,6 @@ class Create extends \Octris\Cliff\Args\Command
     /**
      * Constructor.
      *
-     * @octdoc  m:create/__construct
      * @param   string                              $name               Name of command.
      */
     public function __construct($name)
@@ -40,7 +38,6 @@ class Create extends \Octris\Cliff\Args\Command
     /**
      * Configure command arguments.
      *
-     * @octdoc  m:create/configure
      */
     public function configure()
     {
@@ -64,7 +61,6 @@ class Create extends \Octris\Cliff\Args\Command
     /**
      * Return command description.
      *
-     * @octdoc  m:create/getDescription
      */
     public static function getDescription()
     {
@@ -74,7 +70,6 @@ class Create extends \Octris\Cliff\Args\Command
     /**
      * Return command manual.
      *
-     * @octdoc  m:create/getManual
      */
     public static function getManual()
     {
@@ -126,7 +121,6 @@ EOT;
     /**
      * Helper method to test whether a file is binary or text file.
      *
-     * @octdoc  m:create/isBinary
      * @param   string          $file               File to test.
      * @param   string          $size               Optional block size to test.
      * @return  bool                                Returns true for binaries.
@@ -148,7 +142,6 @@ EOT;
     /**
      * Run command.
      *
-     * @octdoc  m:create/run
      * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
      */
     public function run(\Octris\Cliff\Args\Collection $args)

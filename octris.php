@@ -13,7 +13,6 @@
 /**
  * Main application.
  *
- * @octdoc      h:octris/octris
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */

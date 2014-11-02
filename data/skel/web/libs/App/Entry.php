@@ -14,7 +14,6 @@ namespace {{$namespace}}\App;
 /**
  * Entry page.
  *
- * @octdoc      c:app/entry
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
@@ -24,7 +23,6 @@ class Entry extends \Octris\Core\App\Web\Page
      * The entry points to which the current page should allow requests to have to be defined with this
      * property.
      *
-     * @octdoc  p:entry/$next_page
      * @type    array
      */
      protected $next_pages = array(
@@ -36,7 +34,6 @@ class Entry extends \Octris\Core\App\Web\Page
      * The constructor is used to setup common settings for example validation rulesets must be defined
      * through the page object constructor.
      *
-     * @octdoc  m:entry/__construct
      */
     public function __construct()
     {
@@ -46,7 +43,6 @@ class Entry extends \Octris\Core\App\Web\Page
     /**
      * Prepare rendering of a page. this method is called _BEFORE_ rendering a page.
      *
-     * @octdoc  m:entry/prepare
      * @param   \octris\core\app\page       $last_page  Instance of the page that was active before this one
      * @return  null|\octris\core\app\page              A page can be returned.
      */
@@ -58,7 +54,6 @@ class Entry extends \Octris\Core\App\Web\Page
      * This method is used to populate a template with data and render it. This method should never be reached for
      * the entry page. Otherwise the application is propably broken.
      *
-     * @octdoc  m:entry/render
      */
     public function render()
     {

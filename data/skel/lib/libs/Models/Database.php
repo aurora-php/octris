@@ -14,7 +14,6 @@ namespace {{$namespace}}\Models;
 /**
  * Proxy for accessing different database backends.
  *
- * @octdoc      c:models/database
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
@@ -23,7 +22,6 @@ class Database
     /**
      * Instance of database backend class.
      *
-     * @octdoc  p:database/$backend
      * @type    \{{$namespace}}\Models\Database
      */
     protected $backend;
@@ -32,7 +30,6 @@ class Database
     /**
      * Constructor.
      *
-     * @octdoc  m:database/__construct
      * @param   array           $settings                   Database connection settings.
      */
     public function __construct(array $settings)

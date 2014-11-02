@@ -14,7 +14,6 @@ namespace {{$namespace}};
 /**
  * Application class.
  *
- * @octdoc      c:libs/app
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
@@ -23,7 +22,6 @@ class App extends \Octris\Cliff\App
     /**
      * Application name.
      *
-     * @octdoc  p:app/$app_name
      * @type    string
      */
     protected static $app_name = '{{$vendor}}-{{$module}}';
@@ -32,7 +30,6 @@ class App extends \Octris\Cliff\App
     /**
      * Application version.
      *
-     * @octdoc  p:app/$app_version
      * @type    string
      */
     protected static $app_version = '0.0.0';
@@ -41,7 +38,6 @@ class App extends \Octris\Cliff\App
     /**
      * Application version date.
      *
-     * @octdoc  p:app/$app_version_date
      * @type    string
      */
     protected static $app_version_date = '0000-00-00';
@@ -50,7 +46,6 @@ class App extends \Octris\Cliff\App
     /**
      * Constructor.
      *
-     * @octdoc  m:app/__construct
      */
     public function __construct()
     {
@@ -59,7 +54,6 @@ class App extends \Octris\Cliff\App
     /**
      * Execute application.
      *
-     * @octdoc  m:app/main
      * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments.
      */
     protected function main(\Octris\Cliff\Args\Collection $args);

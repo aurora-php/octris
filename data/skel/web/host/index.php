@@ -14,7 +14,6 @@ namespace {{$namespace}};
 /**
  * Application loader.
  *
- * @octdoc      h:host/index
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */

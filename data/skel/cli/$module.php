@@ -19,7 +19,6 @@
 /**
  * Application launcher.
  *
- * @octdoc      h:{{$module}}/{{$module}}.php
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */

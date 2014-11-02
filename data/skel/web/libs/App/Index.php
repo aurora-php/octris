@@ -14,7 +14,6 @@ namespace {{$namespace}}\App;
 /**
  * index page.
  *
- * @octdoc      c:app/index
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
@@ -24,7 +23,6 @@ class Index extends \Octris\Core\App\Web\Page
      * The index points to which the current page should allow requests to have to be defined with this
      * property.
      *
-     * @octdoc  p:index/$next_page
      * @type    array
      */
      protected $next_pages = array(
@@ -36,7 +34,6 @@ class Index extends \Octris\Core\App\Web\Page
      * The constructor is used to setup common settings for example validation rulesets must be defined
      * through the page object constructor.
      *
-     * @octdoc  m:index/__construct
      */
     public function __construct()
     {
@@ -46,7 +43,6 @@ class Index extends \Octris\Core\App\Web\Page
     /**
      * Prepare rendering of a page. this method is called _BEFORE_ rendering a page.
      *
-     * @octdoc  m:index/prepare
      * @param   \Octris\Core\App\Page       $last_page  Instance of the page that was active before this one
      * @return  null|\Octris\Core\App\Page              A page can be returned.
      */
@@ -57,7 +53,6 @@ class Index extends \Octris\Core\App\Web\Page
     /**
      * This method is used to populate a template with data and render it.
      *
-     * @octdoc  m:index/render
      */
     public function render()
     {

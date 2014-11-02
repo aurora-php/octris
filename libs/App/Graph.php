@@ -17,7 +17,6 @@ use \Octris\Core\Validate as validate;
 /**
  * Create a page graph of a project.
  *
- * @octdoc      c:app/graph
  * @copyright   copyright (c) 2011-2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
@@ -26,18 +25,16 @@ class Graph extends \Octris\Cliff\Args\Command
     /**
      * Constructor.
      *
-     * @octdoc  m:graph/__construct
      * @param   string                              $name               Name of command.
      */
     public function __construct($name)
     {
         parent::__construct($name);
     }
-    
+
     /**
      * Return command description.
      *
-     * @octdoc  m:graph/getDescription
      */
     public static function getDescription()
     {
@@ -47,30 +44,29 @@ class Graph extends \Octris\Cliff\Args\Command
     /**
      * Return command manual.
      *
-     * @octdoc  m:create/getManual
      */
     public static function getManual()
     {
             return <<<EOT
 NAME
     octris graph - create a page graph of a project.
-    
+
 SYNOPSIS
     octris graph     <project-path>
-    
+
 DESCRIPTION
     This command is used to analyze the page flow of a project and
     to create a graph from it that can be visualized using the dot
     utility of graphviz.
-    
+
     The generated graph will be printed to stdout and can as such
     be directly processed by the dot utility.
-    
+
 OPTIONS
 
 EXAMPLES
     Create a graph of a project in PDF format:
-    
+
         $ ./octris graph ~/tmp/octris/test |\
                 dot -Tpdf
 
@@ -83,7 +79,6 @@ EOT;
     /**
      * Run command.
      *
-     * @octdoc  m:graph/run
      * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
      */
     public function run(\Octris\Cliff\Args\Collection $args)
@@ -95,17 +90,17 @@ EOT;
         } else {
             $dir = rtrim($args[0], '/');
         }
-        
+
         if (!is_dir($dir . '/libs/app') || !is_file($dir . '/libs/app/entry.php')) {
             throw new \Octris\Cliff\Exception\Argument(sprintf(
                 '\'%s\' does not seem to be a web application created with the OCTRiS framework',
                 $dir
             ));
         }
-        
+
         $project = basename($dir);
         $ns      = str_replace('.', '\\', $project) . '\\';
-        
+
         /*
          * install new project-specific autoloader
          */
@@ -121,11 +116,11 @@ EOT;
             if (strpos($class, $ns) === 0) {
                 // main application library
                 $file = $dir . '/libs/' . str_replace('\\', '/', substr($class, strlen($ns))) . '.php';
-            
+
                 require_once($file);
             }
         }, true, true);
-        
+
         // main
         $analyze = function ($page) use (&$analyze) {
             static $processed = array();

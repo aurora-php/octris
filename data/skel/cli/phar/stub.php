@@ -19,7 +19,6 @@
 /**
  * PHAR stub for {{$vendor}}-{{$module}}.
  *
- * @octdoc      h:phar/stub
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */

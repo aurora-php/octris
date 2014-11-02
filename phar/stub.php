@@ -13,7 +13,6 @@
 /**
  * Octris PHAR stub.
  *
- * @octdoc      h:phar/stub
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */

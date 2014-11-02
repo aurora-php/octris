@@ -12,7 +12,6 @@
 /**
  * Build PHAR package.
  *
- * @octdoc      h:install/build
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
@@ -46,7 +45,7 @@ if (file_exists($exec)) {
 function getDirIterator($dir) {
     $iterator = new \RecursiveIteratorIterator(
         new \RecursiveDirectoryIterator(
-            realpath($dir), 
+            realpath($dir),
             \FilesystemIterator::SKIP_DOTS
         )
     );
@@ -55,8 +54,8 @@ function getDirIterator($dir) {
 }
 
 $phar = new Phar(
-    $file, 
-    FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_FILENAME, 
+    $file,
+    FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_FILENAME,
     basename($file)
 );
 

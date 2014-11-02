@@ -10,7 +10,6 @@
 /**
  * Main javascript library for {{$vendor}}-{{$module}}.
  *
- * @octdoc      c:libsjs/{{$vendor}}-{{$module}}.js
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */

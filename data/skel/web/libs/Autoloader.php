@@ -14,7 +14,6 @@ namespace {{$namespace}};
 /**
  * Autoloader.
  *
- * @octdoc      c:libs/main
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
@@ -23,7 +22,6 @@ class Autoloader
     /**
      * Class Autoloader.
      *
-     * @octdoc  m:autoloader/autoload
      * @param   string          $class              Class to load.
      */
     public static function autoload($class)

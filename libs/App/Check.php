@@ -17,7 +17,6 @@ use \Octris\Core\Validate as validate;
 /**
  * Check a project for various kind of coding-style related flaws.
  *
- * @octdoc      c:app/check
  * @copyright   copyright (c) 2012-2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
@@ -26,18 +25,16 @@ class Check extends \Octris\Cliff\Args\Command
     /**
      * Constructor.
      *
-     * @octdoc  m:check/__construct
      * @param   string                              $name               Name of command.
      */
     public function __construct($name)
     {
         parent::__construct($name);
     }
-    
+
     /**
      * Return command description.
      *
-     * @octdoc  m:check/getDescription
      */
     public static function getDescription()
     {
@@ -47,26 +44,25 @@ class Check extends \Octris\Cliff\Args\Command
     /**
      * Return command manual.
      *
-     * @octdoc  m:create/getManual
      */
     public static function getManual()
     {
             return <<<EOT
 NAME
     octris check - syntactical check of project files.
-    
+
 SYNOPSIS
     octris check     <project-path>
-    
+
 DESCRIPTION
     This command is used to check the syntax of files in a project. Currently
     validation can be performed for php files and OCTRiS template files.
-    
+
 OPTIONS
 
 EXAMPLES
     Check a project:
-    
+
         $ ./octris check ~/tmp/octris/test
 EOT;
     }
@@ -74,7 +70,6 @@ EOT;
     /**
      * Get a file iterator for a specified directory and specified regular expression matching file names.
      *
-     * @octdoc  m:check/getIterator
      * @param   string                          $dir            Director to iterate recusrivly.
      * @param   string                          $regexp         Regular expression each file has to match to.
      * @param   string                          $exclude        Optional pattern for filtering files.
@@ -100,7 +95,6 @@ EOT;
     /**
      * Run command.
      *
-     * @octdoc  m:check/run
      * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
      */
     public function run(\Octris\Cliff\Args\Collection $args)
@@ -123,7 +117,7 @@ EOT;
         // check templates
         if (is_dir($dir . '/templates/')) {
             $iterator = $this->getIterator($dir . '/templates/', '/\.html$/');
-            
+
             $tpl = new \Octris\Core\Tpl\Check();
 
             foreach ($iterator as $filename => $cur) {

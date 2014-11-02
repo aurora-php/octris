@@ -17,7 +17,6 @@ use \Octris\Core\Validate as validate;
 /**
  * Documentation tools.
  *
- * @octdoc      c:app/doc
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
@@ -26,18 +25,16 @@ class Doc extends \Octris\Cliff\Args\Command
     /**
      * Constructor.
      *
-     * @octdoc  m:doc/__construct
      * @param   string                              $name               Name of command.
      */
     public function __construct($name)
     {
         parent::__construct($name);
     }
-    
+
     /**
      * Return command description.
      *
-     * @octdoc  m:doc/getDescription
      */
     public static function getDescription()
     {
@@ -47,7 +44,6 @@ class Doc extends \Octris\Cliff\Args\Command
     /**
      * Run command.
      *
-     * @octdoc  m:lint/run
      * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
      */
     public function run(\Octris\Cliff\Args\Collection $args)
