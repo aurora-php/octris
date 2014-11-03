@@ -24,12 +24,12 @@ namespace {{$namespace}};
 require_once(__DIR__ . '/../libs/autoloader.php');
 
 // load application configuration
-$registry = \octris\core\registry::getInstance();
+$registry = \Octris\Core\Registry::getInstance();
 $registry->set('OCTRIS_APP', '{{$vendor}}-{{$module}}');
 $registry->set('OCTRIS_BASE', realpath(__DIR__ . '/../'));
 $registry->set('config', function () {
-    return new \octris\core\config('{{$vendor}}-{{$module}}', 'config');
-}, \octris\core\registry::T_SHARED | \octris\core\registry::T_READONLY);
+    return new \Octris\Core\Config('{{$vendor}}-{{$module}}', 'config');
+}, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY);
 
 // run application
 App\Main::getInstance()->process();
