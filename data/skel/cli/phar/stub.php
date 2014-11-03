@@ -58,7 +58,7 @@ $registry->set('config', function () {
 }, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY);
 
 // run application
-$app = new {{$namespace}}\app();
+$app = new {{$namespace}}\App();
 $app->run();
 
 __HALT_COMPILER();
