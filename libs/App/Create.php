@@ -94,7 +94,7 @@ DESCRIPTION
     lib     This type should be used for (shared) libraries.
 
 OPTIONS
-    -p      A valid name for the project in the form of <vendor>/<module>.
+    -p      A valid name for the project in the form of <vendor>/<package>.
 
     -t      A valid type for the project
 
@@ -184,7 +184,7 @@ EOT;
         // build data array
         $data = array_merge($prj->filter('info')->getArrayCopy(true), array(
             'year'      => $year,
-            'module'    => $package,
+            'package'   => $package,
             'vendor'    => $vendor,
             'namespace' => ucfirst($vendor) . '\\' . ucfirst($package),
             'directory' => $vendor . '.' . $package
