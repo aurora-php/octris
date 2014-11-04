@@ -43,7 +43,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "39e2f76f691978c65885371efe7543b153bf6871"
+                "reference": "cd7fb1773866f238bb97018eedfe39931a3f6f75"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -66,7 +66,7 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2014-11-02 23:43:56"
+            "time": "2014-11-04 23:38:21"
         }
     ],
     "packages-dev": [],
