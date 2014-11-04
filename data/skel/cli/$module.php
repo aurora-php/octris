@@ -41,8 +41,8 @@ require_once(__DIR__ . '/libs/autoloader.php');
 
 // load application configuration
 $registry = \Octris\Core\Registry::getInstance();
-$registry->set('OCTRIS_APP', '{{$vendor}}-{{$module}}', \Octris\Core\Registry::T_READONLY);
-$registry->set('OCTRIS_BASE', __DIR__, \Octris\Core\Registry::T_READONLY);
+$registry->set('OCTRIS_APP_NAME', '{{$vendor}}-{{$module}}', \Octris\Core\Registry::T_READONLY);
+$registry->set('OCTRIS_APP_BASE', __DIR__, \Octris\Core\Registry::T_READONLY);
 $registry->set('config', function () {
     return new \Octris\Core\Config('{{$vendor}}-{{$module}}', 'config');
 }, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY);
