@@ -32,4 +32,5 @@ $registry->set('config', function () {
 }, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY);
 
 // run application
-App\Main::getInstance()->process();
+$app = new App\Main();
+$app->process();

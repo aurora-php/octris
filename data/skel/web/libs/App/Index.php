@@ -33,10 +33,12 @@ class Index extends \Octris\Core\App\Web\Page
     /**
      * The constructor is used to setup common settings for example validation rulesets must be defined
      * through the page object constructor.
+     *
+     * @param   \Octris\Core\App\Web                    Application instance.
      */
-    public function __construct()
+    public function __construct(\Octris\Core\App\Web $app)
     {
-        parent::__construct();
+        parent::__construct($app);
     }
 
     /**
@@ -54,7 +56,7 @@ class Index extends \Octris\Core\App\Web\Page
      */
     public function render()
     {
-        $tpl = \Octris\Core\App::getInstance()->getTemplate();
+        $tpl = $this->app->getTemplate();
         $tpl->render('index.html');
     }
 }
