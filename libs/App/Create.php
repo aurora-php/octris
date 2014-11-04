@@ -145,14 +145,14 @@ EOT;
         $project = $args['project'];
         $type    = $args['type'];
 
-        list($vendor, $module) = explode('/', $project);
+        list($vendor, $package) = explode('/', $project);
 
         if (!isset($args[0])) {
             throw new \Octris\Cliff\Exception\Argument(sprintf("no destination path specified"));
         } elseif (!is_dir($args[0])) {
             throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
         } else {
-            $dir = $args[0] . '/' . $module;
+            $dir = $args[0] . '/' . $package;
 
             if (is_dir($dir)) {
                 throw new \Octris\Cliff\Exception\Argument(sprintf("project directory already exists '%s'", $dir));
@@ -184,10 +184,10 @@ EOT;
         // build data array
         $data = array_merge($prj->filter('info')->getArrayCopy(true), array(
             'year'      => $year,
-            'module'    => $module,
+            'module'    => $package,
             'vendor'    => $vendor,
-            'namespace' => ucfirst($vendor) . '\\' . ucfirst($module),
-            'directory' => $vendor . '.' . $module
+            'namespace' => ucfirst($vendor) . '\\' . ucfirst($package),
+            'directory' => $vendor . '.' . $package
         ));
 
         // create project

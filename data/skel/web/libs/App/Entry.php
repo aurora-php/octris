@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the '{{$vendor}}/{{$module}}' package.
+ * This file is part of the '{{$vendor}}/{{$package}}' package.
  *
  * (c) {{$company}}
  *

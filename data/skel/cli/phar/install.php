@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the '{{$vendor}}/{{$module}}' package.
+ * This file is part of the '{{$vendor}}/{{$package}}' package.
  *
  * (c) {{$company}}
  *
@@ -17,7 +17,7 @@
  */
 /**/
 
-define('APP_NAME', '{{$module}}');
+define('APP_NAME', '{{$package}}');
 
 if ($argc <= 1) {
     printf("usage: %s installation-path\n", $argv[0]);

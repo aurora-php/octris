@@ -1,5 +1,5 @@
 /*
- * This file is part of the '{{$vendor}}/{{$module}}' package.
+ * This file is part of the '{{$vendor}}/{{$package}}' package.
  *
  * (c) {{$company}}
  *
@@ -8,7 +8,7 @@
  */
 
 /**
- * Main javascript library for {{$vendor}}-{{$module}}.
+ * Main javascript library for {{$vendor}}-{{$package}}.
  *
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>

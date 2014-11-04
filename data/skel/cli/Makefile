@@ -1,7 +1,7 @@
 # vim:set noexpandtab:
 
 #
-# This file is part of the '{{$vendor}}/{{$module}}' package.
+# This file is part of the '{{$vendor}}/{{$package}}' package.
 #
 # (c) {{$company}}
 #
@@ -10,9 +10,9 @@
 #
 
 #**
-# Makefile for {{$vendor}}-{{$module}}.
+# Makefile for {{$vendor}}-{{$package}}.
 #
-# @octdoc       h:{{$module}}/Makefile
+# @octdoc       h:{{$package}}/Makefile
 # @copyright    copyright (c) {{$year}} by {{$company}}
 # @author       {{$author}} <{{$email}}>
 #**
@@ -23,7 +23,7 @@ DSTDIR := "/usr/local/bin"
 
 help:
 	@echo "make targets:"
-	@echo "    install    creates single-executable '$(DSTDIR)/{{$module}}'"
-	
+	@echo "    install    creates single-executable '$(DSTDIR)/{{$package}}'"
+
 install:
 	@php -dphar.readonly=0 $(CURDIR)/phar/install.php $(DSTDIR)

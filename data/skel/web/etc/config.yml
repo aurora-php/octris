@@ -1,7 +1,7 @@
 #**
-# Main configuration for {{$vendor}}-{{$module}}.
+# Main configuration for {{$vendor}}-{{$package}}.
 #
-# @octdoc      h:styles/{{$module}}
+# @octdoc      h:styles/{{$package}}
 # @copyright   copyright (c) {{$year}} by {{$company}}
 # @author      {{$author}} <{{$email}}>
 #**

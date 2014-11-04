@@ -2,7 +2,7 @@
 <?php
 
 /*
- * This file is part of the '{{$vendor}}/{{$module}}' package.
+ * This file is part of the '{{$vendor}}/{{$package}}' package.
  *
  * (c) {{$company}}
  *
@@ -17,7 +17,7 @@
  */
 
 /**
- * PHAR stub for {{$vendor}}-{{$module}}.
+ * PHAR stub for {{$vendor}}-{{$package}}.
  *
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
@@ -43,8 +43,8 @@ if (!class_exists('PHAR')) {
 
 Phar::mapPhar();
 
-require_once('phar://{{$module}}.phar/vendor/autoload.php');
-require_once('phar://{{$module}}.phar/libs/autoloader.php');
+require_once('phar://{{$package}}.phar/vendor/autoload.php');
+require_once('phar://{{$package}}.phar/libs/autoloader.php');
 
 // import environment
 \Octris\Core\Provider::set('env', $_ENV);
@@ -52,7 +52,7 @@ require_once('phar://{{$module}}.phar/libs/autoloader.php');
 // load application configuration
 $registry = \Octris\Core\Registry::getInstance();
 $registry->set('OCTRIS_APP_VENDOR', '{{$vendor}}', \Octris\Core\Registry::T_READONLY);
-$registry->set('OCTRIS_APP_NAME', '{{$module}}', \Octris\Core\Registry::T_READONLY);
+$registry->set('OCTRIS_APP_NAME', '{{$package}}', \Octris\Core\Registry::T_READONLY);
 $registry->set('OCTRIS_APP_BASE', __DIR__, \Octris\Core\Registry::T_READONLY);
 $registry->set('config', function () {
     return new \Octris\Core\Config('config');

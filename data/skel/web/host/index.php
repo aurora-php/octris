@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the '{{$vendor}}/{{$module}}' package.
+ * This file is part of the '{{$vendor}}/{{$package}}' package.
  *
  * (c) {{$company}}
  *
@@ -26,7 +26,7 @@ require_once(__DIR__ . '/../libs/autoloader.php');
 // load application configuration
 $registry = \Octris\Core\Registry::getInstance();
 $registry->set('OCTRIS_APP_VENDOR', '{{$vendor}}', \Octris\Core\Registry::T_READONLY);
-$registry->set('OCTRIS_APP_NAME', '{{$module}}', \Octris\Core\Registry::T_READONLY);
+$registry->set('OCTRIS_APP_NAME', '{{$package}}', \Octris\Core\Registry::T_READONLY);
 $registry->set('OCTRIS_APP_BASE', realpath(__DIR__ . '/../'), \Octris\Core\Registry::T_READONLY);
 $registry->set('config', function () {
     return new \Octris\Core\Config('config');

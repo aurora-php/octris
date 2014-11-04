@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the '{{$vendor}}/{{$module}}' package.
+ * This file is part of the '{{$vendor}}/{{$package}}' package.
  *
  * (c) {{$company}}
  *
@@ -24,7 +24,7 @@ class App extends \Octris\Cliff\App
      *
      * @type    string
      */
-    protected static $app_name = '{{$vendor}}-{{$module}}';
+    protected static $app_name = '{{$vendor}}-{{$package}}';
     /**/
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the '{{$vendor}}/{{$module}}' package.
+ * This file is part of the '{{$vendor}}/{{$package}}' package.
  *
  * (c) {{$company}}
  *
@@ -38,4 +38,4 @@ class Autoloader
     }
 }
 
-spl_autoload_register(array('\{{$module}}\Autoloader', 'autoload', true, true));
+spl_autoload_register(array('\{{$package}}\Autoloader', 'autoload', true, true));

@@ -1,17 +1,17 @@
 {
-    "name":         "{{$vendor}}/{{$module}}",
+    "name":         "{{$vendor}}/{{$package}}",
     "type":         "project",
     "description":  "",
     "keywords":     [],
     "homepage":     "",
     "license":      "",
-    
+
     "authors":      [{
         "name":         "{{$author}}",
         "email":        "{{$email}}",
         "homepage":     ""
     }],
-    
+
     "repositories": [
         {
             "url":  "https://github.com/octris/core.git",
