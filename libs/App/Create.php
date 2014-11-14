@@ -162,7 +162,7 @@ EOT;
         $year = date('Y');
 
         // handle project configuration
-        $prj = new \Octris\Core\Config('org.octris.core', 'project.create');
+        $prj = new \Octris\Core\Config('global');
 
         $prj->setDefaults(array(
             'info.company' => (isset($data['company']) ? $data['company'] : ''),
