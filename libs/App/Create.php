@@ -231,7 +231,7 @@ EOT;
             }
 
             if (!$this->isBinary($filename)) {
-                $cmp = $tpl->fetch($rel, \Octris\Core\Tpl::T_ESC_NONE);
+                $cmp = $tpl->fetch($rel, \Octris\Core\Tpl::ESC_NONE);
 
                 file_put_contents($dst, $cmp);
             } else {

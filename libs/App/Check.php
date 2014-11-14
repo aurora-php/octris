@@ -122,7 +122,7 @@ EOT;
                 print $filename . "\n";
 
                 try {
-                    $tpl->process($filename, \Octris\Core\Tpl::T_ESC_HTML);
+                    $tpl->process($filename, \Octris\Core\Tpl::ESC_HTML);
                 } catch (\Exception $e) {
                 }
             }
