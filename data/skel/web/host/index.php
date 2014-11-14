@@ -31,6 +31,19 @@ $registry->set('OCTRIS_APP_BASE', realpath(__DIR__ . '/../'), \Octris\Core\Regis
 $registry->set('config', function () {
     return new \Octris\Core\Config('config');
 }, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY);
+$registry->set('createTemplate', function($registry) {
+    $tpl = new \Octris\Core\Tpl();
+
+    $tpl->setL10n(\Octris\Core\L10n::getInstance());
+    $tpl->setOutputPath('tpl', $registry->OCTRIS_APP_BASE . '/cache/templates_c/');
+    $tpl->setOutputPath('css', $registry->OCTRIS_APP_BASE . '/host/styles/');
+    $tpl->setOutputPath('js', $registry->OCTRIS_APP_BASE . '/host/libsjs/');
+    $tpl->setResourcePath('css', $registry->OCTRIS_APP_BASE . '/styles/');
+    $tpl->setResourcePath('js', $registry->OCTRIS_APP_BASE . '/libsjs/');
+    $tpl->addSearchPath($registry->OCTRIS_APP_BASE . '/templates/');
+
+    return $tpl;
+}, \Octris\Core\Registry::T_READONLY);
 
 // run application
 $app = new App\Main();
