@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "696f2ae788a141b356062e96f57b4661",
+    "hash": "f2c9a84fd9035c52c0e4b456f8e85fc1",
     "packages": [
         {
             "name": "octris/cliff",
@@ -43,7 +43,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "f9eec3668b42faca2f33626db87e03390b33202b"
+                "reference": "f273e7f56be8a2645dc2f3d1aa0745b23b1fbcbd"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -66,7 +66,38 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2014-11-14 00:40:03"
+            "time": "2014-11-18 15:02:02"
+        },
+        {
+            "name": "octris/phphttpd",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aurora/phphttpd.git",
+                "reference": "bba20ad51caa90e32e68aae7fc75343fa084c16a"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Octris\\Httpd\\": "libs/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Harald Lapp",
+                    "email": "harald@octris.org",
+                    "homepage": "http://www.octris.org/"
+                }
+            ],
+            "description": "Library for building self-contained scripts for serving with PHP 5.4's builtin web-server",
+            "homepage": "http://github.com/aurora/phphttpd/",
+            "time": "2014-11-18 22:06:35"
         }
     ],
     "packages-dev": [],
@@ -74,7 +105,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "octris/cliff": 20,
-        "octris/core": 20
+        "octris/core": 20,
+        "octris/phphttpd": 20
     },
     "prefer-stable": false,
     "platform": {
