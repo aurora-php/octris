@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the octris/core.
+ * This file is part of the octris/octris.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
