@@ -74,7 +74,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aurora/phphttpd.git",
-                "reference": "bba20ad51caa90e32e68aae7fc75343fa084c16a"
+                "reference": "e694247ebd3a6f46276cf22d522d555f510416cf"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -97,7 +97,7 @@
             ],
             "description": "Library for building self-contained scripts for serving with PHP 5.4's builtin web-server",
             "homepage": "http://github.com/aurora/phphttpd/",
-            "time": "2014-11-18 22:06:35"
+            "time": "2014-11-18 22:48:53"
         }
     ],
     "packages-dev": [],
