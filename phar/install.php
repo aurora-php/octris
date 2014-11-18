@@ -65,6 +65,8 @@ $iterator->append(getDirIterator(__DIR__ . '/../libs/'));
 $iterator->append(getDirIterator(__DIR__ . '/../vendor/composer/'));
 $iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/cliff/libs/'));
 $iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/core/libs/'));
+$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/phphttpd/etc/'));
+$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/phphttpd/libs/'));
 
 $phar->buildFromIterator($iterator, realpath(__DIR__ . '/../'));
 $phar->addFile(realpath(__DIR__ . '/../vendor/autoload.php'), '/vendor/autoload.php');
