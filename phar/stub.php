@@ -38,7 +38,7 @@ if (!class_exists('PHAR')) {
 Phar::mapPhar();
 
 require_once('phar://octris.phar/vendor/autoload.php');
-require_once('phar://octris.phar/libs/autoloader.php');
+require_once('phar://octris.phar/libs/Autoloader.php');
 
 // import environment
 \Octris\Core\Provider::set('env', $_ENV);
