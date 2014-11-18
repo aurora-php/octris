@@ -12,7 +12,6 @@
 #**
 # Makefile for {{$vendor}}-{{$package}}.
 #
-# @octdoc       h:{{$package}}/Makefile
 # @copyright    copyright (c) {{$year}} by {{$company}}
 # @author       {{$author}} <{{$email}}>
 #**
