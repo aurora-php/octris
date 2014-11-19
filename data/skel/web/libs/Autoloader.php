@@ -38,4 +38,4 @@ class Autoloader
     }
 }
 
-spl_autoload_register(array('\{{$package}}\Autoloader', 'autoload', true, true));
+spl_autoload_register(array('\{{$namespace}}\Autoloader', 'autoload'), true, true);
