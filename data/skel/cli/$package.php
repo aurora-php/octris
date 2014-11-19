@@ -34,7 +34,7 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
 }
 
 @include_once(__DIR__ . '/vendor/autoload.php');
-require_once(__DIR__ . '/libs/autoloader.php');
+require_once(__DIR__ . '/libs/Autoloader.php');
 
 // import environment
 \Octris\Core\Provider::set('env', $_ENV);
