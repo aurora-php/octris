@@ -24,6 +24,20 @@ use \Octris\Cliff\Args    as args;
 class Httpd extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
 {
     /**
+     * Bind to IP address.
+     *
+     * @type    string
+     */
+    protected static $bind_ip = '127.0.0.1';
+
+    /**
+     * Bind to port.
+     *
+     * @type    int
+     */
+    protected static $bind_port = '8888';
+
+    /**
      * Constructor.
      *
      * @param   string                              $name               Name of command.
@@ -38,10 +52,16 @@ class Httpd extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IMa
      */
     public function configure()
     {
-        $this->addOption(['f', 'filter'], args::T_VALUE)->addValidator(function ($value) {
-            $validator = new \Octris\Core\Validate\Type\Printable();
-            return $validator->validate($validator->preFilter($value));
-        }, 'invalid filter specified');
+        $this->addOption(['b', 'bind-ip'], args::T_VALUE | args::T_REQUIRED, 'arg', self::$bind_ip)->addValidator(function ($value) {
+            return true;
+        }, 'invalid IP address specified')->setHelp('A single IP that the webserver will be listening on (defaults to ' . self::$bind_ip . ').');
+        $this->addOption(['p', 'port'], args::T_VALUE | args::T_REQUIRED, 'arg', self::$bind_port)->addValidator(function ($value) {
+            return ctype_digit($value);
+        }, 'invalid port number specified')->setHelp('A port number the webserver will be listening on (defaults to ' . self::$bind_port . ').');
+
+        $this->addOperand(1, 'project-path')->addValidator(function ($value) {
+            return (is_dir($value) && is_dir($value . '/host'));
+        }, 'specified path is not a directory or directory not found or directory contains no "host" directory and therefore is probably not an octris web project')->setHelp('Path to a project.');
     }
 
     /**
@@ -57,23 +77,32 @@ class Httpd extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IMa
      */
     public static function getManual()
     {
-            return <<<EOT
+            return sprintf(<<<EOT
 NAME
     octris httpd - start http backend for testing project.
 
 SYNOPSIS
-    octris httpd
+    octris httpd    [-b <ip-address>]
+                    [-p <port-number>]
+                    <project-path>
 
 DESCRIPTION
     This command uses PHP's builtin webserver for testing a project.
 
 OPTIONS
+    -b      A single IP that the webserver will be listening on
+            (defaults to %s).
+
+    -p      A port number the webserver will be listening on
+            (defaults to %s).
 
 EXAMPLES
     Example:
 
-        $ ./octris httpd
-EOT;
+        $ ./octris httpd ~/tmp/test
+EOT
+            , self::$bind_ip, self::$bind_port
+        );
     }
 
     /**
@@ -83,5 +112,31 @@ EOT;
      */
     public function run(\Octris\Cliff\Args\Collection $args)
     {
+        $ip = $args['bind-ip'];
+        $port = $args['port'];
+
+        $docroot = $args[0] . '/host/';
+
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        $router = array_pop($trace)['file'];
+
+        // start php's builtin webserver
+        $pid = exec(sprintf(
+            '((%s -d output_buffering=on -t %s -S %s:%s %s 1>/dev/null 2>&1 & echo $!) &)',
+            PHP_BINARY,
+            $docroot,
+            $ip,
+            $port,
+            $router
+        ));
+        sleep(1);
+
+        if (ctype_digit($pid) && posix_kill($pid, 0)) {
+            printf("listening on '%s:%s', PID is %d\n", $ip, $port, $pid);
+            die(0);
+        } else {
+            printf("Unable to start webserver on '%s:%s'\n", $ip, $port);
+            die(255);
+        }
     }
 }
