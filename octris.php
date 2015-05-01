@@ -18,14 +18,6 @@
  */
 /**/
 
-if (php_sapi_name() == 'cli-server') {
-    // run using cli-server, probably because tool was executed with Httpd command.
-    ob_end_clean();
-
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/index.php');
-    exit(0);
-}
-
 if (version_compare(PHP_VERSION, '5.6.0') < 0) {
     printf(
         "%s: PHP-5.6.0 or newer is required, your version is '%s'!\n",
@@ -33,6 +25,11 @@ if (version_compare(PHP_VERSION, '5.6.0') < 0) {
         PHP_VERSION
     );
     exit(1);
+}
+
+if (php_sapi_name() == 'cli-server') {
+    // run using cli-server, probably because tool was executed with Httpd command.
+    return require_once(__DIR__ . '/libs/Util/Router.php');
 }
 
 require_once(__DIR__ . '/vendor/autoload.php');
