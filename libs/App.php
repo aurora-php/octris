@@ -95,9 +95,12 @@ class App extends \Octris\Cliff\App
         printf("               __         .__
   ____   _____/  |________|__| ______
  /  _ \_/ ___\   __\_  __ \  |/  ___/    OCTRiS framework tool
-(  <_> )  \___|  |  |  | \/  |\___ \     copyright (c) 2014 by Harald Lapp
+(  <_> )  \___|  |  |  | \/  |\___ \     copyright (c) %s by Harald Lapp
  \____/ \___  >__|  |__|  |__/____  >    http://github.com/octris/octris/
-            \/%20s\/\n\n", 'v' . static::$app_version);
+            \/%20s\/\n\n",
+            explode('-', static::$app_version_date)[0],
+            'v' . static::$app_version
+        );
 
         parent::showHelp();
     }
