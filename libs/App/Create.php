@@ -22,7 +22,7 @@ use \Octris\Cliff\Args as args;
  * @copyright   copyright (c) 2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Create extends \Octris\Cliff\Args\Command
+class Create extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
 {
     /**
      * Constructor.
@@ -42,8 +42,7 @@ class Create extends \Octris\Cliff\Args\Command
         $this->addOption(['p', 'project'], args::T_VALUE | args::T_REQUIRED)->addValidator(function ($value) {
             $validator = new \Octris\Core\Validate\Type\Project();
             return $validator->validate($validator->preFilter($value));
-        }, 'invalid project name specified')->setHelp('A valid name for the project in the form of a reversed domain
-        name.');
+        }, 'invalid project name specified')->setHelp('A valid name for the project in the form of vendor/package.');
         $this->addOption(['t', 'type'], args::T_VALUE | args::T_REQUIRED)->addValidator(function ($value) {
             return in_array($value, ['web', 'cli', 'lib']);
         }, 'invalid project type specified');

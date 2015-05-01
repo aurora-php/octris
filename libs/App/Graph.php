@@ -20,7 +20,7 @@ use \Octris\Core\Validate as validate;
  * @copyright   copyright (c) 2011-2014 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Graph extends \Octris\Cliff\Args\Command
+class Graph extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
 {
     /**
      * Constructor.
