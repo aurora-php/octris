@@ -239,5 +239,12 @@ EOT;
 
             chmod($dst, 0644);
         }
+
+        // reminder
+        print "Project created in '$dir'.\n\n";
+
+        print "Next steps you should do:\n";
+        print "- edit the 'composer.json' configuration located in the project directory.\n";
+        print "- run 'composer update' in the project directory to load dependencies.\n\n";
     }
 }
