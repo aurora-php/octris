@@ -151,7 +151,7 @@ EOT;
         } elseif (!is_dir($args[0])) {
             throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
         } else {
-            $dir = $args[0] . '/' . $package;
+            $dir = rtrim($args[0], '/') . '/' . $package;
 
             if (is_dir($dir)) {
                 throw new \Octris\Cliff\Exception\Argument(sprintf("project directory already exists '%s'", $dir));
