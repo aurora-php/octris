@@ -13,11 +13,12 @@ namespace Octris\App;
 
 use \Octris\Core\Provider as provider;
 use \Octris\Core\Validate as validate;
+use \Octris\Cliff\Args as args;
 
 /**
  * Change OCTRiS command-line tool configuration.
  *
- * @copyright   copyright (c) 2014 by Harald Lapp
+ * @copyright   copyright (c) 2014-2015 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 class Config extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
@@ -33,11 +34,21 @@ class Config extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IM
     }
 
     /**
+     * Configure command arguments.
+     */
+    public function configure()
+    {
+        $this->addOption(['s', 'set'], args::T_KEYVALUE)->addValidator(function ($value, $key) {
+            return (in_array($key, ['company', 'author', 'email']) && $value != '');
+        }, 'invalid argument value');
+    }
+
+    /**
      * Return command description.
      */
     public static function getDescription()
     {
-        return 'Change configuration.';
+        return 'List and change configuration.';
     }
 
     /**
@@ -54,9 +65,16 @@ SYNOPSIS
                      -s email=<email-address>]
 
 DESCRIPTION
-    This command changes the OCTRIS command-line tool configuration.
+    This command lists or changes the global OCTRIS command-line tool
+    configuration.
 
 OPTIONS
+    -s      Key-value pairs of global configuration settings. Current
+            supported settings are:
+
+            company
+            author
+            email
 
 EXAMPLES
     Change company name in configuration:
@@ -72,5 +90,20 @@ EOT;
      */
     public function run(\Octris\Cliff\Args\Collection $args)
     {
+        $prj = new \Octris\Core\Config('global');
+
+        if (isset($args['set'])) {
+            foreach ($args['set'] as $k => $v) {
+                $prj['info.' . $k] = $v;
+            }
+        }
+
+        $filter = $prj->filter('info');
+
+        foreach ($filter as $k => $v) {
+            printf("%-10s%s\n", $k, $v);
+        }
+
+        $prj->save();
     }
 }
