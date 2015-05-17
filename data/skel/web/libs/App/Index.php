@@ -53,10 +53,13 @@ class Index extends \Octris\Core\App\Web\Page
 
     /**
      * This method is used to populate a template with data and render it.
+     *
+     * @return  string                                  Rendered template.
      */
     public function render()
     {
         $tpl = $this->app->getTemplate();
-        $tpl->render('index.html');
+
+        return $tpl->fetch('index.html');
     }
 }
