@@ -18,7 +18,7 @@
 
     "autoload":     {
         "psr-4":        {
-            "{{$vendor}}\\{{$package}}\\": "libs/"
+            "{{ucfirst($vendor)}}\\{{ucfirst($package)}}\\": "libs/"
         }
     }
 }
