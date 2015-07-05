@@ -12,8 +12,8 @@
 namespace Octris\App;
 
 use \Octris\Core\Provider as provider;
-use \Octris\Cliff\Stdio as stdio;
 use \Octris\Core\Validate as validate;
+use \Octris\Readline as readline;
 use \Octris\Cliff\Args as args;
 
 /**
@@ -173,7 +173,7 @@ EOT;
         $filter = $prj->filter('info');
 
         foreach ($filter as $k => $v) {
-            $prj['info.' . $k] = stdio::getPrompt(sprintf("%s [%%s]: ", $k), $v);
+            $prj['info.' . $k] = readline::getPrompt(sprintf("%s [%%s]: ", $k), $v);
         }
 
         $prj->save();
