@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f2c9a84fd9035c52c0e4b456f8e85fc1",
+    "hash": "88ad97d65579f4eef8bfd1bc3e3627b3",
     "packages": [
         {
             "name": "octris/cliff",
@@ -43,7 +43,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "db58bc70982d49c8596b4bceb58384d5687cf589"
+                "reference": "a606dcb3bd9ff53144ade3c617f8e30945d80597"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -66,7 +66,7 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2014-12-20 19:47:29"
+            "time": "2015-06-06 01:15:12"
         },
         {
             "name": "octris/phphttpd",
@@ -98,6 +98,41 @@
             "description": "Library for building self-contained scripts for serving with PHP 5.4's builtin web-server",
             "homepage": "http://github.com/aurora/phphttpd/",
             "time": "2014-11-18 22:48:53"
+        },
+        {
+            "name": "octris/readline",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/octris/readline.git",
+                "reference": "e13db76596579562bd10d0931c7215148de4b08a"
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "libs/Readline.php",
+                    "libs/IReadline.php"
+                ],
+                "psr-4": {
+                    "Octris\\Readline\\": "libs/Readline/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Harald Lapp",
+                    "email": "harald@octris.org",
+                    "homepage": "http://www.octris.org/"
+                }
+            ],
+            "description": "Provides readline functionality either by using built-in readline capabilities or by an emulation, if built-in functionality is not available.",
+            "homepage": "http://github.com/octris/process/",
+            "time": "2015-07-05 21:50:15"
         }
     ],
     "packages-dev": [],
@@ -106,6 +141,7 @@
     "stability-flags": {
         "octris/cliff": 20,
         "octris/core": 20,
+        "octris/readline": 20,
         "octris/phphttpd": 20
     },
     "prefer-stable": false,
