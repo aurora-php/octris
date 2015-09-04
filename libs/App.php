@@ -34,7 +34,7 @@ class App extends \Octris\Cliff\App
      *
      * @type    string
      */
-    protected static $app_version = '0.0.9';
+    protected static $app_version = '0.0.10';
     /**/
 
     /**
@@ -42,7 +42,7 @@ class App extends \Octris\Cliff\App
      *
      * @type    string
      */
-    protected static $app_version_date = '2015-07-04';
+    protected static $app_version_date = '2015-09-05';
     /**/
 
     /**
