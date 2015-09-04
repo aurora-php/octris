@@ -21,12 +21,4 @@ namespace {{$namespace}}\App;
  */
 class Main extends \Octris\Core\App\Web
 {
-    /**
-     * Page to use a entry point, if no "next_page" is specified through the
-     * application state.
-     *
-     * @type    string
-     */
-    protected $entry_page = '{{$namespace}}\App\Entry';
-    /**/
 }
