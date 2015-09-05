@@ -48,7 +48,7 @@ $registry->set('createTemplate', function($registry) {
 // run application
 $router = new \Octris\Core\App\Web\Router\UrlBased(
     '{{$namespace}}\App\Entry',
-    function(\Octris\Core\Web\Router\RuleCollector $r) {
+    function(\Octris\Core\App\Web\Router\RuleCollector $r) {
         $r->addRewrite(['GET', 'POST'], '/');     // default route map to pageRouter
     },
     $registry->OCTRIS_APP_BASE . '/cache/router.cache'
