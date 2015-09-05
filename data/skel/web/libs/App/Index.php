@@ -44,10 +44,10 @@ class Index extends \Octris\Core\App\Web\Page
     /**
      * Prepare rendering of a page. this method is called _BEFORE_ rendering a page.
      *
-     * @param   \Octris\Core\App\Page       $last_page  Instance of the page that was active before this one
-     * @return  null|\Octris\Core\App\Page              A page can be returned.
+     * @param   \Octris\Core\App\Web\Page       $last_page  Instance of the page that was active before this one
+     * @return  \Octris\Core\App\Web\Page|null              A page can be returned.
      */
-    public function prepare(\Octris\Core\App\Page $last_page, $action)
+    public function prepare(\Octris\Core\App\Web\Page $last_page, $action)
     {
     }
 
