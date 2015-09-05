@@ -58,7 +58,7 @@ class Index extends \Octris\Core\App\Web\Page
      */
     public function render()
     {
-        $tpl = $this->app->getTemplate();
+        $tpl = $this->getTemplate();
 
         return $tpl->fetch('index.html');
     }
