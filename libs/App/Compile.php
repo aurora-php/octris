@@ -88,44 +88,12 @@ EOT;
             throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
         }
 
-        $src = rtrim($args[0], '/') . '/templates';
-        
-        if (!is_dir($src)) {
-            throw new \Octris\Cliff\Exception\Application(sprintf("unable to locate template directory '%s'\n", $src));
+        $base = rtrim($args[0], '/');
+
+        if (!is_file($base . '/etc/global.php')) {
+            throw new \Octris\Cliff\Exception\Argument(sprintf('global app configuration not found "%s"!', $base . '/etc/global.php'));
         }
 
-        $dir = rtrim($args[0], '/') . '/cache/templates';
-        
-        if (!is_dir($dir)) {
-            mkdir($dir, 0755, true);
-        }
-
-        // compile templates
-        $tpl = new \Octris\Core\Tpl();
-        $tpl->addSearchPath($src);
-
-        $len = strlen($src);
-
-        $directories = array();
-        $iterator    = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($src, \FilesystemIterator::SKIP_DOTS)
-        );
-
-        foreach ($iterator as $filename => $cur) {
-            $rel   = substr($filename, $len);
-            $dst   = $dir . '/' . $rel;
-            $path  = dirname($dst);
-
-            if (!is_dir($path)) {
-                // create destination directory
-                mkdir($path, 0755, true);
-            }
-
-            // $tpl->process($rel, $dst, \Octris\Core\Tpl::ESC_HTML);
-
-            // chmod($dst, 0644);
-        }
-
-        print "Done.\n\n";
+        passthru(__DIR__ . '/../../bin/compile.php ' . escapeshellarg($base));
     }
 }
