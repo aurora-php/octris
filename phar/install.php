@@ -60,6 +60,7 @@ $phar = new Phar(
 );
 
 $iterator = new AppendIterator();
+$iterator->append(getDirIterator(__DIR__ . '/../bin/'));
 $iterator->append(getDirIterator(__DIR__ . '/../data/'));
 $iterator->append(getDirIterator(__DIR__ . '/../libs/'));
 $iterator->append(getDirIterator(__DIR__ . '/../vendor/composer/'));
