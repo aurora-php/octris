@@ -101,31 +101,22 @@ EOT;
             throw new \Octris\Cliff\Exception\Argument(sprintf("no project path specified"));
         } elseif (!is_dir($args[0])) {
             throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
-        } else {
-            $dir = rtrim($args[0], '/');
+        }
+
+        $base = rtrim($args[0], '/');
+
+        if (!is_file($base . '/etc/global.php')) {
+            throw new \Octris\Cliff\Exception\Argument(sprintf('global app configuration not found "%s"!', $base . '/etc/global.php'));
         }
 
         // check php files
-        $iterator = $this->getIterator($dir, '/\.php$/', '/(\/data\/cldr\/|\/vendor\/)/');
+        $iterator = $this->getIterator($base, '/\.php$/', '/(\/data\/cldr\/|\/vendor\/)/');
 
         foreach ($iterator as $filename => $cur) {
             system(PHP_BINARY . ' -l ' . escapeshellarg($filename));
         }
 
         // check templates
-        if (is_dir($dir . '/templates/')) {
-            $iterator = $this->getIterator($dir . '/templates/', '/\.html$/');
-
-            $tpl = new \Octris\Core\Tpl\Lint();
-
-            foreach ($iterator as $filename => $cur) {
-                print $filename . "\n";
-
-                try {
-                    $tpl->process($filename, \Octris\Core\Tpl::ESC_HTML);
-                } catch (\Exception $e) {
-                }
-            }
-        }
+        passthru(__DIR__ . '/../../bin/lint.php ' . escapeshellarg($base));
     }
 }
