@@ -106,7 +106,7 @@ EOT;
         }
 
         // check php files
-        $iterator = $this->getIterator($dir, '/\.php$/', '/(\/data\/cldr\/)/');
+        $iterator = $this->getIterator($dir, '/\.php$/', '/(\/data\/cldr\/|\/vendor\/)/');
 
         foreach ($iterator as $filename => $cur) {
             system(PHP_BINARY . ' -l ' . escapeshellarg($filename));
