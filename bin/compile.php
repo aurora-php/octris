@@ -33,3 +33,5 @@ foreach ($tpl->getTemplatesIterator() as $file => $path) {
 
     $tpl->compile($file, \Octris\Core\Tpl::ESC_HTML);
 }
+
+print "Done.\n\n";
