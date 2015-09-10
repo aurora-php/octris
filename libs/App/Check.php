@@ -116,7 +116,7 @@ EOT;
         if (is_dir($dir . '/templates/')) {
             $iterator = $this->getIterator($dir . '/templates/', '/\.html$/');
 
-            $tpl = new \Octris\Core\Tpl\Check();
+            $tpl = new \Octris\Core\Tpl\Lint();
 
             foreach ($iterator as $filename => $cur) {
                 print $filename . "\n";
