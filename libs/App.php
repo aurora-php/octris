@@ -69,6 +69,7 @@ class App extends \Octris\Cliff\App
         $this->addCommand(new \Octris\App\Test('test'));
         $this->addCommand(new \Octris\App\Doc('doc'));
         $this->addCommand(new \Octris\App\Httpd('httpd'));
+        $this->addCommand(new \Octris\App\Compile('compile'));
     }
 
     /**
