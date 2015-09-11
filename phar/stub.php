@@ -49,10 +49,11 @@ require_once('phar://octris.phar/libs/Autoloader.php');
 \Octris\Core\Provider::set('env', $_ENV);
 
 // load application configuration
+define('OCTRIS_APP_VENDOR', 'octris');
+define('OCTRIS_APP_NAME', 'octris');
+define('OCTRIS_APP_BASE', realpath(__DIR__));
+
 $registry = \Octris\Core\Registry::getInstance();
-$registry->set('OCTRIS_APP_VENDOR', 'octris', \Octris\Core\Registry::T_READONLY);
-$registry->set('OCTRIS_APP_NAME', 'octris', \Octris\Core\Registry::T_READONLY);
-$registry->set('OCTRIS_APP_BASE', __DIR__, \Octris\Core\Registry::T_READONLY);
 $registry->set('config', function () {
     return new \Octris\Core\Config('config');
 }, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY);
