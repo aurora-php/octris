@@ -48,7 +48,7 @@ class Compile extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\I
      */
     public static function getDescription()
     {
-        return 'Template compiler.';
+        return 'Compile project templates.';
     }
 
     /**
