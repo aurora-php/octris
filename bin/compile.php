@@ -24,6 +24,9 @@ if (!is_file($base . '/etc/global.php')) {
 
 require_once($base . '/etc/global.php');
 
+@include_once($base . '/vendor/autoload.php');
+@include_once($base . '/libs/Autoloader.php');
+
 // compile templates
 $registry = \Octris\Core\Registry::getInstance();
 $tpl = $registry->createTemplate;
