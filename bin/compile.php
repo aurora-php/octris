@@ -31,10 +31,27 @@ require_once($base . '/etc/global.php');
 $registry = \Octris\Core\Registry::getInstance();
 $tpl = $registry->createTemplate;
 
+$next_path = '';
+$total_time = 0;
+
 foreach ($tpl->getTemplatesIterator() as $file => $path) {
-    print $path . "\n";
+    if ($next_path != $path) {
+        $next_path = $path;
+
+        printf("\n%s:\n", dirname($path));
+    }
+
+    printf("%s ... ", $file);
+
+    $start = microtime(true);
 
     $tpl->compile($file, \Octris\Core\Tpl::ESC_HTML);
+
+    $end = microtime(true);
+
+    printf("%1.2fs\n", $end - $start);
+
+    $total_time += ($end - $start);
 }
 
-print "Done.\n\n";
+printf("\nDone, total time: %1.2fs.\n\n", $total_time);
