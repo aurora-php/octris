@@ -1,3 +1,5 @@
+# Octris framework tool
+
 ```
                __         .__
   ____   _____/  |________|__| ______
@@ -13,13 +15,14 @@ Options:
     --version
 
 Commands:
-    check     Syntactical check of project files.
-    config    List and change configuration.
-    create    Create a new project.
-    graph     Create a page graph of a project.
-    help      Show help for command.
-    httpd     Httpd backend.
-    test      Execute phpunit tests.
+    check      Syntactical check of project files.
+    compile    Compile project templates.
+    config     List and change configuration.
+    create     Create a new project.
+    graph      Create a page graph of a project.
+    help       Show help for command.
+    httpd      Httpd backend.
+    test       Execute phpunit tests.
 
 See 'octris.php help <command>' to read about a specific subcommand.
 ```
