@@ -49,9 +49,9 @@ foreach ($tpl->getTemplatesIterator() as $file => $path) {
 
     $end = microtime(true);
 
-    printf("%1.2fs\n", $end - $start);
+    printf("%1.4fs\n", $end - $start);
 
     $total_time += ($end - $start);
 }
 
-printf("\nDone, total time: %1.2fs.\n\n", $total_time);
+printf("\nDone, total time: %1.4fs.\n\n", $total_time);
