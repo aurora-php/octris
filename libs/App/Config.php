@@ -58,6 +58,7 @@ class Config extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IM
     {
             return <<<EOT
 NAME
+    octris config - list and change configuration.
 
 SYNOPSIS
     octris config   [-s company=<company-name> |
