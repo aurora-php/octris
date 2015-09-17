@@ -37,5 +37,9 @@
         "octris/core":     "dev-master",
         "octris/readline": "dev-master",
         "octris/phphttpd": "dev-master"
+    },
+    
+    "replace": {
+        "nikic/fast-route": "*"
     }
 }

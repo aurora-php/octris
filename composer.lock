@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "88ad97d65579f4eef8bfd1bc3e3627b3",
+    "hash": "4318f04c0451a919809cd0c192eec969",
     "packages": [
         {
             "name": "octris/cliff",
@@ -43,9 +43,10 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "a606dcb3bd9ff53144ade3c617f8e30945d80597"
+                "reference": "acde15261945fb99f3774b7f9b0b209a416c7651"
             },
             "require": {
+                "nikic/fast-route": "^0.6.0",
                 "php": ">=5.6.0"
             },
             "type": "library",
@@ -66,7 +67,7 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2015-06-06 01:15:12"
+            "time": "2015-09-16 19:27:51"
         },
         {
             "name": "octris/phphttpd",
