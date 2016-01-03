@@ -31,7 +31,7 @@ $router = new \Octris\Core\App\Web\Router\UrlBased(
     '{{$namespace}}\App\Entry',
     function(\Octris\Core\App\Web\Router\RuleCollector $r) {
         $r->addRewrite(['GET', 'POST'], '/');     // default route map to pageRouter
-        $r->addRoute(['GET', 'POST'], '/service/{ACTION}', '{{$namespace}}\App\Service');
+        $r->addRoute(['GET', 'POST'], '/service/{SERVICE}', new \{{$namespace}}\Services());
     },
     OCTRIS_APP_BASE . '/cache/router.cache'
 );
