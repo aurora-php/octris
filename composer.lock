@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4318f04c0451a919809cd0c192eec969",
+    "hash": "da175bb0a6eddd0bae707492c0f8fcf7",
+    "content-hash": "0c582a251a86becd89d1fbcf3d590028",
     "packages": [
         {
             "name": "octris/cliff",
