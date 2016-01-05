@@ -16,7 +16,7 @@
  * @author      {{$author}} <{{$email}}>
  */
 
-namespace Octris\Rtest;
+namespace {{$namespace}};
 
 define('OCTRIS_APP_VENDOR', '{{$vendor}}');
 define('OCTRIS_APP_NAME', '{{$package}}');
