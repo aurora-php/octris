@@ -11,56 +11,76 @@
 
 namespace Octris\App;
 
-use \Octris\Core\Provider as provider;
-use \Octris\Core\Validate as validate;
 use \Octris\Readline as readline;
-use \Octris\Cliff\Args as args;
 
 /**
  * Create a new project.
  *
- * @copyright   copyright (c) 2014 by Harald Lapp
+ * @copyright   copyright (c) 2014-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Create extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
+class Create implements \Octris\Cli\App\ICommand
 {
     /**
      * Constructor.
+     */
+    public function __construct()
+    {
+    }
+
+    /**
+     * Configure the command.
      *
-     * @param   string                              $name               Name of command.
+     * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
-    public function __construct($name)
+    public static function configure(\Aaparser\Command $command)
     {
-        parent::__construct($name);
-    }
+        $package = '';
 
-    /**
-     * Configure command arguments.
-     */
-    public function configure()
-    {
-        $this->addOption(['p', 'project'], args::T_VALUE | args::T_REQUIRED)->addValidator(function ($value) {
+        $command->setHelp('Create a new project.');
+        $command->addOption('project', '-p | --project <project-name>', ['\Aaparser\Coercion', 'value'], [
+            'help' => 'A valid name for the project in the form of <vendor>/<package>.',
+            'required' => true
+        ])->addValidator(function($value) use (&$package) {
+            $package = $value;
+
             $validator = new \Octris\Core\Validate\Type\Project();
-            return $validator->validate($validator->preFilter($value));
-        }, 'invalid project name specified')->setHelp('A valid name for the project in the form of vendor/package.');
-        $this->addOption(['t', 'type'], args::T_VALUE | args::T_REQUIRED)->addValidator(function ($value) {
+
+            if (($is_valid = $validator->validate($validator->preFilter($value)))) {
+                list(, $package) = explode('/', $value);
+            }
+
+            return $is_valid;
+        }, 'invalid project name specified');
+        $command->addOption('type', '-t | --type <project-type>', ['\Aaparser\Coercion', 'value'], [
+            'help' => 'A project type. Valid types are "web", "cli" and "lib".',
+            'required' => true
+        ])->addValidator(function($value) {
             return in_array($value, ['web', 'cli', 'lib']);
-        }, 'invalid project type specified');
-        $this->addOption(['d', 'define'], args::T_KEYVALUE)->addValidator(function ($value, $key) {
-            return (in_array($key, ['info.company', 'info.author', 'info.email']) && $value != '');
-        }, 'invalid argument value');
+        }, 'invalid project type specified')
+          ->addValidator(function($value) {
+            return is_dir(__DIR__ . '/../../data/skel/' . $value . '/');
+        }, 'unable to locate template directory "' . __DIR__ . '/../../data/skel/${value}/".');
+        $command->addOption('define', '-d | --define <key-value>', ['\Aaparser\Coercion', 'kv'], [
+            'help' => 'Overwrite default configuration settings for "company", "author" and "email".'
+        ])->addValidator(function($value) {
+            return in_array(key($value), array('company', 'author', 'email'));
+        }, 'Invalid configuration key specified "${value}"')
+          ->addValidator(function($value) {
+            $val = current($value);
 
-        $this->addOperand(1, 'project-path')->addValidator(function ($value) {
+            return (!is_null($val) && $val !== '');
+        }, 'Configuration value must not be empty');
+        $command->addOperand('project-path', 1, [
+            'help' => 'Project path.'
+        ])->addValidator(function($value) {
             return is_dir($value);
-        }, 'specified path is not a directory or directory not found')->setHelp('Path to a project.');
-    }
+        }, 'specified path is not a directory or directory not found')
+          ->addValidator(function($value) use (&$package) {
+            $package_dir = rtrim($value, '/') . '/' . $package;
 
-    /**
-     * Return command description.
-     */
-    public static function getDescription()
-    {
-        return 'Create a new project.';
+            return !is_dir($package_dir);
+        }, 'project directory already exists');
     }
 
     /**
@@ -137,51 +157,38 @@ EOT;
     /**
      * Run command.
      *
-     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
+     * @param   array           $options                    Cli options.
+     * @param   array           $operands                   Cli operands.
      */
-    public function run(\Octris\Cliff\Args\Collection $args)
+    public function run(array $options, array $operands)
     {
-        $project = $args['project'];
-        $type    = $args['type'];
+        $project = $options['project'];
+        $type = $options['type'];
 
         list($vendor, $package) = explode('/', $project);
-
-        if (!isset($args[0])) {
-            throw new \Octris\Cliff\Exception\Argument(sprintf("no destination path specified"));
-        } elseif (!is_dir($args[0])) {
-            throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
-        } else {
-            $dir = rtrim($args[0], '/') . '/' . $package;
-
-            if (is_dir($dir)) {
-                throw new \Octris\Cliff\Exception\Argument(sprintf("project directory already exists '%s'", $dir));
-            }
-        }
 
         $year = date('Y');
 
         // handle project configuration
+        $data = array();
         $prj = new \Octris\Core\Config('global');
 
-        $prj->setDefaults(array(
-            'info.company' => (isset($data['company']) ? $data['company'] : ''),
-            'info.author'  => (isset($data['author']) ? $data['author'] : ''),
-            'info.email'   => (isset($data['email']) ? $data['email'] : '')
-        ));
+        if (isset($options['key-value'])) {
+            foreach ($options['key-value'] as $k => $v) {
+                $prj['info.' . $k] = $v;
+            }
+        }
 
-        // collect information and create configuration for new project
         $filter = $prj->filter('info');
 
         foreach ($filter as $k => $v) {
-            $prj['info.' . $k] = readline::getPrompt(sprintf("%s [%%s]: ", $k), $v);
+            $data[$k] = readline::getPrompt(sprintf("%s [%%s]: ", $k), $v);
         }
-
-        $prj->save();
 
         print "\n";
 
         // build data array
-        $data = array_merge($prj->filter('info')->getArrayCopy(true), array(
+        $data = array_merge($data, array(
             'year'      => $year,
             'package'   => $package,
             'vendor'    => $vendor,
@@ -190,12 +197,8 @@ EOT;
         ));
 
         // create project
+        $dir = rtrim($operands['project-path'][0], '/') . '/' . $package;
         $src = __DIR__ . '/../../data/skel/' . $type . '/';
-        if (!is_dir($src)) {
-            throw new \Octris\Cliff\Exception\Application(sprintf("unable to locate template directory '%s'\n", $src));
-
-            return 1;
-        }
 
         // process skeleton and write project files
         $tpl = new \Octris\Core\Tpl();
