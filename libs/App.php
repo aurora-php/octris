@@ -60,7 +60,7 @@ class App extends \Octris\Cli\App
 
     /**
      * Print help.
-     * 
+     *
      * @param   \Aaparser\Command       $command                Optional command to print help for.
      */
     public function printHelp(\Aaparser\Command $command = null)
@@ -84,14 +84,14 @@ class App extends \Octris\Cli\App
     protected function initialize()
     {
         parent::initialize();
-        
+
         $this->importCommand('check', '\Octris\App\Check');
         $this->importCommand('compile', '\Octris\App\Compile');
         $this->importCommand('config', '\Octris\App\Config');
+        $this->importCommand('create', '\Octris\App\Create');
+        $this->importCommand('doc', '\Octris\App\Doc');
+        $this->importCommand('graph', '\Octris\App\Graph');
         $this->importCommand('httpd', '\Octris\App\Httpd');
-        // $this->importCommand('create', '\Octris\App\Create');
-        // $this->importCommand('graph', '\Octris\App\Graph');
-        // $this->importCommand('test', '\Octris\App\Test');
-        // $this->importCommand('doc', '\Octris\App\Doc');
+        $this->importCommand('test', '\Octris\App\Test');
     }
 }
