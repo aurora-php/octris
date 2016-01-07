@@ -49,7 +49,7 @@ class Httpd implements \Octris\Cli\App\ICommand
 
     /**
      * Configure the command.
-     * 
+     *
      * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
     public static function configure(\Aaparser\Command $command)
@@ -73,11 +73,10 @@ class Httpd implements \Octris\Cli\App\ICommand
         })->addValidator(function($value) {
             var_dump(extension_loaded('openssl'));
         });
-        $command->addOperand('project-path', 1, [
+        $op = $command->addOperand('project-path', 1, [
             'help' => 'Project path.'
-        ])->addValidator(function($value) {
-            return \Octris\Util\Validator::isProjectPath($value);
-        });
+        ]);
+        \Octris\Util\Validator::addProjectPathCheck($op);
     }
 
     /**
@@ -123,7 +122,7 @@ EOT
     {
         $port = (isset($options['port']) ? $options['port'] : self::$bind_port);
         $ip = (isset($options['ip-address']) ? $options['ip-address'] : self::$bind_ip);
-        
+
         $docroot = $operands['project-path'][0] . '/host/';
 
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);

@@ -20,19 +20,16 @@ namespace Octris\Util;
 class Validator
 {
     /**
-     * Validate if something seems to be a valid project path.
-     * 
-     * @param   string              $value                  Value to test.
-     * @return  bool                                        Returns true or false.
+     * Add check for valid project path.
+     *
+     * @param   object              $object                 Object to add checks to.
      */
-    public static function isProjectPath($value)
+    public static function addProjectPathCheck($object)
     {
-        if (!($return = is_dir($value))) {
-            fwrite(STDERR, "Specified path is not a directory or directory not found\n");
-        } elseif (!($return = is_file($value . '/etc/global.php'))) {
-            fwrite(STDERR, sprintf("global app configuration not found \"%s\"!\n", $value . '/etc/global.php'));
-        }
-        
-        return $return;
+        $object->addValidator(function($value) {
+            return is_dir($value);
+        }, 'Specified path is not a directory or directory not found');
+        $object->addValidator(function($value) {
+        }, 'global app configuration not found "${value}/etc/global.php"');
     }
 }

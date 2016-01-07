@@ -28,17 +28,16 @@ class Check implements \Octris\Cli\App\ICommand
 
     /**
      * Configure the command.
-     * 
+     *
      * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('Syntactical check of project files.');
-        $command->addOperand('project-path', 1, [
+        $op = $command->addOperand('project-path', 1, [
             'help' => 'Project path.'
-        ])->addValidator(function($value) {
-            return \Octris\Util\Validator::isProjectPath($value);
-        });
+        ]);
+        \Octris\Util\Validator::addProjectPathCheck($op);
     }
 
     /**
@@ -100,7 +99,7 @@ EOT;
     public function run(array $options, array $operands)
     {
         $base = rtrim($operands['project-path'][0], '/');
-        
+
         // check php files
         $iterator = $this->getIterator($base, '/\.php$/', '/(\/data\/cldr\/|\/vendor\/)/');
 
