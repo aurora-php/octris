@@ -17,27 +17,30 @@ use \Octris\Core\Validate as validate;
 /**
  * Create a page graph of a project.
  *
- * @copyright   copyright (c) 2011-2014 by Harald Lapp
+ * @copyright   copyright (c) 2011-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Graph extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
+class Graph implements \Octris\Cli\App\ICommand
 {
     /**
      * Constructor.
-     *
-     * @param   string                              $name               Name of command.
      */
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
     }
 
     /**
-     * Return command description.
+     * Configure the command.
+     *
+     * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
-    public static function getDescription()
+    public static function configure(\Aaparser\Command $command)
     {
-        return 'Create a page graph of a project.';
+        $command->setHelp('Create a page graph of a project.');
+        $op = $command->addOperand('project-path', 1, [
+            'help' => 'Project path.'
+        ]);
+        \Octris\Util\Validator::addWebProjectPathCheck($op);
     }
 
     /**
@@ -77,27 +80,15 @@ EOT;
     /**
      * Run command.
      *
-     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
+     * @param   array           $options                    Cli options.
+     * @param   array           $operands                   Cli operands.
      */
-    public function run(\Octris\Cliff\Args\Collection $args)
+    public function run(array $options, array $operands)
     {
-        if (!isset($args[0])) {
-            throw new \Octris\Cliff\Exception\Argument(sprintf("no project path specified"));
-        } elseif (!is_dir($args[0])) {
-            throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
-        } else {
-            $dir = rtrim($args[0], '/');
-        }
-
-        if (!is_dir($dir . '/libs/app') || !is_file($dir . '/libs/app/entry.php')) {
-            throw new \Octris\Cliff\Exception\Argument(sprintf(
-                '\'%s\' does not seem to be a web application created with the OCTRiS framework',
-                $dir
-            ));
-        }
+        $dir = rtrim($operands['project-path'][0], '/');
 
         $project = basename($dir);
-        $ns      = str_replace('.', '\\', $project) . '\\';
+        $ns = str_replace('.', '\\', $project) . '\\';
 
         /*
          * install new project-specific autoloader
