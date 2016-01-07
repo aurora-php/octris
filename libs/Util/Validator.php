@@ -30,6 +30,7 @@ class Validator
             return is_dir($value);
         }, 'Specified path is not a directory or directory not found');
         $object->addValidator(function($value) {
+            return is_file($value . '/etc/global.php');
         }, 'global app configuration not found "${value}/etc/global.php"');
     }
 }
