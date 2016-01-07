@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aaparser/aaparser-php",
-                "reference": "6306983e60ecf4e0ba1f4b7d67478581413414cb"
+                "reference": "38fec73737059e44124ec488be492e612808ee43"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -42,7 +42,7 @@
                 "option",
                 "parser"
             ],
-            "time": "2016-01-02 18:04:52"
+            "time": "2016-01-07 19:11:40"
         },
         {
             "name": "octris/cli",
@@ -50,7 +50,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/cli.git",
-                "reference": "5f77d802bafce632815caee9c24522a19448677e"
+                "reference": "4fc5eeccc8e76130d431dc9b1f37009fbbc5caf3"
             },
             "require": {
                 "aaparser/aaparser-php": "dev-master",
@@ -74,7 +74,7 @@
             ],
             "description": "Octris library for cli applications",
             "homepage": "http://github.com/octris/cli/",
-            "time": "2016-01-07 15:11:19"
+            "time": "2016-01-07 16:28:08"
         },
         {
             "name": "octris/core",
