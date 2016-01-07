@@ -14,7 +14,11 @@
 
     "repositories": [
         {
-            "url":  "https://github.com/octris/cliff.git",
+            "url":  "https://github.com/aaparser/aaparser-php",
+            "type": "git"
+        },
+        {
+            "url":  "https://github.com/octris/cli.git",
             "type": "git"
         },
         {
@@ -24,8 +28,9 @@
     ],
 
     "require":      {
-        "php":          ">=5.6.0",
-        "octris/cliff": "dev-master",
-        "octris/core":  "dev-master"
+        "php":                   ">=5.6.0",
+        "aaparser/aaparser-php": "dev-master",
+        "octris/cli":            "dev-master",
+        "octris/core":           "dev-master"
     }
 }

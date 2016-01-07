@@ -17,7 +17,7 @@ namespace {{$namespace}};
  * @copyright   copyright (c) {{$year}} by {{$company}}
  * @author      {{$author}} <{{$email}}>
  */
-class App extends \Octris\Cliff\App
+class App extends \Octris\Cli\App
 {
     /**
      * Application name.
@@ -48,14 +48,21 @@ class App extends \Octris\Cliff\App
      */
     public function __construct()
     {
+        parent::__construct(
+            self::$app_name,
+            [
+                'version' => self::$app_version,
+                'version_date' => self::$app_version_date,
+                'version_string' => "\${name} \${version} (\${version_date})\n"
+            ]
+        );
     }
 
     /**
-     * Execute application.
-     *
-     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments.
+     * App initialization, set default action.
      */
-    protected function main(\Octris\Cliff\Args\Collection $args);
+    protected function initialize()
     {
+        parent::initialize();
     }
 }
