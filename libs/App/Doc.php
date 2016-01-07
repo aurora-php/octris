@@ -11,48 +11,45 @@
 
 namespace Octris\App;
 
-use \Octris\Core\Provider as provider;
-use \Octris\Core\Validate as validate;
-
 /**
  * Documentation tools.
  *
- * @copyright   copyright (c) 2014 by Harald Lapp
+ * @copyright   copyright (c) 2014-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Doc extends \Octris\Cliff\Args\Command
+class Doc implements \Octris\Cli\App\ICommand
 {
     /**
      * Constructor.
-     *
-     * @param   string                              $name               Name of command.
      */
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
     }
 
     /**
-     * Return command description.
+     * Configure the command.
+     *
+     * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
-    public static function getDescription()
+    public static function configure(\Aaparser\Command $command)
     {
-        return '';
+        $command->setHelp('Display documentation for various framework parts.');
+
+        $command->addCommand('ebnf', [
+            'help' => 'Display EBNF of template grammar.'
+        ])->setAction(function(array $options, array $operands) {
+            $grammar = new \Octris\Core\Tpl\Compiler\Grammar();
+            print $grammar->getEBNF();
+        });
     }
 
     /**
      * Run command.
      *
-     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
+     * @param   array           $options                    Cli options.
+     * @param   array           $operands                   Cli operands.
      */
-    public function run(\Octris\Cliff\Args\Collection $args)
+    public function run(array $options, array $operands)
     {
-        // $this->setError('not implemented, yet');
-        //
-        // return 1;
-
-        // export EBNF
-        $grammar = new \Octris\Core\Tpl\Compiler\Grammar();
-        print $grammar->getEBNF();
     }
 }
