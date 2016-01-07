@@ -11,17 +11,13 @@
 
 namespace Octris\App;
 
-use \Octris\Core\Provider as provider;
-use \Octris\Core\Validate as validate;
-use \Octris\Cliff\Args    as args;
-
 /**
  * Start HTTPD backend.
  *
- * @copyright   copyright (c) 2014 by Harald Lapp
+ * @copyright   copyright (c) 2014-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Httpd extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
+class Httpd implements \Octris\Cli\App\ICommand
 {
     /**
      * Bind to IP address.
@@ -35,41 +31,53 @@ class Httpd extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IMa
      *
      * @type    int
      */
-    protected static $bind_port = '8888';
+    protected static $bind_port = '3000';
+
+    /**
+     * Bind to SSL port.
+     *
+     * @type    int
+     */
+    protected static $bind_ssl_port = '3443';
 
     /**
      * Constructor.
-     *
-     * @param   string                              $name               Name of command.
      */
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
     }
 
     /**
-     * Configure command arguments.
+     * Configure the command.
+     * 
+     * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
-    public function configure()
+    public static function configure(\Aaparser\Command $command)
     {
-        $this->addOption(['b', 'bind-ip'], args::T_VALUE | args::T_REQUIRED, 'arg', self::$bind_ip)->addValidator(function ($value) {
-            return true;
-        }, 'invalid IP address specified')->setHelp('A single IP that the webserver will be listening on (defaults to ' . self::$bind_ip . ').');
-        $this->addOption(['p', 'port'], args::T_VALUE | args::T_REQUIRED, 'arg', self::$bind_port)->addValidator(function ($value) {
+        $command->setHelp('Httpd server for testing purpose.');
+        $command->addOption('ip-address', '-b | --bind-ip <ip-address>', ['\Aaparser\Coercion', 'value'], [
+            'help' => 'A single IP that the webserver will be listening on (defaults to ' . self::$bind_ip . ').'
+        ]);
+        $command->addOption('port', '-p | --port <port>', ['\Aaparser\Coercion', 'value'], [
+            'help' => 'A port number the webserver will be listening on (defaults to ' . self::$bind_port . ').'
+        ])->addValidator(function($value) {
             return ctype_digit($value);
-        }, 'invalid port number specified')->setHelp('A port number the webserver will be listening on (defaults to ' . self::$bind_port . ').');
-
-        $this->addOperand(1, 'project-path')->addValidator(function ($value) {
-            return (is_dir($value) && is_dir($value . '/host'));
-        }, 'specified path is not a directory or directory not found or directory contains no "host" directory and therefore is probably not an octris web project')->setHelp('Path to a project.');
-    }
-
-    /**
-     * Return command description.
-     */
-    public static function getDescription()
-    {
-        return 'Httpd backend.';
+        });
+        $command->addOption('detach', '-d | --detach', true, [
+            'help' => 'Run in background.'
+        ]);
+        $command->addOption('ssl-port', '--with-ssl <ssl-port>', ['\Aaparser\Coercion', 'value'], [
+            'help' => 'A port number the webserver will be listening on for SSL connections (defaults to ' . self::$bind_ssl_port . ').'
+        ])->addValidator(function($value) {
+            return ctype_digit($value);
+        })->addValidator(function($value) {
+            var_dump(extension_loaded('openssl'));
+        });
+        $command->addOperand('project-path', 1, [
+            'help' => 'Project path.'
+        ])->addValidator(function($value) {
+            return \Octris\Util\Validator::isProjectPath($value);
+        });
     }
 
     /**
@@ -108,14 +116,15 @@ EOT
     /**
      * Run command.
      *
-     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
+     * @param   array           $options                    Cli options.
+     * @param   array           $operands                   Cli operands.
      */
-    public function run(\Octris\Cliff\Args\Collection $args)
+    public function run(array $options, array $operands)
     {
-        $ip = $args['bind-ip'];
-        $port = $args['port'];
-
-        $docroot = $args[0] . '/host/';
+        $port = (isset($options['port']) ? $options['port'] : self::$bind_port);
+        $ip = (isset($options['ip-address']) ? $options['ip-address'] : self::$bind_ip);
+        
+        $docroot = $operands['project-path'][0] . '/host/';
 
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         $router = array_pop($trace)['file'];

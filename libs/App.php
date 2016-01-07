@@ -61,9 +61,9 @@ class App extends \Octris\Cli\App
     /**
      * Print help.
      * 
-     * @param   string              $command                Optional command to print help for.
+     * @param   \Aaparser\Command       $command                Optional command to print help for.
      */
-    public function printHelp($command = null)
+    public function printHelp(\Aaparser\Command $command = null)
     {
         printf("               __         .__
   ____   _____/  |________|__| ______
@@ -86,12 +86,12 @@ class App extends \Octris\Cli\App
         parent::initialize();
         
         $this->importCommand('check', '\Octris\App\Check');
+        $this->importCommand('httpd', '\Octris\App\Httpd');
         // $this->importCommand('config', '\Octris\App\Config');
         // $this->importCommand('create', '\Octris\App\Create');
         // $this->importCommand('graph', '\Octris\App\Graph');
         // $this->importCommand('test', '\Octris\App\Test');
         // $this->importCommand('doc', '\Octris\App\Doc');
-        // $this->importCommand('httpd', '\Octris\App\Httpd');
         // $this->importCommand('compile', '\Octris\App\Compile');
     }
 }

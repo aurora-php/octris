@@ -11,9 +11,6 @@
 
 namespace Octris\App;
 
-use \Octris\Core\Provider as provider;
-use \Octris\Core\Validate as validate;
-
 /**
  * Check a project for various kind of coding-style related flaws.
  *
@@ -37,22 +34,10 @@ class Check implements \Octris\Cli\App\ICommand
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('Syntactical check of project files.');
-        $command->addOperand('path', 1, [
+        $command->addOperand('project-path', 1, [
             'help' => 'Project path.'
         ])->addValidator(function($value) {
-            return (is_dir($value) && is_file($value . '/etc/global.php'));
-
-        // if (!is_dir($value)) {
-        //     throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
-        // }
-        //
-        // $base = rtrim($args[0], '/');
-        //
-        // if (!is_file($base . '/etc/global.php')) {
-        //     throw new \Octris\Cliff\Exception\Argument(sprintf('global app configuration not found "%s"!', $base . '/etc/global.php'));
-        // }
-
-            return true;
+            return \Octris\Util\Validator::isProjectPath($value);
         });
     }
 
@@ -114,7 +99,7 @@ EOT;
      */
     public function run(array $options, array $operands)
     {
-        $base = rtrim($operands['path'][0], '/');
+        $base = rtrim($operands['project-path'][0], '/');
         
         // check php files
         $iterator = $this->getIterator($base, '/\.php$/', '/(\/data\/cldr\/|\/vendor\/)/');
