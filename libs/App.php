@@ -11,15 +11,13 @@
 
 namespace Octris;
 
-use \Octris\Core\Provider as provider;
-
 /**
  * Application class.
  *
- * @copyright   copyright (c) 2014 by Harald Lapp
+ * @copyright   copyright (c) 2014-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class App extends \Octris\Cliff\App
+class App extends \Octris\Cli\App
 {
     /**
      * Application name.
@@ -47,51 +45,25 @@ class App extends \Octris\Cliff\App
 
     /**
      * Constructor.
-     *
-     * @param
      */
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct(
+            self::$app_name,
+            [
+                'version' => self::$app_version,
+                'version_date' => self::$app_version_date,
+                'version_string' => "\${name} \${version} (\${version_date})\n"
+            ]
+        );
     }
 
     /**
-     * Configure application arguments.
+     * Print help.
+     * 
+     * @param   string              $command                Optional command to print help for.
      */
-    protected function configure()
-    {
-        parent::configure();
-
-        $this->addCommand(new \Octris\App\Config('config'));
-        $this->addCommand(new \Octris\App\Create('create'));
-        $this->addCommand(new \Octris\App\Graph('graph'));
-        $this->addCommand(new \Octris\App\Check('check'));
-        $this->addCommand(new \Octris\App\Test('test'));
-        $this->addCommand(new \Octris\App\Doc('doc'));
-        $this->addCommand(new \Octris\App\Httpd('httpd'));
-        $this->addCommand(new \Octris\App\Compile('compile'));
-    }
-
-    /**
-     * Run main application.
-     *
-     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments.
-     */
-    protected function main(\Octris\Cliff\Args\Collection $args)
-    {
-        if (count($GLOBALS['argv']) == 1) {
-            $this->showHelp();
-
-            exit(1);
-        } else {
-            exit(0);
-        }
-    }
-
-    /**
-     * Show help.
-     */
-    protected function showHelp()
+    public function printHelp($command = null)
     {
         printf("               __         .__
   ____   _____/  |________|__| ______
@@ -103,6 +75,23 @@ class App extends \Octris\Cliff\App
             'v' . static::$app_version
         );
 
-        parent::showHelp();
+        parent::printHelp($command);
+    }
+
+    /**
+     * App initialization, set default action.
+     */
+    protected function initialize()
+    {
+        parent::initialize();
+        
+        $this->importCommand('check', '\Octris\App\Check');
+        // $this->importCommand('config', '\Octris\App\Config');
+        // $this->importCommand('create', '\Octris\App\Create');
+        // $this->importCommand('graph', '\Octris\App\Graph');
+        // $this->importCommand('test', '\Octris\App\Test');
+        // $this->importCommand('doc', '\Octris\App\Doc');
+        // $this->importCommand('httpd', '\Octris\App\Httpd');
+        // $this->importCommand('compile', '\Octris\App\Compile');
     }
 }
