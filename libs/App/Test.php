@@ -13,43 +13,46 @@ namespace Octris\App;
 
 use \Octris\Core\Provider as provider;
 use \Octris\Core\Validate as validate;
-use \Octris\Cliff\Args    as args;
 
 /**
  * Execute phpunit test-suite for a project.
  *
- * @copyright   copyright (c) 2014 by Harald Lapp
+ * @copyright   copyright (c) 2014-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Test extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
+class Test implements \Octris\Cli\App\ICommand
 {
     /**
      * Constructor.
-     *
-     * @param   string                              $name               Name of command.
      */
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
     }
 
     /**
-     * Configure command arguments.
+     * Configure the command.
+     *
+     * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
-    public function configure()
+    public static function configure(\Aaparser\Command $command)
     {
-        $this->addOption(['f', 'filter'], args::T_VALUE)->addValidator(function ($value) {
+        $command->setHelp('Execute phpunit tests.');
+        $command->addOption('filter', '-f | --filter <filter>', ['\Aaparser\Coercion', 'value'], [
+            'help' => 'Filter to apply.'
+        ])->addValidator(function($value) {
             $validator = new \Octris\Core\Validate\Type\Printable();
+
             return $validator->validate($validator->preFilter($value));
         }, 'invalid filter specified');
-    }
-
-    /**
-     * Return command description.
-     */
-    public static function getDescription()
-    {
-        return 'Execute phpunit tests.';
+        $op = $command->addOperand('project-path', 1, [
+            'help' => 'Project path.'
+        ])->addValidator(function($value) {
+            return !!(`which phpunit`);
+        }, 'phpunit not found');
+        \Octris\Util\Validator::addProjectPathCheck($op);
+        $op->addValidator(function($value) {
+            return is_dir($value . '/tests/');
+        }, 'no tests available');
     }
 
     /**
@@ -82,34 +85,19 @@ EOT;
     /**
      * Run command.
      *
-     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
+     * @param   array           $options                    Cli options.
+     * @param   array           $operands                   Cli operands.
      */
-    public function run(\Octris\Cliff\Args\Collection $args)
+    public function run(array $options, array $operands)
     {
-        if (!isset($args[0])) {
-            throw new \Octris\Cliff\Exception\Argument(sprintf("no destination path specified"));
-        } elseif (!is_dir($args[0])) {
-            throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
-        } else {
-            $dir = $args[0] . '/tests/';
+        $dir = rtrim($operands['project-path'][0], '/') . '/tests/';
 
-            if (!is_dir($dir)) {
-                throw new \Octris\Cliff\Exception\Application('no tests available');
-            }
-        }
-
-        if (isset($args['f'])) {
-            $filter = '--filter ' . escapeshellarg($args['f']);
-        } else {
-            $filter = '';
-        }
-
-        if (!($cmd = `which phpunit`)) {
-            throw new \Octris\Cliff\Exception\Application('phpunit not found');
-        }
+        $filter = (isset($options['filter'])
+                    ? '--filter ' . escapeshellarg($options['filter'])
+                    : '');
 
         // execute tests
-        $cmd .= ' --tap ' . $filter . ' ' . $dir;
+        $cmd = 'phpunit --tap ' . $filter . ' ' . $dir;
 
         passthru($cmd);
     }
