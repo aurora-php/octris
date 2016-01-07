@@ -11,44 +11,40 @@
 
 namespace Octris\App;
 
-use \Octris\Core\Provider as provider;
-use \Octris\Core\Validate as validate;
-use \Octris\Cliff\Args as args;
-
 /**
  * Change OCTRiS command-line tool configuration.
  *
- * @copyright   copyright (c) 2014-2015 by Harald Lapp
+ * @copyright   copyright (c) 2014-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Config extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
+class Config implements \Octris\Cli\App\ICommand
 {
     /**
      * Constructor.
-     *
-     * @param   string                              $name               Name of command.
      */
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
     }
 
     /**
-     * Configure command arguments.
+     * Configure the command.
+     * 
+     * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
-    public function configure()
+    public static function configure(\Aaparser\Command $command)
     {
-        $this->addOption(['s', 'set'], args::T_KEYVALUE)->addValidator(function ($value, $key) {
-            return (in_array($key, ['company', 'author', 'email']) && $value != '');
-        }, 'invalid argument value');
-    }
-
-    /**
-     * Return command description.
-     */
-    public static function getDescription()
-    {
-        return 'List and change configuration.';
+        $command->setHelp('List and change configuration.');
+        $command->addOption('value', '-s | --set <value>', ['\Aaparser\Coercion', 'kv'], [
+            'help' => 'Set a configuration value in the form of key=value. Allowed keys are: company, author and email.'
+        ])->addValidator(function($value) {
+            var_dump($value);
+            
+            return true;
+        });
+        
+        // $this->addOption(['s', 'set'], args::T_KEYVALUE)->addValidator(function ($value, $key) {
+        //     return (in_array($key, ['company', 'author', 'email']) && $value != '');
+        // }, 'invalid argument value');
     }
 
     /**
@@ -87,10 +83,13 @@ EOT;
     /**
      * Run command.
      *
-     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
+     * @param   array           $options                    Cli options.
+     * @param   array           $operands                   Cli operands.
      */
-    public function run(\Octris\Cliff\Args\Collection $args)
+    public function run(array $options, array $operands)
     {
+        var_dump($options, $operands);
+        
         $prj = new \Octris\Core\Config('global');
 
         if (isset($args['set'])) {

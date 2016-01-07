@@ -86,12 +86,12 @@ class App extends \Octris\Cli\App
         parent::initialize();
         
         $this->importCommand('check', '\Octris\App\Check');
+        $this->importCommand('compile', '\Octris\App\Compile');
+        $this->importCommand('config', '\Octris\App\Config');
         $this->importCommand('httpd', '\Octris\App\Httpd');
-        // $this->importCommand('config', '\Octris\App\Config');
         // $this->importCommand('create', '\Octris\App\Create');
         // $this->importCommand('graph', '\Octris\App\Graph');
         // $this->importCommand('test', '\Octris\App\Test');
         // $this->importCommand('doc', '\Octris\App\Doc');
-        // $this->importCommand('compile', '\Octris\App\Compile');
     }
 }

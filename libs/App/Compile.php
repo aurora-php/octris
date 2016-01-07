@@ -11,44 +11,34 @@
 
 namespace Octris\App;
 
-use \Octris\Core\Provider as provider;
-use \Octris\Core\Validate as validate;
-use \Octris\Cliff\Args    as args;
-
 /**
  * Template compiler.
  *
- * @copyright   copyright (c) 2015 by Harald Lapp
+ * @copyright   copyright (c) 2015-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Compile extends \Octris\Cliff\Args\Command implements \Octris\Cliff\Args\IManual
+class Compile implements \Octris\Cli\App\ICommand
 {
     /**
      * Constructor.
-     *
-     * @param   string                              $name               Name of command.
      */
-    public function __construct($name)
+    public function __construct()
     {
-        parent::__construct($name);
     }
 
     /**
-     * Configure command arguments.
+     * Configure the command.
+     * 
+     * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
-    public function configure()
+    public static function configure(\Aaparser\Command $command)
     {
-        $this->addOperand(1, 'project-path')->addValidator(function ($value) {
-            return (is_dir($value) && is_dir($value . '/host'));
-        }, 'specified path is not a directory or directory not found or directory contains no "host" directory and therefore is probably not an octris web project')->setHelp('Path to a project.');
-    }
-
-    /**
-     * Return command description.
-     */
-    public static function getDescription()
-    {
-        return 'Compile project templates.';
+        $command->setHelp('Compile project templates.');
+        $command->addOperand('project-path', 1, [
+            'help' => 'Project path.'
+        ])->addValidator(function($value) {
+            return \Octris\Util\Validator::isProjectPath($value);
+        });
     }
 
     /**
@@ -78,22 +68,11 @@ EOT;
     /**
      * Run command.
      *
-     * @param   \Octris\Cliff\Args\Collection        $args           Parsed arguments for command.
+     * @param   array           $options                    Cli options.
+     * @param   array           $operands                   Cli operands.
      */
-    public function run(\Octris\Cliff\Args\Collection $args)
+    public function run(array $options, array $operands)
     {
-        if (!isset($args[0])) {
-            throw new \Octris\Cliff\Exception\Argument('no project path specified');
-        } elseif (!is_dir($args[0])) {
-            throw new \Octris\Cliff\Exception\Argument('specified path is not a directory or directory not found');
-        }
-
-        $base = rtrim($args[0], '/');
-
-        if (!is_file($base . '/etc/global.php')) {
-            throw new \Octris\Cliff\Exception\Argument(sprintf('global app configuration not found "%s"!', $base . '/etc/global.php'));
-        }
-
-        passthru(__DIR__ . '/../../bin/compile.php ' . escapeshellarg($base));
+        passthru(__DIR__ . '/../../bin/compile.php ' . escapeshellarg($operands['project-path'][0]));
     }
 }
