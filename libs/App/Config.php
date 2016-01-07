@@ -28,23 +28,22 @@ class Config implements \Octris\Cli\App\ICommand
 
     /**
      * Configure the command.
-     * 
+     *
      * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('List and change configuration.');
-        $command->addOption('value', '-s | --set <value>', ['\Aaparser\Coercion', 'kv'], [
+        $command->addOption('key-value', '-s | --set <key-value>', ['\Aaparser\Coercion', 'kv'], [
             'help' => 'Set a configuration value in the form of key=value. Allowed keys are: company, author and email.'
         ])->addValidator(function($value) {
-            var_dump($value);
-            
-            return true;
-        });
-        
-        // $this->addOption(['s', 'set'], args::T_KEYVALUE)->addValidator(function ($value, $key) {
-        //     return (in_array($key, ['company', 'author', 'email']) && $value != '');
-        // }, 'invalid argument value');
+            return in_array(key($value), array('company', 'author', 'email'));
+        }, 'Invalid configuration key specified "${value}"')
+          ->addValidator(function($value) {
+            $val = current($value);
+
+            return (!is_null($val) && $val !== '');
+        }, 'Configuration value must not be empty');
     }
 
     /**
@@ -88,12 +87,10 @@ EOT;
      */
     public function run(array $options, array $operands)
     {
-        var_dump($options, $operands);
-        
         $prj = new \Octris\Core\Config('global');
 
-        if (isset($args['set'])) {
-            foreach ($args['set'] as $k => $v) {
+        if (isset($options['key-value'])) {
+            foreach ($options['key-value'] as $k => $v) {
                 $prj['info.' . $k] = $v;
             }
         }
