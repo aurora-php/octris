@@ -32,7 +32,7 @@ class App extends \Octris\Cli\App
      *
      * @type    string
      */
-    protected static $app_version = '0.0.12';
+    protected static $app_version = '0.0.13';
     /**/
 
     /**
@@ -40,7 +40,7 @@ class App extends \Octris\Cli\App
      *
      * @type    string
      */
-    protected static $app_version_date = '2016-01-03';
+    protected static $app_version_date = '2016-01-08';
     /**/
 
     /**
