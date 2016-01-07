@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aaparser/aaparser-php",
-                "reference": "38fec73737059e44124ec488be492e612808ee43"
+                "reference": "be8a4ced9b114d7b54b75a078400c5f5d2b71672"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -42,7 +42,7 @@
                 "option",
                 "parser"
             ],
-            "time": "2016-01-07 19:11:40"
+            "time": "2016-01-07 22:30:35"
         },
         {
             "name": "octris/cli",
