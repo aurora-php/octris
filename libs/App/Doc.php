@@ -33,7 +33,7 @@ class Doc implements \Octris\Cli\App\ICommand
      */
     public static function configure(\Aaparser\Command $command)
     {
-        $command->setHelp('Display documentation for various framework parts. Display documentation for various framework parts. Display documentation for various framework parts. Display documentation for various framework parts.');
+        $command->setHelp('Display documentation for various framework parts.');
 
         $command->addCommand('ebnf', [
             'help' => 'Display EBNF of template grammar.'
