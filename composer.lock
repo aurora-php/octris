@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aaparser/aaparser-php",
-                "reference": "be8a4ced9b114d7b54b75a078400c5f5d2b71672"
+                "reference": "30876e968ef8da9d69eb5bd076b9c067f1bc4ec0"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -42,7 +42,7 @@
                 "option",
                 "parser"
             ],
-            "time": "2016-01-07 22:30:35"
+            "time": "2016-01-09 22:09:04"
         },
         {
             "name": "octris/cli",
@@ -82,7 +82,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "ebfd2d45804f40197fcd040d04a6638b72b1dae1"
+                "reference": "0cde182303db12f5cb37c7709f7125f39b557810"
             },
             "require": {
                 "nikic/fast-route": "^0.6.0",
@@ -107,7 +107,7 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2016-01-07 11:21:47"
+            "time": "2016-01-09 22:50:00"
         },
         {
             "name": "octris/phphttpd",
