@@ -93,6 +93,8 @@ class Password implements \Octris\Cli\App\ICommand
         $is_valid = \Octris\Core\Security\Password::verify($operands['password'][0], $operands['hash'][0]);
 
         print ($is_valid ? 'OK' : 'ERROR') . "\n";
+
+        exit(!$is_valid);
     }
 
     /**
