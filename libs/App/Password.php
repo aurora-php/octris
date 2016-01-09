@@ -62,7 +62,9 @@ class Password implements \Octris\Cli\App\ICommand
 
         $hash = \Octris\Core\Security\Password::hash($operands['password'][0], $algo, $options);
 
-        print "$hash\n";
+        print "$hash\n\n";
+
+        self::infoHash([], ['hash' => [$hash]]);
     }
 
     /**
