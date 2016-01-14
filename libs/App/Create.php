@@ -22,6 +22,13 @@ use \Octris\Readline as readline;
 class Create implements \Octris\Cli\App\ICommand
 {
     /**
+     * Settings used.
+     *
+     * @type    array
+     */
+    protected static $settings = array('company', 'author', 'email', 'homepage', 'repository');
+    
+    /**
      * Constructor.
      */
     public function __construct()
@@ -62,9 +69,9 @@ class Create implements \Octris\Cli\App\ICommand
             return is_dir(__DIR__ . '/../../data/skel/' . $value . '/');
         }, 'unable to locate template directory "' . __DIR__ . '/../../data/skel/${value}/".');
         $command->addOption('define', '-d | --define <key-value>', ['\Aaparser\Coercion', 'kv'], [
-            'help' => 'Overwrite default configuration settings for "company", "author" and "email".'
+            'help' => 'Overwrite default configuration settings for "' . implode('", "', self::$settings) . '".'
         ])->addValidator(function($value) {
-            return in_array(key($value), array('company', 'author', 'email'));
+            return in_array(key($value), self::$settings);
         }, 'Invalid configuration key specified "${value}"')
           ->addValidator(function($value) {
             $val = current($value);
@@ -164,28 +171,50 @@ EOT;
     {
         $project = $options['project'];
         $type = $options['type'];
+        $dir = rtrim($operands['project-path'][0], '/');
 
         list($vendor, $package) = explode('/', $project);
 
         $year = date('Y');
 
         // handle project configuration
-        $data = array();
-        $prj = new \Octris\Core\Config('global');
+        $cfg = new \Octris\Cliconfig(['/etc']);
+        $cfg->load($dir . '/.octris.ini');
+
+        $data = [];
+        $info = $cfg->addSection('info');
 
         if (isset($options['key-value'])) {
             foreach ($options['key-value'] as $k => $v) {
-                $prj['info.' . $k] = $v;
+                $info[$k] = $v;
             }
         }
 
-        $filter = $prj->filter('info');
-
-        foreach ($filter as $k => $v) {
-            $data[$k] = readline::getPrompt(sprintf("%s [%%s]: ", $k), $v);
+        foreach (self::$settings as $k) {
+            $info[$k] = readline::getPrompt(
+                sprintf(
+                    '%s [%%s]: ',
+                    $k
+                ),
+                (isset($info[$k]) ? $info[$k] : '')
+            );
+            
+            $data[$k] = preg_replace('/<package>/', $package, $info[$k]);
         }
 
         print "\n";
+
+        if ($cfg->hasChanged()) {
+            do {
+                $yn = readline::getPrompt('Save changed configuration? (Y/n) ', 'y');
+            } while (!preg_match('/^[YyNn]$/', $yn));
+            
+            if ($yn == 'y') {
+                $cfg->save();
+            }
+            
+            print "\n";
+        }
 
         // build data array
         $data = array_merge($data, array(
@@ -197,7 +226,7 @@ EOT;
         ));
 
         // create project
-        $dir = rtrim($operands['project-path'][0], '/') . '/' . $package;
+        $dir .= '/' . $package;
         $src = __DIR__ . '/../../data/skel/' . $type . '/';
 
         // process skeleton and write project files
