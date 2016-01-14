@@ -22,6 +22,10 @@
             "type": "git"
         },
         {
+            "url":  "https://github.com/octris/cliconfig.git",
+            "type": "git"
+        },
+        {
             "url":  "https://github.com/octris/core.git",
             "type": "git"
         },
@@ -39,6 +43,7 @@
         "php":                   ">=5.6.0",
         "aaparser/aaparser-php": "dev-master",
         "octris/cli":            "dev-master",
+        "octris/cliconfig":      "dev-master",
         "octris/core":           "dev-master",
         "octris/readline":       "dev-master",
         "octris/phphttpd":       "dev-master"
