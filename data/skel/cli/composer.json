@@ -3,13 +3,13 @@
     "type":         "project",
     "description":  "",
     "keywords":     [],
-    "homepage":     "",
-    "license":      "",
+    "homepage":     "{{$repository}}",
+    "license":      "proprietary",
 
     "authors":      [{
         "name":         "{{$author}}",
         "email":        "{{$email}}",
-        "homepage":     ""
+        "homepage":     "{{$homepage}}"
     }],
 
     "repositories": [
@@ -22,6 +22,10 @@
             "type": "git"
         },
         {
+            "url":  "https://github.com/octris/cliconfig.git",
+            "type": "git"
+        },
+        {
             "url":  "https://github.com/octris/core.git",
             "type": "git"
         }
@@ -31,6 +35,7 @@
         "php":                   ">=5.6.0",
         "aaparser/aaparser-php": "dev-master",
         "octris/cli":            "dev-master",
+        "octris/cliconfig":      "dev-master",
         "octris/core":           "dev-master"
     }
 }

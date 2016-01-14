@@ -3,13 +3,13 @@
     "type":         "library",
     "description":  "",
     "keywords":     [],
-    "homepage":     "",
-    "license":      "",
+    "homepage":     "{{$repository}}",
+    "license":      "proprietary",
 
     "authors":      [{
         "name":         "{{$author}}",
         "email":        "{{$email}}",
-        "homepage":     ""
+        "homepage":     "{{$homepage}}"
     }],
 
     "require":      {
