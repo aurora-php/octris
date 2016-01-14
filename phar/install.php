@@ -63,16 +63,9 @@ $iterator = new AppendIterator();
 $iterator->append(getDirIterator(__DIR__ . '/../bin/'));
 $iterator->append(getDirIterator(__DIR__ . '/../data/'));
 $iterator->append(getDirIterator(__DIR__ . '/../libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/composer/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/aaparser/aaparser-php/libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/cli/libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/core/libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/readline/libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/phphttpd/etc/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/phphttpd/libs/'));
+$iterator->append(getDirIterator(__DIR__ . '/../vendor/'));
 
 $phar->buildFromIterator($iterator, realpath(__DIR__ . '/../'));
-$phar->addFile(realpath(__DIR__ . '/../vendor/autoload.php'), '/vendor/autoload.php');
 
 $phar->setStub(file_get_contents(__DIR__ . '/stub.php'));
 
