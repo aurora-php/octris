@@ -34,44 +34,23 @@ class Graph implements \Octris\Cli\App\ICommand
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('Create a page graph of a project.');
+        $command->setDescription(<<<DESCRIPTION
+This command is used to analyze the page flow of a project and to create a graph from it that can be visualized using the dot utility of graphviz.
+
+The generated graph will be printed to stdout and can as such be directly processed by the dot utility.
+DESCRIPTION
+        );
+        $command->setExample(<<<EXAMPLE
+Create a graph of a project in PDF format using graphviz:
+
+    $ ./octris graph ~/tmp/octris/test |\
+            dot -Tpdf
+EXAMPLE
+        );
         $op = $command->addOperand('project-path', 1, [
             'help' => 'Project path.'
         ]);
         \Octris\Util\Validator::addWebProjectPathCheck($op);
-    }
-
-    /**
-     * Return command manual.
-     */
-    public static function getManual()
-    {
-            return <<<EOT
-NAME
-    octris graph - create a page graph of a project.
-
-SYNOPSIS
-    octris graph     <project-path>
-
-DESCRIPTION
-    This command is used to analyze the page flow of a project and
-    to create a graph from it that can be visualized using the dot
-    utility of graphviz.
-
-    The generated graph will be printed to stdout and can as such
-    be directly processed by the dot utility.
-
-OPTIONS
-
-EXAMPLES
-    Create a graph of a project in PDF format:
-
-        $ ./octris graph ~/tmp/octris/test |\
-                dot -Tpdf
-
-HINTS
-    Graphviz is available for various platforms and can be downloaded
-    from: http://www.graphviz.org/
-EOT;
     }
 
     /**

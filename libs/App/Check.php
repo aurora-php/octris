@@ -34,35 +34,17 @@ class Check implements \Octris\Cli\App\ICommand
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('Syntactical check of project files.');
+        $command->setDescription('This command is used to check the syntax of files in a project. Currently validation can be performed for php files and OCTRiS template files.');
+        $command->setExample(<<<EXAMPLE
+Check a project:
+
+    $ ./octris check ~/tmp/octris/test
+EXAMPLE
+        );
         $op = $command->addOperand('project-path', 1, [
             'help' => 'Project path.'
         ]);
         \Octris\Util\Validator::addProjectPathCheck($op);
-    }
-
-    /**
-     * Return command manual.
-     */
-    public static function getManual()
-    {
-            return <<<EOT
-NAME
-    octris check - syntactical check of project files.
-
-SYNOPSIS
-    octris check     <project-path>
-
-DESCRIPTION
-    This command is used to check the syntax of files in a project. Currently
-    validation can be performed for php files and OCTRiS template files.
-
-OPTIONS
-
-EXAMPLES
-    Check a project:
-
-        $ ./octris check ~/tmp/octris/test
-EOT;
     }
 
     /**

@@ -34,6 +34,13 @@ class Config implements \Octris\Cli\App\ICommand
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('List and change configuration.');
+        $command->setDescription('This command lists or changes the global OCTRiS command-line tool configuration.');
+        $command->setExample(<<<EXAMPLE
+Change company name in configuration:
+
+    $ ./octris config -s company=foo
+EXAMPLE
+        );
         $command->addOption('key-value', '-s | --set <key-value>', ['\Aaparser\Coercion', 'kv'], [
             'help' => 'Set a configuration value in the form of key=value. Allowed keys are: company, author and email.'
         ])->addValidator(function($value) {
@@ -44,39 +51,6 @@ class Config implements \Octris\Cli\App\ICommand
 
             return (!is_null($val) && $val !== '');
         }, 'Configuration value must not be empty');
-    }
-
-    /**
-     * Return command manual.
-     */
-    public static function getManual()
-    {
-            return <<<EOT
-NAME
-    octris config - list and change configuration.
-
-SYNOPSIS
-    octris config   [-s company=<company-name> |
-                     -s author=<author-name> |
-                     -s email=<email-address>]
-
-DESCRIPTION
-    This command lists or changes the global OCTRIS command-line tool
-    configuration.
-
-OPTIONS
-    -s      Key-value pairs of global configuration settings. Current
-            supported settings are:
-
-            company
-            author
-            email
-
-EXAMPLES
-    Change company name in configuration:
-
-        $ ./octris config -s company=foo
-EOT;
     }
 
     /**

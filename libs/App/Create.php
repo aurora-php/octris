@@ -45,6 +45,26 @@ class Create implements \Octris\Cli\App\ICommand
         $package = '';
 
         $command->setHelp('Create a new project.');
+        $command->setDescription(<<<DESCRIPTION
+This command creates a new project of the specified type in the specified destination-path. A valid basic directory layout will be created from a skeleton according to the specified project-type.
+
+The current supported types are 'web', 'cli' and 'lib':
+
+web     for projects like web applications, web sites etc.
+cli     for command-line applications.
+lib     for (shared) libraries.
+DESCRIPTION
+        );
+        $command->setExample(<<<EXAMPLE
+Create a test project:
+
+    $ ./octris create -p example/test -t web \
+        -d company="Foo Inc." \
+        -d author="Bar Baz" \
+        -d email="info@example.org" \
+        ~/tmp/
+EXAMPLE
+        );
         $command->addOption('project', '-p | --project <project-name>', ['\Aaparser\Coercion', 'value'], [
             'help' => 'A valid name for the project in the form of <vendor>/<package>.',
             'required' => true
@@ -88,56 +108,6 @@ class Create implements \Octris\Cli\App\ICommand
 
             return !is_dir($package_dir);
         }, 'project directory already exists');
-    }
-
-    /**
-     * Return command manual.
-     */
-    public static function getManual()
-    {
-            return <<<EOT
-NAME
-    octris create - create a new project.
-
-SYNOPSIS
-    octris create   -p <project-name>
-                    -t web | cli | lib
-                    [-d info.company=<company-name>]
-                    [-d info.author=<author-name>]
-                    [-d info.email=<author-email>]
-                    <destination-path>
-
-DESCRIPTION
-    This command creates a new project of specified type in the specified
-    destination-path. A valid basic directory layout will be created from
-    a skeleton according to the specified project-type.
-
-    The current supported types are 'web', 'cli' and 'lib':
-
-    web     This type should be used for projects like web applications,
-            web sites etc.
-    cli     This type should be used for command-line applications.
-    lib     This type should be used for (shared) libraries.
-
-OPTIONS
-    -p      A valid name for the project in the form of <vendor>/<package>.
-
-    -t      A valid type for the project
-
-    -d      Additional definitions to set that will be used to rewrite
-            comments in the project skeleton. The current supported fields
-            that can be set are: 'info.company', 'info.author' and
-            'info.email'.
-
-EXAMPLES
-    Create a test project:
-
-        $ ./octris create -p example/test -t web \
-                -d info.company="Foo Inc." \
-                -d info.author="Bar Baz" \
-                -d info.email="baz@example.org" \
-                ~/tmp/
-EOT;
     }
 
     /**

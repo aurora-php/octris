@@ -34,34 +34,17 @@ class Compile implements \Octris\Cli\App\ICommand
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('Compile project templates.');
+        $command->setDescription('This command is used to compile the project templates.');
+        $command->setExample(<<<EXAMPLE
+Compile templates of a project:
+
+    $ ./octris compile ~/tmp/test
+EXAMPLE
+        );
         $op = $command->addOperand('project-path', 1, [
             'help' => 'Project path.'
         ]);
         \Octris\Util\Validator::addProjectPathCheck($op);
-    }
-
-    /**
-     * Return command manual.
-     */
-    public static function getManual()
-    {
-            return <<<EOT
-NAME
-    octris compile - compile project templates.
-
-SYNOPSIS
-    octris compile  <project-path>
-
-DESCRIPTION
-    This command is used to compile the project templates.
-
-OPTIONS
-
-EXAMPLES
-    Example:
-
-        $ ./octris compile ~/tmp/test
-EOT;
     }
 
     /**
