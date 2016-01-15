@@ -34,17 +34,28 @@ class Config implements \Octris\Cli\App\ICommand
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('List and change configuration.');
-        $command->setDescription('This command lists or changes the global OCTRiS command-line tool configuration.');
+        $command->setDescription('This command lists or changes the local or global configuration of the OCTRiS command-line tool. The local configuration is 
+located in the parent directory your projects are created in. The global configuration is located in the home-directory.');
         $command->setExample(<<<EXAMPLE
 Change company name in configuration:
 
-    $ ./octris config -s company=foo
+    $ ./octris config -s info -d company=foo
 EXAMPLE
         );
-        $command->addOption('key-value', '-s | --set <key-value>', ['\Aaparser\Coercion', 'kv'], [
-            'help' => 'Set a configuration value in the form of key=value. Allowed keys are: company, author and email.'
+        $command->addOption('section', '-s | --section <section>', ['\Aaparser\Coercion', 'value'], [
+            'help' => 'Section to list or to set value in.',
+            'required' => true
+        ]);
+        $command->addOption('local', '-l | --local <path>', ['\Aaparser\Coercion', 'value'], [
+            'help' => 'Set configuration local instead of globel.'
         ])->addValidator(function($value) {
-            return in_array(key($value), array('company', 'author', 'email'));
+            return is_dir($value);
+        }, 'Specified path is not a directory or directory not found');
+        $command->addOption('key-value', '-d | --define <key-value>', ['\Aaparser\Coercion', 'kv'], [
+            'help' => 'Set a configuration value in the form of key=value.'
+        ])->addValidator(function($value) {
+            var_dump($value);
+            return true;
         }, 'Invalid configuration key specified "${value}"')
           ->addValidator(function($value) {
             $val = current($value);
@@ -61,20 +72,64 @@ EXAMPLE
      */
     public function run(array $options, array $operands)
     {
-        $prj = new \Octris\Core\Config('global');
+        // handle project configuration
+        $cfg = new \Octris\Cliconfig(['/etc']);
+        $cfg->load(\Octris\Cliconfig::getHome() . '/.octris.ini');
+
+        var_dump($cfg);
+        die;
+        
+        // $cfg->load($dir . '/.octris.ini');
+
+        $data = [];
+        $info = $cfg->addSection('info');
 
         if (isset($options['key-value'])) {
             foreach ($options['key-value'] as $k => $v) {
-                $prj['info.' . $k] = $v;
+                $info[$k] = $v;
             }
         }
 
-        $filter = $prj->filter('info');
+        // foreach (self::$settings as $k) {
+        //     $info[$k] = readline::getPrompt(
+        //         sprintf(
+        //             '%s [%%s]: ',
+        //             $k
+        //         ),
+        //         (isset($info[$k]) ? $info[$k] : '')
+        //     );
+        //
+        //     $data[$k] = preg_replace('/<package>/', $package, $info[$k]);
+        // }
 
-        foreach ($filter as $k => $v) {
-            printf("%-10s%s\n", $k, $v);
+        print "\n";
+
+        if ($cfg->hasChanged()) {
+            do {
+                $yn = readline::getPrompt('Save changed configuration? (Y/n) ', 'y');
+            } while (!preg_match('/^[YyNn]$/', $yn));
+            
+            if ($yn == 'y') {
+                $cfg->save();
+            }
+            
+            print "\n";
         }
 
-        $prj->save();
+        // $prj = new \Octris\Core\Config('global');
+        //
+        // if (isset($options['key-value'])) {
+        //     foreach ($options['key-value'] as $k => $v) {
+        //         $prj['info.' . $k] = $v;
+        //     }
+        // }
+        //
+        // $filter = $prj->filter('info');
+        //
+        // foreach ($filter as $k => $v) {
+        //     printf("%-10s%s\n", $k, $v);
+        // }
+        //
+        // $prj->save();
     }
 }
