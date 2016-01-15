@@ -37,6 +37,13 @@ class Test implements \Octris\Cli\App\ICommand
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('Execute phpunit tests.');
+        $command->setDescription('This command is used to execute the phpunit test-suite of a project, if available.');
+        $command->setExample(<<<EXAMPLE
+Run test-suite of a project:
+
+    $ ./octris test ~/tmp/test
+EXAMPLE
+        );
         $command->addOption('filter', '-f | --filter <filter>', ['\Aaparser\Coercion', 'value'], [
             'help' => 'Filter to apply.'
         ])->addValidator(function($value) {
@@ -53,33 +60,6 @@ class Test implements \Octris\Cli\App\ICommand
         $op->addValidator(function($value) {
             return is_dir($value . '/tests/');
         }, 'no tests available');
-    }
-
-    /**
-     * Return command manual.
-     */
-    public static function getManual()
-    {
-            return <<<EOT
-NAME
-    octris test - execute phpunit tests.
-
-SYNOPSIS
-    octris test     [-f filter]
-                    <project-path>
-
-DESCRIPTION
-    This command is used to execute the phpunit test-suite of a
-    project, if available.
-
-OPTIONS
-    -f      Filter to apply.
-
-EXAMPLES
-    Validate a project:
-
-        $ ./octris test ~/tmp/org.octris.test
-EOT;
     }
 
     /**

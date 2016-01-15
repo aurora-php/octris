@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aaparser/aaparser-php",
-                "reference": "30876e968ef8da9d69eb5bd076b9c067f1bc4ec0"
+                "reference": "7f69ca77838154cbc36008eb83a76e884832727f"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -42,7 +42,7 @@
                 "option",
                 "parser"
             ],
-            "time": "2016-01-09 22:09:04"
+            "time": "2016-01-15 13:21:13"
         },
         {
             "name": "octris/cli",
@@ -82,7 +82,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/cliconfig.git",
-                "reference": "f5548afbca33d46013f0092fe62e0560c4256062"
+                "reference": "d65f6c3e6fa6f879257d93f2cb4eb155dd2c9ae3"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -108,7 +108,7 @@
             ],
             "description": "Config file library for CLI tools.",
             "homepage": "https://github.com/octris/cliconfig",
-            "time": "2016-01-14 16:57:17"
+            "time": "2016-01-15 13:59:58"
         },
         {
             "name": "octris/core",
@@ -116,7 +116,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "8cec47f5975c25f56c4f63273f4c3be7ed04a32c"
+                "reference": "f7e821df41a2398cc29974c88fe30da84dc91e9b"
             },
             "require": {
                 "nikic/fast-route": "^0.6.0",
@@ -141,7 +141,7 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2016-01-12 13:08:48"
+            "time": "2016-01-15 02:41:41"
         },
         {
             "name": "octris/phphttpd",

@@ -55,6 +55,13 @@ class Httpd implements \Octris\Cli\App\ICommand
     public static function configure(\Aaparser\Command $command)
     {
         $command->setHelp('Httpd server for testing purpose.');
+        $command->setDescription('This command uses PHP\'s builtin webserver for testing a project.');
+        $command->setExample(<<<EXAMPLE
+Start webserver for a project:
+
+    $ ./octris httpd ~/tmp/test
+EXAMPLE
+        );
         $command->addOption('ip-address', '-b | --bind-ip <ip-address>', ['\Aaparser\Coercion', 'value'], [
             'help' => 'A single IP that the webserver will be listening on (defaults to ' . self::$bind_ip . ').'
         ]);
@@ -77,39 +84,6 @@ class Httpd implements \Octris\Cli\App\ICommand
             'help' => 'Project path.'
         ]);
         \Octris\Util\Validator::addProjectPathCheck($op);
-    }
-
-    /**
-     * Return command manual.
-     */
-    public static function getManual()
-    {
-            return sprintf(<<<EOT
-NAME
-    octris httpd - start http backend for testing project.
-
-SYNOPSIS
-    octris httpd    [-b <ip-address>]
-                    [-p <port-number>]
-                    <project-path>
-
-DESCRIPTION
-    This command uses PHP's builtin webserver for testing a project.
-
-OPTIONS
-    -b      A single IP that the webserver will be listening on
-            (defaults to %s).
-
-    -p      A port number the webserver will be listening on
-            (defaults to %s).
-
-EXAMPLES
-    Example:
-
-        $ ./octris httpd ~/tmp/test
-EOT
-            , self::$bind_ip, self::$bind_port
-        );
     }
 
     /**
