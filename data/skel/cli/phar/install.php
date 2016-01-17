@@ -50,7 +50,11 @@ function getDirIterator($dir) {
         )
     );
 
-    return $iterator;
+    $filter_iterator = new \CallbackFilterIterator($iterator , function ($file) {
+        return (strpos($file, "/.git/") === false);
+    });
+
+    return $filter_iterator;
 }
 
 $phar = new Phar(

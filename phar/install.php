@@ -50,7 +50,11 @@ function getDirIterator($dir) {
         )
     );
 
-    return $iterator;
+    $filter_iterator = new \CallbackFilterIterator($iterator , function ($file) {
+        return (strpos($file, "/.git/") === false);
+    });
+
+    return $filter_iterator;
 }
 
 $phar = new Phar(
@@ -66,7 +70,6 @@ $iterator->append(getDirIterator(__DIR__ . '/../libs/'));
 $iterator->append(getDirIterator(__DIR__ . '/../vendor/'));
 
 $phar->buildFromIterator($iterator, realpath(__DIR__ . '/../'));
-
 $phar->setStub(file_get_contents(__DIR__ . '/stub.php'));
 
 rename($file, $exec);
