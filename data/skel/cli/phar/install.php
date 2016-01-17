@@ -65,10 +65,7 @@ $phar = new Phar(
 
 $iterator = new AppendIterator();
 $iterator->append(getDirIterator(__DIR__ . '/../libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/composer/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/aaparser/aaparser-php/libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/cli/libs/'));
-$iterator->append(getDirIterator(__DIR__ . '/../vendor/octris/core/libs/'));
+$iterator->append(getDirIterator(__DIR__ . '/../vendor/'));
 
 $phar->buildFromIterator($iterator, realpath(__DIR__ . '/../'));
 $phar->setStub(file_get_contents(__DIR__ . '/stub.php'));
