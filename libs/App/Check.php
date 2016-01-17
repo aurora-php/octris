@@ -90,6 +90,9 @@ EXAMPLE
             system(PHP_BINARY . ' -l ' . escapeshellarg($filename));
         }
 
+        // PSR-2 compliant check for PHP files
+        system(__DIR__ . '/../../vendor/bin/phpcs -n --standard=psr2 --extensions=php ' . $base);
+
         // check templates
         passthru(__DIR__ . '/../../bin/lint.php ' . escapeshellarg($base));
     }
