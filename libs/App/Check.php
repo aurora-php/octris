@@ -41,10 +41,11 @@ Check a project:
     $ ./octris check ~/tmp/octris/test
 EXAMPLE
         );
-        $op = $command->addOperand('project-path', 1, [
+        $command->addOperand('project-path', 1, [
             'help' => 'Project path.'
-        ]);
-        \Octris\Util\Validator::addProjectPathCheck($op);
+        ])->addValidator(function($value) {
+            return is_dir($value);
+        }, 'Specified path is not a directory or directory not found');
     }
 
     /**
