@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aaparser/aaparser-php",
-                "reference": "7d0b788bdd09d31a75701dcad67ccebf938a15d6"
+                "reference": "9a55bbd98802902b193a858467baa74e3a80dbed"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -42,7 +42,7 @@
                 "option",
                 "parser"
             ],
-            "time": "2016-01-15 19:27:39"
+            "time": "2016-01-22 00:11:48"
         },
         {
             "name": "octris/cli",
@@ -50,7 +50,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/cli.git",
-                "reference": "4fc5eeccc8e76130d431dc9b1f37009fbbc5caf3"
+                "reference": "ce0c17e08c1bb3f3361914f34adf6c60a020d52a"
             },
             "require": {
                 "aaparser/aaparser-php": "dev-master",
@@ -74,7 +74,7 @@
             ],
             "description": "Octris library for cli applications",
             "homepage": "http://github.com/octris/cli/",
-            "time": "2016-01-07 16:28:08"
+            "time": "2016-01-22 00:16:04"
         },
         {
             "name": "octris/cliconfig",
@@ -116,7 +116,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "0d3811d71d1e96772cd6fc99adb47e1b15bffae4"
+                "reference": "7f8c996691b5169ac0977afae26390b9beac60fd"
             },
             "require": {
                 "nikic/fast-route": "^0.6.0",
@@ -144,7 +144,7 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2016-01-17 17:52:19"
+            "time": "2016-01-21 15:21:59"
         },
         {
             "name": "octris/debug",
@@ -299,16 +299,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "e4fb41d5d0387d556e2c25534d630b3cce90ea67"
+                "reference": "6731851d6aaf1d0d6c58feff1065227b7fda3ba8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e4fb41d5d0387d556e2c25534d630b3cce90ea67",
-                "reference": "e4fb41d5d0387d556e2c25534d630b3cce90ea67",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/6731851d6aaf1d0d6c58feff1065227b7fda3ba8",
+                "reference": "6731851d6aaf1d0d6c58feff1065227b7fda3ba8",
                 "shasum": ""
             },
             "require": {
@@ -326,7 +326,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -372,7 +372,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2015-12-11 00:12:46"
+            "time": "2016-01-19 23:39:10"
         },
         {
             "name": "willdurand/negotiation",
