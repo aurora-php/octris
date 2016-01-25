@@ -116,7 +116,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "3f61031e9645c078eeef6a8a75f2914154bcb42e"
+                "reference": "311e2550c6d6a2d97a8205ef1bfad28cead54f4e"
             },
             "require": {
                 "nikic/fast-route": "^0.6.0",
@@ -144,7 +144,7 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2016-01-22 00:53:33"
+            "time": "2016-01-24 23:59:43"
         },
         {
             "name": "octris/debug",
