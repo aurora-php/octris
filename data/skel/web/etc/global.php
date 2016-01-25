@@ -30,11 +30,19 @@ define('OCTRIS_APP_BASE', realpath(__DIR__ . '/../'));
             $tpl = new \Octris\Core\Tpl();
 
             $tpl->setL10n(\Octris\Core\L10n::getInstance());
-            $tpl->setOutputPath('tpl', OCTRIS_APP_BASE . '/cache/templates_c/');
-            $tpl->setOutputPath('css', OCTRIS_APP_BASE . '/host/styles/');
-            $tpl->setOutputPath('js', OCTRIS_APP_BASE . '/host/libsjs/');
-            $tpl->setResourcePath('css', OCTRIS_APP_BASE . '/styles/');
-            $tpl->setResourcePath('js', OCTRIS_APP_BASE . '/libsjs/');
+            $tpl->setOutputPath(OCTRIS_APP_BASE . '/cache/templates_c/');
+            $tpl->addPostprocessor(
+                new \Octris\Core\Tpl\Postprocess\CombineJs(
+                    [ '/libsjs/' => OCTRIS_APP_BASE . '/libsjs/' ],
+                    OCTRIS_APP_BASE . '/host/libsjs/'
+                )
+            );
+            $tpl->addPostprocessor(
+                new \Octris\Core\Tpl\Postprocess\CombineCss(
+                    [ '/styles/' => OCTRIS_APP_BASE . '/styles/' ],
+                    OCTRIS_APP_BASE . '/host/styles/'
+                )
+            );
             $tpl->addSearchPath(OCTRIS_APP_BASE . '/templates/');
 
             return $tpl;
