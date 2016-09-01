@@ -31,7 +31,7 @@ class Graph implements \Octris\Cli\App\ICommand
      *
      * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
-    public static function configure(\Aaparser\Command $command)
+    public static function configure(\Octris\Cli\App\Command $command)
     {
         $command->setHelp('Create a page graph of a project.');
         $command->setDescription(<<<DESCRIPTION

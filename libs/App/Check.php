@@ -31,7 +31,7 @@ class Check implements \Octris\Cli\App\ICommand
      *
      * @param   \Aaparser\Command       $command            Instance of an aaparser command to configure.
      */
-    public static function configure(\Aaparser\Command $command)
+    public static function configure(\Octris\Cli\App\Command $command)
     {
         $command->setHelp('Syntactical check of project files.');
         $command->setDescription('This command is used to check the syntax of files in a project. Currently validation can be performed for php files and OCTRiS template files.');
