@@ -63,7 +63,7 @@ class App extends \Octris\Cli\App
      *
      * @param   \Aaparser\Command       $command                Optional command to print help for.
      */
-    public function printHelp(\Aaparser\Command $command = null)
+    public function printHelp(\Octris\Cli\App\Command $command = null)
     {
         printf("               __         .__
   ____   _____/  |________|__| ______
