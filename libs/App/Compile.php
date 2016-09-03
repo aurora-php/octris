@@ -55,6 +55,8 @@ EXAMPLE
      */
     public function run(array $options, array $operands)
     {
-        passthru(__DIR__ . '/../../bin/compile.php ' . escapeshellarg($operands['project-path'][0]));
+        global $argv;
+
+        passthru($argv[0] . ' exec compile ' . escapeshellarg($operands['project-path'][0]));
     }
 }

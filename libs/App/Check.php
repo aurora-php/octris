@@ -81,6 +81,8 @@ EXAMPLE
      */
     public function run(array $options, array $operands)
     {
+        global $argv;
+
         $base = rtrim($operands['project-path'][0], '/');
 
         // check php files
@@ -91,6 +93,6 @@ EXAMPLE
         }
 
         // check templates
-        passthru(__DIR__ . '/../../bin/lint.php ' . escapeshellarg($base));
+        passthru($argv[0] . ' exec lint ' . escapeshellarg($base));
     }
 }

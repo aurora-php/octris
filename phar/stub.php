@@ -42,6 +42,13 @@ if (php_sapi_name() == 'cli-server') {
     return require_once('phar://octris.phar/libs/Util/Router.php');
 }
 
+if ($argc > 2 && $argv[1] == 'exec') {
+    // execute bundled tool
+    require_once('phar://octris.phar/libs/Util/Exec.php');
+
+    exit(0);
+}
+
 require_once('phar://octris.phar/vendor/autoload.php');
 require_once('phar://octris.phar/libs/Autoloader.php');
 
