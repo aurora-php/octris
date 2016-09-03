@@ -46,10 +46,9 @@
         "octris/cliconfig":      "dev-master",
         "octris/core":           "dev-master",
         "octris/readline":       "dev-master",
-        "octris/phphttpd":       "dev-master",
-        "squizlabs/php_codesniffer": "^2.5"
+        "octris/phphttpd":       "dev-master"
     },
-    
+
     "replace": {
         "nikic/fast-route": "*"
     }
