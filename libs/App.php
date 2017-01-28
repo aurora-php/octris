@@ -14,7 +14,7 @@ namespace Octris;
 /**
  * Application class.
  *
- * @copyright   copyright (c) 2014-2016 by Harald Lapp
+ * @copyright   copyright (c) 2014-2017 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 class App extends \Octris\Cli\App
@@ -32,7 +32,7 @@ class App extends \Octris\Cli\App
      *
      * @type    string
      */
-    protected static $app_version = '0.0.15';
+    protected static $app_version = '0.0.16';
     /**/
 
     /**
@@ -40,7 +40,7 @@ class App extends \Octris\Cli\App
      *
      * @type    string
      */
-    protected static $app_version_date = '2016-09-03';
+    protected static $app_version_date = '2017-01-28';
     /**/
 
     /**
