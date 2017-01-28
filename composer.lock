@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc051f707efb185af981749f1d2c99c6",
     "content-hash": "1b858739d1f05a4a94294321790409a9",
     "packages": [
         {
@@ -13,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aaparser/aaparser-php",
-                "reference": "9a55bbd98802902b193a858467baa74e3a80dbed"
+                "reference": "dd81bc379a98f62f18529e0a6c7fb76d6c5c2f39"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -42,7 +41,7 @@
                 "option",
                 "parser"
             ],
-            "time": "2016-01-22 00:11:48"
+            "time": "2017-01-28 16:18:19"
         },
         {
             "name": "octris/cli",
@@ -116,7 +115,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/core.git",
-                "reference": "10a010da6c28caba2f0482ba52f97570f9c88f46"
+                "reference": "5cc0a9e61702774ba7a153a5121e5743e3d6216f"
             },
             "require": {
                 "nikic/fast-route": "^0.6.0",
@@ -144,7 +143,7 @@
             ],
             "description": "OCTRiS core php framework",
             "homepage": "http://github.com/octris/core/",
-            "time": "2016-09-02 21:52:25"
+            "time": "2017-01-27 20:34:18"
         },
         {
             "name": "octris/debug",
@@ -191,7 +190,7 @@
             "keywords": [
                 "debugging"
             ],
-            "time": "2016-01-16 17:36:27"
+            "time": "2016-01-16T17:36:27+00:00"
         },
         {
             "name": "octris/phphttpd",
@@ -261,22 +260,30 @@
         },
         {
             "name": "psr/log",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
                 "shasum": ""
             },
+            "require": {
+                "php": ">=5.3.0"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -290,12 +297,13 @@
                 }
             ],
             "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
             "keywords": [
                 "log",
                 "psr",
                 "psr-3"
             ],
-            "time": "2012-12-21 11:40:51"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "willdurand/negotiation",
@@ -344,7 +352,7 @@
                 "header",
                 "negotiation"
             ],
-            "time": "2015-10-01 07:42:40"
+            "time": "2015-10-01T07:42:40+00:00"
         },
         {
             "name": "zendframework/zend-escaper",
@@ -388,7 +396,7 @@
                 "escaper",
                 "zf2"
             ],
-            "time": "2016-06-30 19:48:38"
+            "time": "2016-06-30T19:48:38+00:00"
         }
     ],
     "packages-dev": [],
