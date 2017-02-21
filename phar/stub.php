@@ -49,8 +49,8 @@ if ($argc > 2 && $argv[1] == 'exec') {
     exit(0);
 }
 
-require_once('phar://octris.phar/vendor/autoload.php');
-require_once('phar://octris.phar/libs/Autoloader.php');
+require_once(__DIR__ . '/vendor/autoload.php');
+require_once(__DIR__ . '/libs/Autoloader.php');
 
 // import environment
 \Octris\Core\Provider::set('env', $_ENV);
