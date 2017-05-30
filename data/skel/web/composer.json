@@ -12,6 +12,12 @@
         "homepage":     "{{$homepage}}"
     }],
 
+    "scripts": {
+        "post-install-cmd": [
+            "Octris\\Core\\Composer::postInstall"
+        ]
+    },
+
     "repositories": [
         {
             "url":  "https://github.com/octris/core.git",
