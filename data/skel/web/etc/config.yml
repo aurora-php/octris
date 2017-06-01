@@ -4,3 +4,4 @@
 # @copyright   copyright (c) {{$year}} by {{$company}}
 # @author      {{$author}} <{{$email}}>
 #**
+mode: production
