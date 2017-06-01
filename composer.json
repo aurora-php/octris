@@ -40,7 +40,7 @@
     ],
 
     "require":      {
-        "php":                   ">=5.6.0",
+        "php":                   ">=7.0.0",
         "aaparser/aaparser-php": "dev-master",
         "octris/cli":            "dev-master",
         "octris/cliconfig":      "dev-master",
