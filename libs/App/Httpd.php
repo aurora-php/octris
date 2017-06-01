@@ -102,9 +102,14 @@ EXAMPLE
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         $router = array_pop($trace)['file'];
 
+        if (($mode = getenv('OCTRIS_APP_MODE')) === false) {
+            $mode = 'development';
+        }
+
         // start php's builtin webserver
         $pid = exec(sprintf(
-            '((%s -d output_buffering=on -t %s -S %s:%s %s 1>/dev/null 2>&1 & echo $!) &)',
+            '((OCTRIS_APP_MODE=%s %s -d output_buffering=on -t %s -S %s:%s %s 1>/dev/null 2>&1 & echo $!) &)',
+            $mode,
             PHP_BINARY,
             $docroot,
             $ip,
