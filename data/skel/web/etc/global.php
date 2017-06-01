@@ -30,11 +30,13 @@ define('OCTRIS_APP_BASE', realpath(__DIR__ . '/../'));
             $tpl = new \Octris\Core\Tpl();
 
             $tpl->setL10n(\Octris\Core\L10n::getInstance());
-            $tpl->setCache(
-                new \Octris\Core\Tpl\Cache\File(
-                    OCTRIS_APP_BASE . '/cache/templates_c/'
-                )
-            );
+            if ($registry->config['mode'] != 'development') {
+                $tpl->setCache(
+                    new \Octris\Core\Tpl\Cache\File(
+                        OCTRIS_APP_BASE . '/cache/templates_c/'
+                    )
+                );
+            }
             $tpl->addPostprocessor(
                 new \Octris\Core\Tpl\Postprocess\CombineJs(
                     [ '/libsjs/' => OCTRIS_APP_BASE . '/libsjs/' ],
