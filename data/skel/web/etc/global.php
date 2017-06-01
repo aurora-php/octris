@@ -26,11 +26,20 @@ define('OCTRIS_APP_BASE', realpath(__DIR__ . '/../'));
     ->set('config', function () {
             return new \Octris\Core\Config('config');
         }, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY)
+    ->set('mode', function($registry) {
+            return (function() use ($registry) {
+                if (($mode = getenv('OCTRIS_APP_MODE')) === false) {
+                    $mode = (isset($registry->config['mode']) ? $registry->config['mode'] : '');
+                }
+
+                return $mode;
+            })();
+        }, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY)
     ->set('createTemplate', function($registry) {
             $tpl = new \Octris\Core\Tpl();
 
             $tpl->setL10n(\Octris\Core\L10n::getInstance());
-            if ($registry->config['mode'] != 'development') {
+            if ($registry->mode != 'development') {
                 $tpl->setCache(
                     new \Octris\Core\Tpl\Cache\File(
                         OCTRIS_APP_BASE . '/cache/templates_c/'
