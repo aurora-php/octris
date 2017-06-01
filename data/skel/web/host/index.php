@@ -34,7 +34,7 @@ require_once(__DIR__ . '/../etc/global.php');
             $r->addRewrite(['GET', 'POST'], '/');     // default route map to pageRouter
             $r->addRoute(['GET', 'POST'], '/service/{SERVICE}', new \{{$namespace}}\Services());
         },
-        ($registry->config['mode'] == 'development' ? null : OCTRIS_APP_BASE . '/cache/router.cache')
+        ($registry->mode == 'development' ? null : OCTRIS_APP_BASE . '/cache/router.cache')
     );
     $app = new App\Main($router);
     $app->run();
