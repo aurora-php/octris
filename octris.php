@@ -18,9 +18,9 @@
  */
 /**/
 
-if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+if (version_compare(PHP_VERSION, '7.0.0') < 0) {
     printf(
-        "%s: PHP-5.6.0 or newer is required, your version is '%s'!\n",
+        "%s: PHP-7.0.0 or newer is required, your version is '%s'!\n",
         basename($argv[0]),
         PHP_VERSION
     );
