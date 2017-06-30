@@ -27,7 +27,7 @@ require_once(__DIR__ . '/../libs/Autoloader.php');
 require_once(__DIR__ . '/../etc/global.php');
 
 // run application
-(function() {
+(function($registry) {
     $router = new \Octris\Core\App\Web\Router\UrlBased(
         '{{$namespace}}\App\Entry',
         function(\Octris\Core\App\Web\Router\RuleCollector $r) {
