@@ -2,17 +2,17 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>MAUI</title>
-        <link rel="stylesheet" type="text/css" href="css/maui.css" />
-        <link rel="stylesheet" type="text/css" href="vcss/w2ui/w2ui-1.5.rc1.min.css" />
-        <link rel="stylesheet" type="text/css" href="vcss/w2ui/font-awesome/css/font-awesome.min.css" />
-        <script type="text/javascript" src="vjs/w2ui/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="vjs/w2ui/w2ui-1.5.rc1.min.js"></script>
+        <title>{{$package}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/{{$package}}.css" />
+        <link rel="stylesheet" type="text/css" href="/vcss/octris/w2ui/w2ui-1.5.rc1.min.css" />
+        <link rel="stylesheet" type="text/css" href="/vcss/octris/w2ui/font-awesome/css/font-awesome.min.css" />
+        <script type="text/javascript" src="/vjs/octris/w2ui/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="/vjs/octris/w2ui/w2ui-1.5.rc1.min.js"></script>
     </head>
 
     <body>
         <div id="layout"></div>
     </body>
 
-    <script type="text/javascript" src="libsjs/ui.js"></script>
+    <script type="text/javascript" src="/libsjs/{{$directory}}.js"></script>
 </html>
