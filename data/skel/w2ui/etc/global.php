@@ -58,7 +58,7 @@ define('OCTRIS_APP_BASE', realpath(__DIR__ . '/../'));
             $tpl->addPostprocessor(
                 new \Octris\Core\Tpl\Postprocess\CombineCss(
                     [
-                        '/css/' => OCTRIS_APP_BASE . '/styles/'
+                        '/css/' => OCTRIS_APP_BASE . '/styles/',
                         '/vcss/' => OCTRIS_APP_BASE . '/vendor_assets/css/'
                     ],
                     OCTRIS_APP_BASE . '/host/styles/'
