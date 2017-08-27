@@ -15,8 +15,8 @@
  */
 /**/
 
-{{#foreach($ns, explode('.', $directory), $meta)}}{{#if($meta:is_first)}}
-if (!('{{$ns}}' in window)) window['{{$ns}}'] = {};
-{{let($_path, $ns)}}{{#else}}
-if (!('{{$ns}}' in {{$_path}})) {{$_path}}.{{$ns}} = {};
-{{let($_path, concat($_path, '.', $ns))}}{{#end}}{{#end}}
+;var {{$vendor}} = (function({{$vendor}}) {
+    {{$vendor}}.{{$package}} = {};
+
+    return {{$vendor}};
+})({{$vendor}} || {});
