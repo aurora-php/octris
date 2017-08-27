@@ -27,7 +27,7 @@ class Create implements \Octris\Cli\App\ICommand
      * @type    array
      */
     protected static $settings = array('company', 'author', 'email', 'homepage', 'repository');
-    
+
     /**
      * Constructor.
      */
@@ -48,9 +48,10 @@ class Create implements \Octris\Cli\App\ICommand
         $command->setDescription(<<<DESCRIPTION
 This command creates a new project of the specified type in the specified destination-path. A valid basic directory layout will be created from a skeleton according to the specified project-type.
 
-The current supported types are 'web', 'cli' and 'lib':
+The current supported types are 'web', 'w2ui', 'cli' and 'lib':
 
 web     for projects like web applications, web sites etc.
+w2ui    for w2ui based web applications.
 cli     for command-line applications.
 lib     for (shared) libraries.
 DESCRIPTION
@@ -80,10 +81,10 @@ EXAMPLE
             return $is_valid;
         }, 'invalid project name specified');
         $command->addOption('type', '-t | --type <project-type>', ['\Aaparser\Coercion', 'value'], [
-            'help' => 'A project type. Valid types are "web", "cli" and "lib".',
+            'help' => 'A project type. Valid types are "web", "w2ui", "cli" and "lib".',
             'required' => true
         ])->addValidator(function($value) {
-            return in_array($value, ['web', 'cli', 'lib']);
+            return in_array($value, ['web', 'w2ui', 'cli', 'lib']);
         }, 'invalid project type specified')
           ->addValidator(function($value) {
             return is_dir(__DIR__ . '/../../data/skel/' . $value . '/');
@@ -168,7 +169,7 @@ EXAMPLE
                 ),
                 (isset($info[$k]) ? $info[$k] : '')
             );
-            
+
             $data[$k] = preg_replace('/<package>/', $package, $info[$k]);
         }
 
@@ -178,11 +179,11 @@ EXAMPLE
             do {
                 $yn = readline::getPrompt('Save changed configuration? (Y/n) ', 'y');
             } while (!preg_match('/^[YyNn]$/', $yn));
-            
+
             if ($yn == 'y') {
                 $cfg->save();
             }
-            
+
             print "\n";
         }
 
