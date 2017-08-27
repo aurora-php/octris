@@ -12,6 +12,16 @@
         "homepage":     "{{$homepage}}"
     }],
 
+    "extra": {
+        "octris/assets": {
+            "target": {
+                "js": "vendor_assets/js",
+                "css": "vendor_assets/css",
+                "img": "host/vendor_assets"
+            }
+        }
+    },
+
     "repositories": [
         {
             "url":  "https://github.com/octris/core.git",
