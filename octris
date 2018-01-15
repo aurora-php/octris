@@ -13,7 +13,7 @@
 /**
  * Main application.
  *
- * @copyright   copyright (c) 2014-2015 by Harald Lapp
+ * @copyright   copyright (c) 2014-2018 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 /**/
@@ -28,7 +28,7 @@ if (version_compare(PHP_VERSION, '7.0.0') < 0) {
 }
 
 if (php_sapi_name() == 'cli-server') {
-    // run using cli-server, probably because tool was executed with Httpd command.
+    // run using cli-server
     return require_once(__DIR__ . '/libs/Util/Router.php');
 }
 
@@ -39,7 +39,12 @@ if ($argc > 2 && $argv[1] == 'exec') {
     exit(0);
 }
 
-require_once(__DIR__ . '/vendor/autoload.php');
+if (file_exists(__DIR__ . '/../../autoload.php')) {
+    require_once(__DIR__ . '/../../vendor/autoload.php');
+} else {
+    require_once(__DIR__ . '/vendor/autoload.php');
+}
+
 require_once(__DIR__ . '/libs/Autoloader.php');
 
 // import environment
