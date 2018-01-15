@@ -12,7 +12,7 @@
         "homepage":     "http://www.octris.org/"
     }],
 
-    "bin": [ "otris" ],
+    "bin": [ "octris" ],
 
     "repositories": [
         {
