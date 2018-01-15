@@ -1,1 +1,0 @@
-Directory for file-based caching ... do not delete!
