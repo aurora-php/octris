@@ -12,6 +12,8 @@
         "homepage":     "http://www.octris.org/"
     }],
 
+    "bin": [ "otris" ],
+
     "repositories": [
         {
             "url":  "https://github.com/aaparser/aaparser-php",
@@ -32,10 +34,6 @@
         {
             "url":  "https://github.com/octris/readline.git",
             "type": "git"
-        },
-        {
-            "url":  "https://github.com/octris/phphttpd.git",
-            "type": "git"
         }
     ],
 
@@ -45,11 +43,6 @@
         "octris/cli":            "dev-master",
         "octris/cliconfig":      "dev-master",
         "octris/core":           "dev-master",
-        "octris/readline":       "dev-master",
-        "octris/phphttpd":       "dev-master"
-    },
-
-    "replace": {
-        "nikic/fast-route": "*"
+        "octris/readline":       "dev-master"
     }
 }
