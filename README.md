@@ -22,9 +22,7 @@ Commands:
     config      List and change configuration.
     create      Create a new project.
     doc         Display documentation for various framework parts.
-    graph       Create a page graph of a project.
     help        Display help for a subcommand.
-    httpd       Httpd server for testing purpose.
     password    Create and verify password hashes.
     test        Execute phpunit tests.
 ```

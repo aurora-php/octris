@@ -90,8 +90,6 @@ class App extends \Octris\Cli\App
         $this->importCommand('config', '\Octris\App\Config');
         $this->importCommand('create', '\Octris\App\Create');
         $this->importCommand('doc', '\Octris\App\Doc');
-        $this->importCommand('graph', '\Octris\App\Graph');
-        $this->importCommand('httpd', '\Octris\App\Httpd');
         $this->importCommand('password', '\Octris\App\Password');
         $this->importCommand('test', '\Octris\App\Test');
     }
