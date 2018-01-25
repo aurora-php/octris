@@ -1,0 +1,10 @@
+skeleton:
+    cli:
+        url: https://github.com/octris/skel-cli/tarball/master
+        description: command-line applications. 
+    legacy: 
+        url: https://github.com/octris/skel-legacy/tarball/master
+        description: applications based on legacy core framework.
+    web:
+        url: https://github.com/octris/skel-web/tarball/master
+        description: projects like web applications, web sites etc.
