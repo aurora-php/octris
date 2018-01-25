@@ -17,7 +17,7 @@ namespace Octris\App;
  * @copyright   copyright (c) 2012-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Check implements \Octris\Cli\App\ICommand
+class Check implements \Octris\Cli\App\CommandInterface
 {
     /**
      * Constructor.

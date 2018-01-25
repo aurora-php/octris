@@ -17,7 +17,7 @@ namespace Octris\App;
  * @copyright   copyright (c) 2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Password implements \Octris\Cli\App\ICommand
+class Password implements \Octris\Cli\App\CommandInterface
 {
     /**
      * Constructor.

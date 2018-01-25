@@ -19,7 +19,7 @@ use \Octris\Readline as readline;
  * @copyright   copyright (c) 2014-2016 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
-class Create implements \Octris\Cli\App\ICommand
+class Create implements \Octris\Cli\App\CommandInterface
 {
     /**
      * Settings used.
