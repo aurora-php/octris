@@ -48,12 +48,8 @@ class Create implements \Octris\Cli\App\CommandInterface
         $command->setDescription(<<<DESCRIPTION
 This command creates a new project of the specified type in the specified destination-path. A valid basic directory layout will be created from a skeleton according to the specified project-type.
 
-The current supported types are 'web', 'w2ui', 'cli' and 'lib':
+The current supported types are:
 
-web     for projects like web applications, web sites etc.
-w2ui    for w2ui based web applications.
-cli     for command-line applications.
-lib     for (shared) libraries.
 DESCRIPTION
         );
         $command->setExample(<<<EXAMPLE
@@ -81,7 +77,7 @@ EXAMPLE
             return $is_valid;
         }, 'invalid project name specified');
         $command->addOption('type', '-t | --type <project-type>', ['\Aaparser\Coercion', 'value'], [
-            'help' => 'A project type. Valid types are "web", "w2ui", "cli" and "lib".',
+            'help' => 'The type of the project.',
             'required' => true
         ])->addValidator(function($value) {
             return in_array($value, ['web', 'w2ui', 'cli', 'lib']);
@@ -198,29 +194,29 @@ EXAMPLE
 
         // create project
         $dir .= '/' . $package;
-        $src = __DIR__ . '/../../data/skel/' . $type . '/';
+        $src = tempnam(sys_get_temp_dir(), 'octris-') . '.phar.gz';
+
+        copy('https://github.com/octris/skel-legacy/tarball/master', $src);
 
         // process skeleton and write project files
-        $tpl = new \Octris\Core\Tpl();
-        $tpl->addSearchPath($src);
+        $tpl = new \Octris\Tpl();
+        $tpl->addSearchPath('phar://' . $src);
         $tpl->setValues($data);
-
-        $len = strlen($src);
-
+        
         mkdir($dir, 0755);
 
         $directories = array();
-        $iterator    = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($src, \FilesystemIterator::SKIP_DOTS)
-        );
+        $iterator = new \RecursiveIteratorIterator(new \PharData($src));
 
         foreach ($iterator as $filename => $cur) {
-            $rel   = substr($filename, $len);
+            $rel   = preg_replace('/^.*?\/skeleton\//', '', $filename);
             $dst   = $dir . '/' . $rel;
             $path  = dirname($dst);
             $base  = basename($filename);
             $ext   = preg_replace('/^\.?[^\.]+?(\..+|)$/', '\1', $base);
             $base  = basename($filename, $ext);
+
+            $sandbox = $tpl->getSandbox($rel);
 
             if (substr($base, 0, 1) == '$' && isset($data[$base = ltrim($base, '$')])) {
                 // resolve variable in filename
@@ -233,9 +229,7 @@ EXAMPLE
             }
 
             if (!$this->isBinary($filename)) {
-                $cmp = $tpl->fetch($rel, \Octris\Core\Tpl::ESC_NONE);
-
-                file_put_contents($dst, $cmp);
+                $sandbox->save($dst, \Octris\Core\Tpl::ESC_NONE);
             } else {
                 copy($filename, $dst);
             }

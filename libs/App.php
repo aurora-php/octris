@@ -44,10 +44,19 @@ class App extends \Octris\Cli\App
     /**/
 
     /**
+     * Container.
+     * 
+     * @type    \Octris\Container
+     */
+    protected $container;
+
+    /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct(\Octris\Container $container)
     {
+        $this->container = $container;
+        
         parent::__construct(
             self::$app_name,
             [
@@ -85,12 +94,13 @@ class App extends \Octris\Cli\App
     {
         parent::initialize();
 
-        $this->importCommand('check', '\Octris\App\Check');
-        $this->importCommand('compile', '\Octris\App\Compile');
-        $this->importCommand('config', '\Octris\App\Config');
-        $this->importCommand('create', '\Octris\App\Create');
-        $this->importCommand('doc', '\Octris\App\Doc');
-        $this->importCommand('password', '\Octris\App\Password');
-        $this->importCommand('test', '\Octris\App\Test');
+        var_dump($this->container->config['skeleton']);
+
+        $this->importCommand('check', \Octris\App\Check::class);
+        $this->importCommand('compile', \Octris\App\Compile::class);
+        $this->importCommand('config', \Octris\App\Config::class);
+        $this->importCommand('create', \Octris\App\Create::class, [ $this->container ]);
+        $this->importCommand('password', \Octris\App\Password::class);
+        $this->importCommand('test', \Octris\App\Test::class);
     }
 }

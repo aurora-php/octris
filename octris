@@ -47,19 +47,17 @@ if (file_exists(__DIR__ . '/../../autoload.php')) {
 
 require_once(__DIR__ . '/libs/Autoloader.php');
 
-// import environment
-\Octris\Core\Provider::set('env', $_ENV);
-
-// load application configuration
 define('OCTRIS_APP_VENDOR', 'octris');
 define('OCTRIS_APP_NAME', 'octris');
 define('OCTRIS_APP_BASE', realpath(__DIR__));
 
-$registry = \Octris\Core\Registry::getInstance();
-$registry->set('config', function () {
-    return new \Octris\Core\Config('config');
-}, \Octris\Core\Registry::T_SHARED | \Octris\Core\Registry::T_READONLY);
-
 // run application
-$app = new \Octris\App();
-$app->run();
+(function() {
+    $container = new \Octris\Container();
+    $container->set('config', function () {
+        return new \Octris\Config([__DIR__ . '/etc/config.yml', '~/.octris/octris.yml'], new \Octris\Config\Format\Yaml());
+    }, \Octris\Container::ACCESS_SHARED | \Octris\Container::ACCESS_READONLY);
+
+    $app = new \Octris\App($container);
+    $app->run();
+})();
