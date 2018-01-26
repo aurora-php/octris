@@ -189,7 +189,7 @@ EXAMPLE
 
         // create project
         $dir .= '/' . $package;
-        $src = tempnam(sys_get_temp_dir(), 'octris-') . '.phar.gz';
+        $src = tempnam(sys_get_temp_dir(), 'octris-') . '.tar.gz';
 
         // https://stackoverflow.com/questions/26148701/file-get-contents-ssl-operation-failed-with-code-1-and-more
         $context = [
