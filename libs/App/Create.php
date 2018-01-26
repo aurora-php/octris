@@ -22,6 +22,13 @@ use \Octris\Readline as readline;
 class Create implements \Octris\Cli\App\CommandInterface
 {
     /**
+     * Instance of DI container.
+     *
+     * @type    \Octris\Container
+     */
+    protected $container;
+
+    /**
      * Settings used.
      *
      * @type    array
@@ -29,14 +36,9 @@ class Create implements \Octris\Cli\App\CommandInterface
     protected static $settings = array('company', 'author', 'email', 'homepage', 'repository');
 
     /**
-     * Container.
-     *
-     * @type    \Octris\Container
-     */
-    protected $container;
-
-    /**
      * Constructor.
+     *
+     * @param   \Octris\Container       $container          DI Container.
      */
     public function __construct(\Octris\Container $container)
     {
@@ -142,6 +144,12 @@ EXAMPLE
         $project = $options['project'];
         $type = $options['type'];
         $dir = rtrim($operands['project-path'][0], '/');
+
+        if (!isset($this->container->config['skeleton'][$type])) {
+            throw new \Exception('Unknown skeleton type specified');
+        } elseif (empty($this->container->config['skeleton'][$type]['url'])) {
+            throw new \Exception('No URL for skeleton type');
+        }
 
         list($vendor, $package) = explode('/', $project);
 
