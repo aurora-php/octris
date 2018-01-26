@@ -213,6 +213,7 @@ EXAMPLE
         // process skeleton and write project files
         $tpl = new \Octris\Tpl();
         $tpl->addSearchPath('phar://' . $src);
+        $tpl->addExtensionBundle(new \Octris\Tpl\Extension\Bundle\Std());
         $tpl->setValues($data);
 
         $cut = strlen('phar://' . $src);
