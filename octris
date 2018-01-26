@@ -27,11 +27,6 @@ if (version_compare(PHP_VERSION, '7.0.0') < 0) {
     exit(1);
 }
 
-if (php_sapi_name() == 'cli-server') {
-    // run using cli-server
-    return require_once(__DIR__ . '/libs/Util/Router.php');
-}
-
 if ($argc > 2 && $argv[1] == 'exec') {
     // execute bundled tool
     if (in_array($argv[2], ['compile', 'lint'])) {
