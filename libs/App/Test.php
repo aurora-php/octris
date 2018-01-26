@@ -11,9 +11,6 @@
 
 namespace Octris\App;
 
-use \Octris\Core\Provider as provider;
-use \Octris\Core\Validate as validate;
-
 /**
  * Execute phpunit test-suite for a project.
  *
