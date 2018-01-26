@@ -29,10 +29,18 @@ class Create implements \Octris\Cli\App\CommandInterface
     protected static $settings = array('company', 'author', 'email', 'homepage', 'repository');
 
     /**
+     * Container.
+     *
+     * @type    \Octris\Container
+     */
+    protected $container;
+
+    /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct(\Octris\Container $container)
     {
+        $this->container = $container;
     }
 
     /**
@@ -199,7 +207,8 @@ EXAMPLE
                 'verify_peer_name' => true,
             ],
         ];
-        copy('https://github.com/octris/skel-legacy/tarball/master', $src, stream_context_create($context));
+
+        copy($this->container->config['skeleton'][$type]['url'], $src, stream_context_create($context));
 
         // process skeleton and write project files
         $tpl = new \Octris\Tpl();
