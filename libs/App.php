@@ -45,7 +45,7 @@ class App extends \Octris\Cli\App
 
     /**
      * Container.
-     * 
+     *
      * @type    \Octris\Container
      */
     protected $container;
@@ -56,7 +56,7 @@ class App extends \Octris\Cli\App
     public function __construct(\Octris\Container $container)
     {
         $this->container = $container;
-        
+
         parent::__construct(
             self::$app_name,
             [
@@ -94,13 +94,33 @@ class App extends \Octris\Cli\App
     {
         parent::initialize();
 
-        var_dump($this->container->config['skeleton']);
-
         $this->importCommand('check', \Octris\App\Check::class);
         $this->importCommand('compile', \Octris\App\Compile::class);
         $this->importCommand('config', \Octris\App\Config::class);
-        $this->importCommand('create', \Octris\App\Create::class, [ $this->container ]);
+        $create = $this->importCommand('create', \Octris\App\Create::class, [ $this->container ]);
         $this->importCommand('password', \Octris\App\Password::class);
         $this->importCommand('test', \Octris\App\Test::class);
+
+        // create command needs some further setup
+        $description = rtrim($create->getDescription()) . "\n\n";
+
+        $types = [];
+        $length = 0;
+
+        foreach ($this->container->config['skeleton'] as $type => $skeleton) {
+            $types[] = $type;
+            $length = max($length, strlen($type));
+        }
+
+        ksort($types);
+        foreach ($types as $type) {
+            $description .= sprintf("%-" . ($length + 4) . "s%s\n", $type, $this->container->config['skeleton'][$type]['description']);
+        }
+
+        $create->setDescription($description . "\n");
+
+        $create->getOption('-t')->addValidator(function($value) use ($types) {
+            return in_array($value, $types);
+        }, 'invalid project type specified');
     }
 }
