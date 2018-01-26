@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b343ae17e0c34f905f00b894aee5e257",
+    "content-hash": "2d2de3fa797b2d3cfce1cd80a9616b18",
     "packages": [
         {
             "name": "aaparser/aaparser-php",
@@ -81,7 +81,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/cliconfig.git",
-                "reference": "8707dff918cdd09eadafa96e02d52b5d96c6d920"
+                "reference": "337c4cdffce2ce20259e34865f01b3e91acfce51"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -107,7 +107,7 @@
             ],
             "description": "Config file library for CLI tools.",
             "homepage": "https://github.com/octris/cliconfig",
-            "time": "2016-01-30 17:33:09"
+            "time": "2018-01-25 17:01:54"
         },
         {
             "name": "octris/config",
@@ -259,7 +259,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/octris/tpl.git",
-                "reference": "4ca0e73332d4d0596bf2e683f7dda067c00bf379"
+                "reference": "fa9a772e8db1699252da7fe078a790522e51fe09"
             },
             "require": {
                 "octris/parser": "^0.1.0",
@@ -285,7 +285,41 @@
             ],
             "description": "Template engine.",
             "homepage": "https://github.com/octris/tpl",
-            "time": "2018-01-23 23:49:44"
+            "time": "2018-01-26 02:12:25"
+        },
+        {
+            "name": "octris/validate",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/octris/validate.git",
+                "reference": "ad2bc348e7ae3d1ffd65f79490436bd977850f6b"
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "libs/Validate.php"
+                ],
+                "psr-4": {
+                    "Octris\\Validate\\": "libs/Validate/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Harald Lapp",
+                    "email": "harald@octris.org",
+                    "homepage": "http://www.octris.org/"
+                }
+            ],
+            "description": "Library for (parameter) validation.",
+            "homepage": "https://github.com/octris/validate",
+            "time": "2018-01-10 19:38:14"
         },
         {
             "name": "psr/container",
@@ -347,7 +381,8 @@
         "octris/config": 20,
         "octris/tpl": 20,
         "octris/container": 20,
-        "octris/readline": 20
+        "octris/readline": 20,
+        "octris/validate": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
