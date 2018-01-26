@@ -196,7 +196,15 @@ EXAMPLE
         $dir .= '/' . $package;
         $src = tempnam(sys_get_temp_dir(), 'octris-') . '.phar.gz';
 
-        copy('https://github.com/octris/skel-legacy/tarball/master', $src);
+        // https://stackoverflow.com/questions/26148701/file-get-contents-ssl-operation-failed-with-code-1-and-more
+        $context = [
+            'ssl' => [
+                'cafile' => __DIR__ . '/../../etc/cacert.pem',
+                'verify_peer' => true,
+                'verify_peer_name' => true,
+            ],
+        ];
+        copy('https://github.com/octris/skel-legacy/tarball/master', $src, stream_context_create($context));
 
         // process skeleton and write project files
         $tpl = new \Octris\Tpl();
