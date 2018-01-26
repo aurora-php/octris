@@ -14,7 +14,7 @@ namespace Octris\App;
 /**
  * Check a project for various kind of coding-style related flaws.
  *
- * @copyright   copyright (c) 2012-2016 by Harald Lapp
+ * @copyright   copyright (c) 2012-2018 by Harald Lapp
  * @author      Harald Lapp <harald@octris.org>
  */
 class Check implements \Octris\Cli\App\CommandInterface
@@ -65,9 +65,16 @@ EXAMPLE
         );
 
         if (!is_null($exclude)) {
-            $iterator = new \Octris\Core\Type\FilterIterator($iterator, function ($current, $filename) use ($exclude) {
-                return !preg_match($exclude, $filename);
-            });
+            $iterator = new class($iterator) extends \FilterIterator {
+                protected $exclude;
+                public function __construct(\Iterator $iterator, $exclude) {
+                    parent::__construct($iterator);
+                    $this->exclude = $exclude;
+                }
+                public function accept() {
+                    return !preg_match($this->exclude, $this->getInnerIterator()->current());
+                }
+            };
         }
 
         return $iterator;
