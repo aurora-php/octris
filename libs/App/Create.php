@@ -79,12 +79,7 @@ EXAMPLE
         $command->addOption('type', '-t | --type <project-type>', ['\Aaparser\Coercion', 'value'], [
             'help' => 'The type of the project.',
             'required' => true
-        ])->addValidator(function($value) {
-            return in_array($value, ['web', 'w2ui', 'cli', 'lib']);
-        }, 'invalid project type specified')
-          ->addValidator(function($value) {
-            return is_dir(__DIR__ . '/../../data/skel/' . $value . '/');
-        }, 'unable to locate template directory "' . __DIR__ . '/../../data/skel/${value}/".');
+        ]);
         $command->addOption('define', '-d | --define <key-value>', ['\Aaparser\Coercion', 'kv'], [
             'help' => 'Overwrite default configuration settings for "' . implode('", "', self::$settings) . '".'
         ])->addValidator(function($value) {
