@@ -47,7 +47,7 @@ EXAMPLE
         $command->addOption('filter', '-f | --filter <filter>', ['\Aaparser\Coercion', 'value'], [
             'help' => 'Filter to apply.'
         ])->addValidator(function($value) {
-            $validator = new \Octris\Core\Validate\Type\Printable();
+            $validator = new \Octris\Validate\Validator\Printable();
 
             return $validator->validate($validator->preFilter($value));
         }, 'invalid filter specified');
