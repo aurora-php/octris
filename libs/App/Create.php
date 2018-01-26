@@ -231,7 +231,7 @@ EXAMPLE
             $ext   = preg_replace('/^\.?[^\.]+?(\..+|)$/', '\1', $base);
             $base  = basename($filename, $ext);
 
-            $sandbox = $tpl->getSandbox(substr($filename, $cut));
+            $sandbox = $tpl->getSandbox(substr($filename, $cut), \Octris\Tpl::ESC_NONE);
 
             if (substr($base, 0, 1) == '$' && isset($data[$base = ltrim($base, '$')])) {
                 // resolve variable in filename
@@ -244,7 +244,7 @@ EXAMPLE
             }
 
             if (!$this->isBinary($filename)) {
-                $sandbox->save($dst, \Octris\Tpl::ESC_NONE);
+                $sandbox->save($dst);
             } else {
                 copy($filename, $dst);
             }
