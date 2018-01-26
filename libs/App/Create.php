@@ -68,7 +68,7 @@ EXAMPLE
         ])->addValidator(function($value) use (&$package) {
             $package = $value;
 
-            $validator = new \Octris\Core\Validate\Type\Project();
+            $validator = new \Octris\Validate\Validator\Project();
 
             if (($is_valid = $validator->validate($validator->preFilter($value)))) {
                 list(, $package) = explode('/', $value);
@@ -210,7 +210,7 @@ EXAMPLE
         $tpl = new \Octris\Tpl();
         $tpl->addSearchPath('phar://' . $src);
         $tpl->setValues($data);
-        
+
         mkdir($dir, 0755);
 
         $directories = array();
@@ -237,7 +237,7 @@ EXAMPLE
             }
 
             if (!$this->isBinary($filename)) {
-                $sandbox->save($dst, \Octris\Core\Tpl::ESC_NONE);
+                $sandbox->save($dst, \Octris\Tpl::ESC_NONE);
             } else {
                 copy($filename, $dst);
             }
