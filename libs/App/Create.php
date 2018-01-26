@@ -215,6 +215,8 @@ EXAMPLE
         $tpl->addSearchPath('phar://' . $src);
         $tpl->setValues($data);
 
+        $cut = strlen('phar://' . $src);
+
         mkdir($dir, 0755);
 
         $directories = array();
@@ -228,7 +230,7 @@ EXAMPLE
             $ext   = preg_replace('/^\.?[^\.]+?(\..+|)$/', '\1', $base);
             $base  = basename($filename, $ext);
 
-            $sandbox = $tpl->getSandbox($rel);
+            $sandbox = $tpl->getSandbox(substr($filename, $cut));
 
             if (substr($base, 0, 1) == '$' && isset($data[$base = ltrim($base, '$')])) {
                 // resolve variable in filename
