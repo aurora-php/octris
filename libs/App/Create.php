@@ -48,7 +48,7 @@ class Create implements \Octris\Cli\App\CommandInterface
         $command->setDescription(<<<DESCRIPTION
 This command creates a new project of the specified type in the specified destination-path. A valid basic directory layout will be created from a skeleton according to the specified project-type.
 
-The current supported types are:
+The supported types are:
 
 DESCRIPTION
         );
