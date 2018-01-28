@@ -7,22 +7,19 @@
 (  <_> )  \___|  |  |  | \/  |\___ \     copyright (c) 2018 by Harald Lapp
  \____/ \___  >__|  |__|  |__/____  >    http://github.com/octris/octris/
             \/                    \/
-
-Usage: octris [-h | --help] [--version] <command> [ARGUMENTS]
-
-Options:
-    -h | --help
-          Print help information.
-    --version
-          Print version info.
-
-Commands:
-    check       Syntactical check of project files.
-    compile     Compile project templates.
-    config      List and change configuration.
-    create      Create a new project.
-    doc         Display documentation for various framework parts.
-    help        Display help for a subcommand.
-    password    Create and verify password hashes.
-    test        Execute phpunit tests.
 ```
+
+## Preface
+
+This tool can be used to create a basic application structure from skeletons for
+developing applications using the OCTRiS components framework.
+
+## Installation and first run
+
+The tool can be installed using composer:
+
+    composer global require octris/octris
+
+If you followed the installation of composer and added the binary folder to your
+path, you can run the tool afterwards entering `octris` on command-line.
+
