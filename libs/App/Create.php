@@ -203,35 +203,80 @@ EXAMPLE
             'directory' => $vendor . '.' . $package
         ));
 
-        // create project
         $dir .= '/' . $package;
-        $src = tempnam(sys_get_temp_dir(), 'octris-') . '.tar.gz';
 
-        // https://stackoverflow.com/questions/26148701/file-get-contents-ssl-operation-failed-with-code-1-and-more
-        $context = [
-            'ssl' => [
-                'cafile' => __DIR__ . '/../../etc/cacert.pem',
-                'verify_peer' => true,
-                'verify_peer_name' => true,
-            ],
-        ];
-
-        copy($this->container->config['skeleton'][$type]['url'], $src, stream_context_create($context));
-
-        // process skeleton and write project files
         $tpl = new \Octris\Tpl();
-        $tpl->addSearchPath('phar://' . $src);
         $tpl->addExtensionBundle(new \Octris\Tpl\Extension\Bundle\Std());
         $tpl->setValues($data);
 
-        $cut = strlen('phar://' . $src);
+        $tmp = parse_url($this->container->config['skeleton'][$type]['url']);
+        
+        if (isset($tmp['host'])) {
+            // download tarball of skeleton project
+            $src = tempnam(sys_get_temp_dir(), 'octris-') . '.tar.gz';
 
-        mkdir($dir, 0755);
+            // https://stackoverflow.com/questions/26148701/file-get-contents-ssl-operation-failed-with-code-1-and-more
+            $context = [
+                'ssl' => [
+                    'cafile' => __DIR__ . '/../../etc/cacert.pem',
+                    'verify_peer' => true,
+                    'verify_peer_name' => true,
+                ],
+            ];
 
+            $tmp = copy(
+                (!isset($tmp['scheme']) ? 'http://' : '') . $this->container->config['skeleton'][$type]['url'],
+                $src,
+                stream_context_create($context)
+            );
+            
+            if (!$tmp) {
+                printf("Unable to download skeleton from \"%s\"!\n", $this->container->config['skeleton'][$type]['url']);
+                exit(1);
+            }
+            
+            try {
+                $iterator = new \PharData($src);
+            } catch(\Exception $e) {
+                printf("Invalid package file \"%s\"!\n", $src);
+                exit(1);
+            }
+
+            $src = 'phar://' . $src;
+        } else {
+            $src = realpath($this->container->config['skeleton'][$type]['url']);
+            
+            if (!$src) {
+                printf("Invalid path \"%s\"!\n", $src);
+                exit(1);
+            } elseif (is_dir($src)) {
+                $iterator = new \RecursiveDirectoryIterator($src);
+            } else {
+                try {
+                    $iterator = new \PharData($src);
+                } catch(\Exception $e) {
+                    printf("Invalid package file \"%s\"!\n", $src);
+                    exit(1);
+                }
+
+                $src = 'phar://' . $src;
+            }
+        }
+
+        $tpl->addSearchPath($src);            
+        $cut = strlen($src);
+        
+        if (!is_dir($src . '/skeleton/')) {
+            printf("Invalid skeleton, skeleton sub-directory not found in \"%s\"!\n", $src);
+            exit(1);
+        }
+        
+        exit();
+
+        // process skeleton and write project files
         $directories = array();
-        $iterator = new \RecursiveIteratorIterator(new \PharData($src));
 
-        foreach ($iterator as $filename => $cur) {
+        foreach (new \RecursiveIteratorIterator($iterator) as $filename => $cur) {
             $rel   = preg_replace('/^.*?\/skeleton\//', '', $filename);
             $dst   = $dir . '/' . $rel;
             $path  = dirname($dst);
@@ -248,7 +293,9 @@ EXAMPLE
 
             if (!is_dir($path)) {
                 // create destination directory
-                mkdir($path, 0755, true);
+                if (!mkdir($path, 0755, true)) {
+                    printf("Unable to create directory \"%s\"!\n", $path);
+                }
             }
 
             if (!$this->isBinary($filename)) {
