@@ -146,9 +146,11 @@ EXAMPLE
         $dir = rtrim($operands['project-path'][0], '/');
 
         if (!isset($this->container->config['skeleton'][$type])) {
-            throw new \Exception('Unknown skeleton type specified');
+            printf("Unknown sekelton type specified \"%s\"!\n", $type);
+            exit(1);
         } elseif (empty($this->container->config['skeleton'][$type]['url'])) {
-            throw new \Exception('No URL for skeleton type');
+            printf("No URL configured for skeleton type \"%s\"!\n", $type);
+            exit(1);
         }
 
         list($vendor, $package) = explode('/', $project);
@@ -271,8 +273,6 @@ EXAMPLE
             exit(1);
         }
         
-        exit();
-
         // process skeleton and write project files
         $directories = array();
 
